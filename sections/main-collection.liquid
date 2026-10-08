@@ -4,6 +4,7 @@
   if section.settings.enable_filtering and collection.filters.size > 0
     assign has_filters = true
   endif
+  assign empty_link_url = section.settings.empty_button_link | default: routes.all_products_collection_url
 -%}
 {%- if section.settings.show_banner -%}
   <div class="collection-hero">
@@ -76,7 +77,7 @@
             title: section.settings.empty_title,
             text: section.settings.empty_text,
             link_label: section.settings.empty_button_label,
-            link_url: section.settings.empty_button_link | default: routes.all_products_collection_url
+            link_url: empty_link_url
           %}
         {%- else -%}
           <ul class="grid" role="list" data-stagger="0.05" data-product-grid style="--cols: {{ section.settings.columns }}; --cols-tablet: 3; --cols-mobile: {{ section.settings.columns_mobile }};">

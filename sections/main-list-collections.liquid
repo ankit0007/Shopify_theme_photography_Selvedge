@@ -1,3 +1,4 @@
+{%- assign empty_link_url = section.settings.empty_button_link | default: routes.all_products_collection_url -%}
 <div class="page-width">
   <div class="page-header"><h1>{{ section.settings.title | escape }}</h1></div>
   {%- paginate collections by 24 -%}
@@ -27,7 +28,7 @@
         title: section.settings.empty_title,
         text: section.settings.empty_text,
         link_label: section.settings.empty_button_label,
-        link_url: section.settings.empty_button_link | default: routes.all_products_collection_url
+        link_url: empty_link_url
       %}
     {%- endif -%}
   {%- endpaginate -%}

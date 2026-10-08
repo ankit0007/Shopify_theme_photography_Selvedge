@@ -1,3 +1,4 @@
+{%- assign empty_link_url = section.settings.empty_button_link | default: routes.root_url -%}
 <div class="page-width" style="padding-bottom: 8rem;">
   <div class="page-header"><h1>{{ blog.title | escape }}</h1></div>
   {%- if blog.all_tags.size > 0 and section.settings.show_tags -%}
@@ -21,7 +22,7 @@
         title: section.settings.empty_title,
         text: section.settings.empty_text,
         link_label: section.settings.empty_button_label,
-        link_url: section.settings.empty_button_link | default: routes.root_url
+        link_url: empty_link_url
       %}
     {%- endif -%}
   {%- endpaginate -%}
