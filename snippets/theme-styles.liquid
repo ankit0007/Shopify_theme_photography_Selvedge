@@ -1,0 +1,68 @@
+{%- liquid
+  assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'
+  assign body_font_italic = settings.type_body_font | font_modify: 'style', 'italic'
+  assign body_font_medium = settings.type_body_font | font_modify: 'weight', '500'
+  assign heading_font_italic = settings.type_header_font | font_modify: 'style', 'italic'
+-%}
+{% style %}
+  {{ settings.type_body_font | font_face: font_display: 'swap' }}
+  {{ body_font_bold | font_face: font_display: 'swap' }}
+  {{ body_font_italic | font_face: font_display: 'swap' }}
+  {{ body_font_medium | font_face: font_display: 'swap' }}
+  {{ settings.type_header_font | font_face: font_display: 'swap' }}
+  {{ heading_font_italic | font_face: font_display: 'swap' }}
+  {{ settings.type_accent_font | font_face: font_display: 'swap' }}
+
+  :root {
+    --font-body-family: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
+    --font-body-style: {{ settings.type_body_font.style }};
+    --font-body-weight: {{ settings.type_body_font.weight }};
+    --font-body-weight-medium: {% if body_font_medium %}500{% else %}{{ settings.type_body_font.weight }}{% endif %};
+    --font-heading-family: {{ settings.type_header_font.family }}, {{ settings.type_header_font.fallback_families }};
+    --font-heading-style: {{ settings.type_header_font.style }};
+    --font-heading-weight: {{ settings.type_header_font.weight }};
+    --font-accent-family: {{ settings.type_accent_font.family }}, {{ settings.type_accent_font.fallback_families }};
+    --font-accent-weight: {{ settings.type_accent_font.weight }};
+    --font-accent-style: {{ settings.type_accent_font.style }};
+    --nav-case: {{ settings.nav_case }};
+    --font-body-scale: {{ settings.body_scale | divided_by: 100.0 }};
+    --font-heading-scale: {{ settings.heading_scale | divided_by: 100.0 }};
+    --heading-tracking: {{ settings.heading_tracking | divided_by: 100.0 }}em;
+    --heading-case: {{ settings.heading_case }};
+
+    --page-width: {{ settings.page_width }}px;
+    --spacing-sections: {{ settings.spacing_sections }}px;
+    --grid-gap: {{ settings.grid_gap }}px;
+    --radius-lg: {{ settings.radius_large }}px;
+    --radius-sm: {{ settings.radius_small }}px;
+    --radius-button: {{ settings.buttons_radius }}px;
+    --radius-input: {{ settings.inputs_radius }}px;
+    --button-case: {% if settings.buttons_uppercase %}uppercase{% else %}none{% endif %};
+    --button-tracking: {% if settings.buttons_uppercase %}0.08em{% else %}0em{% endif %};
+    --logo-width: {{ settings.logo_width }}px;
+  }
+
+  {% for scheme in settings.color_schemes -%}
+    {%- liquid
+      assign s = scheme.settings
+      assign bg = s.background
+      assign sf = s.surface
+      assign tx = s.text
+      assign ac = s.accent
+      assign bt = s.button
+      assign bl = s.button_label
+      assign sb = s.secondary_button_label
+    -%}
+    {% if forloop.first %}:root,{% endif %}
+    .color-{{ scheme.id }} {
+      --color-bg: {{ bg.red }}, {{ bg.green }}, {{ bg.blue }};
+      --color-surface: {{ sf.red }}, {{ sf.green }}, {{ sf.blue }};
+      --color-fg: {{ tx.red }}, {{ tx.green }}, {{ tx.blue }};
+      --color-accent: {{ ac.red }}, {{ ac.green }}, {{ ac.blue }};
+      --color-btn: {{ bt.red }}, {{ bt.green }}, {{ bt.blue }};
+      --color-btn-label: {{ bl.red }}, {{ bl.green }}, {{ bl.blue }};
+      --color-btn-outline: {{ sb.red }}, {{ sb.green }}, {{ sb.blue }};
+      --gradient-bg: {% if s.background_gradient != blank %}{{ s.background_gradient }}{% else %}{{ bg }}{% endif %};
+    }
+  {% endfor %}
+{% endstyle %}

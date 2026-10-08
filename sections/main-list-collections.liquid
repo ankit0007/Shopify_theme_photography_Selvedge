@@ -1,0 +1,39 @@
+<div class="page-width">
+  <div class="page-header"><h1>{{ section.settings.title | escape }}</h1></div>
+  {%- paginate collections by 24 -%}
+    <ul class="grid" role="list" style="--cols: {{ section.settings.columns }}; --cols-tablet: 2; padding-bottom: 8rem;">
+      {%- for collection in collections -%}
+        <li>
+          <a href="{{ collection.url }}" class="collection-card zoom-hover">
+            <div class="media media--{{ section.settings.image_ratio }}" style="border-radius: var(--radius-card);">
+              {%- if collection.featured_image -%}
+                {{ collection.featured_image | image_url: width: 1000 | image_tag: loading: 'lazy', widths: '300, 500, 750, 1000', sizes: '(min-width: 990px) 33vw, 50vw', alt: collection.title }}
+              {%- else -%}
+                {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+            </div>
+            <div class="collection-card__info">
+              <h2 class="h3" style="margin:0;">{{ collection.title | escape }}</h2>
+              <span class="caption">{{ 'collections.product_count' | t: count: collection.products_count }}</span>
+            </div>
+          </a>
+        </li>
+      {%- endfor -%}
+    </ul>
+    {% render 'pagination', paginate: paginate, anchor: '' %}
+  {%- endpaginate -%}
+</div>
+
+{% schema %}
+{
+  "name": "Collections list page",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Heading", "default": "Collections" },
+    { "type": "range", "id": "columns", "min": 2, "max": 5, "step": 1, "label": "Columns on desktop", "default": 3 },
+    { "type": "select", "id": "image_ratio", "label": "Image ratio", "default": "portrait",
+      "options": [ { "value": "portrait", "label": "Portrait" }, { "value": "square", "label": "Square" }, { "value": "landscape", "label": "Landscape" } ] }
+  ]
+}
+{% endschema %}

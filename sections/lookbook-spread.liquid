@@ -1,0 +1,69 @@
+{%- render 'section-spacing' -%}
+<div class="color-{{ section.settings.color_scheme }} section-bg section-padding">
+  <div class="page-width">
+    <div class="spread{% if section.settings.reverse %} spread--reverse{% endif %}">
+      <div class="spread__page spread__left">
+        <div class="media develop" data-observe>
+          {%- if section.settings.image != blank -%}
+            {{ section.settings.image | image_url: width: 1800 | image_tag: loading: 'lazy', widths: '600, 900, 1200, 1500, 1800', sizes: '(min-width: 990px) 55vw, 100vw', alt: section.settings.image.alt }}
+          {%- else -%}
+            {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
+        {%- if section.settings.folio_left != blank -%}<span class="spread__folio">{{ section.settings.folio_left | escape }}</span>{%- endif -%}
+      </div>
+      <div class="spread__page spread__right">
+        <div class="spread__kicker data muted">
+          <span>{{ section.settings.kicker_left | escape }}</span>
+          <span>{{ section.settings.kicker_right | escape }}</span>
+        </div>
+        {%- if section.settings.title != blank -%}<h2 data-split-lines>{{ section.settings.title }}</h2>{%- endif -%}
+        {%- if section.settings.quote != blank -%}<blockquote class="spread__quote reveal">{{ section.settings.quote | escape }}</blockquote>{%- endif -%}
+        <div class="spread__cols">
+          {%- if section.settings.text != blank -%}<div class="rte reveal">{{ section.settings.text }}</div>{%- endif -%}
+          {%- if section.settings.image_2 != blank -%}
+            <div class="media media--portrait develop" data-observe>
+              {{ section.settings.image_2 | image_url: width: 800 | image_tag: loading: 'lazy', widths: '400, 600, 800', sizes: '(min-width: 990px) 20vw, 100vw', alt: section.settings.image_2.alt }}
+            </div>
+          {%- endif -%}
+        </div>
+        {%- assign items = section.settings.products -%}
+        {%- if items.count > 0 or section.settings.button_label != blank -%}
+          <div class="spread__shop reveal">
+            {%- for p in items -%}<a href="{{ p.url }}" class="button button--link">{{ p.title | escape }}, {{ p.price | money }}</a>{%- endfor -%}
+            {%- if section.settings.button_label != blank -%}<a href="{{ section.settings.button_link | default: routes.all_products_collection_url }}" class="button button--link">{{ section.settings.button_label | escape }}</a>{%- endif -%}
+          </div>
+        {%- endif -%}
+        {%- if section.settings.folio_right != blank -%}<span class="spread__folio">{{ section.settings.folio_right | escape }}</span>{%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Lookbook spread",
+  "tag": "section",
+  "class": "section-spread",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "image_picker", "id": "image", "label": "Main photo" },
+    { "type": "image_picker", "id": "image_2", "label": "Small photo" },
+    { "type": "checkbox", "id": "reverse", "label": "Photo on the right", "default": false },
+    { "type": "text", "id": "kicker_left", "label": "Top line, left", "default": "Chapter two" },
+    { "type": "text", "id": "kicker_right", "label": "Top line, right", "default": "Shot in Lisbon" },
+    { "type": "inline_richtext", "id": "title", "label": "Heading", "default": "The trench, rewritten" },
+    { "type": "text", "id": "quote", "label": "Pull quote", "default": "We kept the storm flap and took out everything that was only there for show." },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Cotton gabardine from a mill in Biella, cut a size bigger through the shoulder so it closes over a knit.</p>" },
+    { "type": "product_list", "id": "products", "label": "Pieces to link", "limit": 3 },
+    { "type": "text", "id": "button_label", "label": "Link label", "default": "See the full lookbook" },
+    { "type": "url", "id": "button_link", "label": "Link" },
+    { "type": "text", "id": "folio_left", "label": "Page number, left", "default": "12" },
+    { "type": "text", "id": "folio_right", "label": "Page number, right", "default": "13" },
+    { "type": "header", "content": "Section padding" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Top padding", "default": 96 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Bottom padding", "default": 120 }
+  ],
+  "presets": [ { "name": "Lookbook spread" } ]
+}
+{% endschema %}

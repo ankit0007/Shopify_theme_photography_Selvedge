@@ -1,0 +1,16 @@
+<article class="article-card">
+  <a href="{{ article.url }}" class="article-card__media zoom-hover" tabindex="-1" aria-hidden="true">
+    <div class="media media--landscape">
+      {%- if article.image -%}
+        {%- assign load = 'lazy' -%}{%- if index < 3 -%}{%- assign load = 'eager' -%}{%- endif -%}
+        {{ article.image | image_url: width: 1000 | image_tag: loading: load, widths: '400, 600, 800, 1000', sizes: '(min-width: 990px) 33vw, (min-width: 750px) 50vw, 100vw', alt: article.image.alt }}
+      {%- else -%}
+        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+    </div>
+  </a>
+  <p class="article-card__meta" style="margin:0;">{{ article.published_at | time_tag: format: 'date' }}{% if article.tags.size > 0 %} · {{ article.tags.first | escape }}{% endif %}</p>
+  <h3><a href="{{ article.url }}">{{ article.title | escape }}</a></h3>
+  <p>{%- if article.excerpt.size > 0 -%}{{ article.excerpt | strip_html | truncatewords: 26 }}{%- else -%}{{ article.content | strip_html | truncatewords: 26 }}{%- endif -%}</p>
+  <a href="{{ article.url }}" class="button button--link" style="align-self:flex-start;">{{ 'blogs.read_more' | t }} {% render 'icon', name: 'arrow' %}</a>
+</article>

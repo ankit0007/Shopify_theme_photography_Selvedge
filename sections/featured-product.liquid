@@ -1,0 +1,81 @@
+{% render 'section-spacing' %}
+{%- liquid
+  assign fp = section.settings.product
+  assign current_variant = fp.selected_or_first_available_variant
+  assign form_id = 'FeaturedForm-' | append: section.id
+-%}
+<div class="color-{{ section.settings.color_scheme }} section-bg section-padding">
+  <div class="page-width" data-section-id="{{ section.id }}">
+    <div class="product feature-product" style="padding: 0;">
+      <div class="feature-product__gallery">
+        {%- if fp.media.size > 0 -%}
+          {%- for media in fp.media limit: 3 -%}
+            <div class="media {% if forloop.first %}media--landscape{% else %}media--square{% endif %} reveal" data-media-id="{{ section.id }}-{{ media.id }}">
+              {{ media.preview_image | image_url: width: 1400 | image_tag: loading: 'lazy', widths: '400, 700, 1000, 1400', sizes: '(min-width: 990px) 55vw, 100vw', alt: media.alt }}
+            </div>
+          {%- endfor -%}
+        {%- else -%}
+          <div class="media media--landscape">{{ 'product-2' | placeholder_svg_tag: 'placeholder-svg' }}</div>
+          <div class="media media--square">{{ 'product-3' | placeholder_svg_tag: 'placeholder-svg' }}</div>
+          <div class="media media--square">{{ 'product-4' | placeholder_svg_tag: 'placeholder-svg' }}</div>
+        {%- endif -%}
+      </div>
+      <div class="product__info">
+        <div class="product__info-inner">
+          {%- if section.settings.label != blank -%}<p class="product__vendor">{{ section.settings.label | escape }}</p>{%- endif -%}
+          <h2 class="product__title" data-split-lines>{{ fp.title | default: 'Your featured product' | escape }}</h2>
+          <div data-price>{%- if fp != blank -%}{% render 'price', product: fp, use_variant: true, size: 'large' %}{%- else -%}{% render 'price', size: 'large' %}{%- endif -%}</div>
+          {%- if fp.description != blank -%}<div class="product__description rte">{{ fp.description | strip_html | truncatewords: 40 }}</div>{%- endif -%}
+          {%- if fp != blank -%}
+            {%- unless fp.has_only_default_variant -%}
+              <div data-variant-picker data-url="{{ fp.url }}" data-update-url="false">
+                {%- for option in fp.options_with_values -%}
+                  <fieldset class="option-group">
+                    <legend>{{ option.name | escape }}: <span>{{ option.selected_value | escape }}</span></legend>
+                    <div class="option-pills">
+                      {%- for value in option.values -%}
+                        {%- assign input_id = section.id | append: '-' | append: option.position | append: '-' | append: forloop.index0 -%}
+                        <input type="radio" id="{{ input_id }}" name="{{ option.name | escape }}-{{ section.id }}" value="{{ value | escape }}" {% if option.selected_value == value %}checked{% endif %}>
+                        <label for="{{ input_id }}">{{ value | escape }}</label>
+                      {%- endfor -%}
+                    </div>
+                  </fieldset>
+                {%- endfor -%}
+              </div>
+            {%- endunless -%}
+            {%- form 'product', fp, id: form_id, data-product-form: '', novalidate: 'novalidate' -%}
+              <input type="hidden" name="id" value="{{ current_variant.id }}">
+              <div class="product-form__row">
+                <div class="quantity">
+                  <button type="button" data-qty="minus" aria-label="{{ 'products.product.quantity.decrease' | t: product: fp.title | escape }}">{% render 'icon', name: 'minus' %}</button>
+                  <input type="number" name="quantity" value="1" min="1" aria-label="{{ 'products.product.quantity.label' | t }}">
+                  <button type="button" data-qty="plus" aria-label="{{ 'products.product.quantity.increase' | t: product: fp.title | escape }}">{% render 'icon', name: 'plus' %}</button>
+                </div>
+                <button type="submit" class="button" data-add-button {% unless current_variant.available %}disabled{% endunless %}><span>{%- if current_variant.available -%}{{ 'products.product.add_to_cart' | t }}{%- else -%}{{ 'products.product.sold_out' | t }}{%- endif -%}</span></button>
+              </div>
+            {%- endform -%}
+            <a href="{{ fp.url }}" class="button button--link">{{ 'products.product.view_full_details' | t }}</a>
+            <script type="application/json" data-variants-json>{{ fp.variants | json }}</script>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Featured product",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "product", "id": "product", "label": "Product" },
+    { "type": "text", "id": "label", "label": "Label", "default": "Best seller this month" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-2" },
+    { "type": "header", "content": "Section padding" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Top padding", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Bottom padding", "default": 64 }
+  ],
+  "presets": [ { "name": "Featured product" } ]
+}
+{% endschema %}

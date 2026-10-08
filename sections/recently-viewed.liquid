@@ -1,0 +1,24 @@
+{%- render 'section-spacing' -%}
+<div class="color-{{ section.settings.color_scheme }} section-bg section-padding recent" data-recent data-limit="{{ section.settings.limit }}"{% if product %} data-current="{{ product.handle }}"{% endif %} hidden>
+  <div class="page-width" data-rail-scope>
+    {% render 'intro', title: section.settings.title %}
+    <ul class="rail" role="list" data-rail data-recent-list style="--per: 6; --per-t: 3.4; --per-m: 2.2;"></ul>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Recently viewed",
+  "tag": "section",
+  "class": "section-recent",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "inline_richtext", "id": "title", "label": "Heading", "default": "Recently viewed" },
+    { "type": "range", "id": "limit", "min": 2, "max": 12, "step": 1, "label": "Products to show", "default": 6 },
+    { "type": "header", "content": "Section padding" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Top padding", "default": 48 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Bottom padding", "default": 96 }
+  ],
+  "presets": [ { "name": "Recently viewed" } ]
+}
+{% endschema %}

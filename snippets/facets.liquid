@@ -1,0 +1,49 @@
+{%- comment -%}
+  Filter form. Params: results (collection or search), id
+{%- endcomment -%}
+<form data-filter-form id="FacetForm-{{ id }}">
+  {%- if results.terms -%}
+    <input type="hidden" name="q" value="{{ results.terms | escape }}">
+    <input type="hidden" name="options[prefix]" value="last">
+  {%- endif -%}
+  <input type="hidden" name="sort_by" value="{{ results.sort_by | default: results.default_sort_by | escape }}">
+  {%- for filter in results.filters -%}
+    <details class="filter-group" {% if forloop.index <= 3 or filter.active_values.size > 0 %}open{% endif %}>
+      <summary>{{ filter.label | escape }} {% render 'icon', name: 'caret' %}</summary>
+      <div class="filter-group__body">
+        {%- case filter.type -%}
+          {%- when 'boolean', 'list' -%}
+            <ul class="filter-list" role="list">
+              {%- for value in filter.values -%}
+                {%- assign input_id = 'Filter-' | append: id | append: '-' | append: filter.param_name | handle | append: '-' | append: forloop.index -%}
+                <li>
+                  <label class="checkbox{% if value.count == 0 and value.active == false %} is-disabled{% endif %}" for="{{ input_id }}">
+                    <input type="checkbox" id="{{ input_id }}" name="{{ value.param_name }}" value="{{ value.value }}" {% if value.active %}checked{% endif %} {% if value.count == 0 and value.active == false %}disabled{% endif %}>
+                    <span>{{ value.label | escape }}</span>
+                    <span class="checkbox__count">{{ value.count }}</span>
+                  </label>
+                </li>
+              {%- endfor -%}
+            </ul>
+          {%- when 'price_range' -%}
+            {%- liquid
+              assign min_val = filter.min_value.value | divided_by: 100.0 | round
+              assign max_val = filter.max_value.value | divided_by: 100.0 | round
+              assign range_max = filter.range_max | divided_by: 100.0 | ceil
+            -%}
+            <div class="price-range">
+              <div>
+                <label class="caption" for="Price-GTE-{{ id }}">{{ 'collections.filters.from' | t }} ({{ cart.currency.symbol }})</label>
+                <input class="input" type="number" id="Price-GTE-{{ id }}" name="{{ filter.min_value.param_name }}" {% if filter.min_value.value %}value="{{ min_val }}"{% endif %} placeholder="0" min="0" max="{{ range_max }}">
+              </div>
+              <div>
+                <label class="caption" for="Price-LTE-{{ id }}">{{ 'collections.filters.to' | t }} ({{ cart.currency.symbol }})</label>
+                <input class="input" type="number" id="Price-LTE-{{ id }}" name="{{ filter.max_value.param_name }}" {% if filter.max_value.value %}value="{{ max_val }}"{% endif %} placeholder="{{ range_max }}" min="0" max="{{ range_max }}">
+              </div>
+            </div>
+        {%- endcase -%}
+      </div>
+    </details>
+  {%- endfor -%}
+  <noscript><button type="submit" class="button button--full" style="margin-top:2rem;">{{ 'collections.filters.apply' | t }}</button></noscript>
+</form>

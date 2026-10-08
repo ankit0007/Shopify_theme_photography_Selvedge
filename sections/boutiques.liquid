@@ -1,0 +1,70 @@
+{%- render 'section-spacing' -%}
+<div class="color-{{ section.settings.color_scheme }} section-bg section-padding">
+  <div class="page-width">
+    {% render 'intro', title: section.settings.title, text: section.settings.text %}
+    <ul class="stores" role="list" data-stagger="0.08">
+      {%- for block in section.blocks -%}
+        <li class="store" {{ block.shopify_attributes }} data-store data-offset="{{ block.settings.utc_offset }}" data-open="{{ block.settings.open_hour }}" data-close="{{ block.settings.close_hour }}" data-closed-day="{{ block.settings.closed_day }}">
+          <div class="media media--landscape develop" data-observe>
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 1000 | image_tag: loading: 'lazy', widths: '400, 700, 1000', sizes: '(min-width: 990px) 33vw, 100vw', alt: block.settings.image.alt }}
+            {%- else -%}
+              {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+          </div>
+          <div>
+            <span class="store__status" data-store-status>{{ block.settings.city | escape }}</span>
+            <h3>{{ block.settings.name | escape }}</h3>
+          </div>
+          <address>{{ block.settings.address | newline_to_br }}</address>
+          {%- assign hours = block.settings.hours | newline_to_br | split: '<br />' -%}
+          <dl class="store__hours">
+            {%- for h in hours -%}
+              {%- assign parts = h | split: ':' -%}
+              {%- assign day = parts.first | strip -%}
+              {%- if day != blank -%}<dt>{{ day | escape }}</dt><dd>{{ h | remove_first: parts.first | remove_first: ':' | strip | escape }}</dd>{%- endif -%}
+            {%- endfor -%}
+          </dl>
+          <div class="button-group">
+            {%- if block.settings.map_link != blank -%}<a href="{{ block.settings.map_link }}" class="button button--secondary button--small">{{ 'sections.stores.directions' | t }}</a>{%- endif -%}
+            {%- if block.settings.phone != blank -%}<a href="tel:{{ block.settings.phone | remove: ' ' }}" class="button button--link">{{ block.settings.phone | escape }}</a>{%- endif -%}
+          </div>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Boutiques",
+  "tag": "section",
+  "class": "section-stores",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "inline_richtext", "id": "title", "label": "Heading", "default": "Try it on in person" },
+    { "type": "text", "id": "text", "label": "Text", "default": "Book a fitting or walk in. Online orders can be collected and altered at any boutique." },
+    { "type": "header", "content": "Section padding" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Top padding", "default": 96 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Bottom padding", "default": 96 }
+  ],
+  "blocks": [
+    { "type": "store", "name": "Boutique", "settings": [
+      { "type": "image_picker", "id": "image", "label": "Photo" },
+      { "type": "text", "id": "city", "label": "City", "default": "Mumbai" },
+      { "type": "text", "id": "name", "label": "Name", "default": "Kala Ghoda" },
+      { "type": "textarea", "id": "address", "label": "Address", "default": "12 Rampart Row\nKala Ghoda, Mumbai 400001" },
+      { "type": "textarea", "id": "hours", "label": "Opening hours", "info": "One line per row, as Days: hours", "default": "Monday to Saturday: 11:00 to 20:00\nSunday: 12:00 to 18:00" },
+      { "type": "text", "id": "phone", "label": "Phone", "default": "+91 22 4000 0000" },
+      { "type": "url", "id": "map_link", "label": "Map link" },
+      { "type": "header", "content": "Open now indicator" },
+      { "type": "range", "id": "utc_offset", "label": "Time zone offset from UTC", "min": -12, "max": 14, "step": 0.5, "unit": "h", "default": 5.5 },
+      { "type": "range", "id": "open_hour", "label": "Opens", "min": 0, "max": 23, "step": 1, "unit": "h", "default": 11 },
+      { "type": "range", "id": "close_hour", "label": "Closes", "min": 1, "max": 24, "step": 1, "unit": "h", "default": 20 },
+      { "type": "select", "id": "closed_day", "label": "Closed on", "default": "none", "options": [ { "value": "none", "label": "Open every day" }, { "value": "0", "label": "Sunday" }, { "value": "1", "label": "Monday" } ] }
+    ] }
+  ],
+  "max_blocks": 6,
+  "presets": [ { "name": "Boutiques", "blocks": [ { "type": "store" }, { "type": "store", "settings": { "city": "Delhi", "name": "Mehrauli", "address": "The Courtyard, Kalka Das Marg\nMehrauli, New Delhi 110030" } } ] } ]
+}
+{% endschema %}

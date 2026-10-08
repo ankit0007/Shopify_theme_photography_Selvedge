@@ -1,0 +1,40 @@
+{% render 'section-spacing' %}
+<div class="color-{{ section.settings.color_scheme }} section-bg section-padding">
+  <div class="page-width cta-big">
+    <h2 class="h0" data-split-lines>{{ section.settings.title }}</h2>
+    {%- assign form_id = 'CtaForm-' | append: section.id -%}
+    {%- form 'customer', id: form_id -%}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      {%- if form.posted_successfully? -%}
+        <p class="form-message form-message--success" role="status">{{ 'newsletter.success' | t }}</p>
+      {%- elsif form.errors -%}
+        <p class="form-message form-message--error" role="alert">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</p>
+      {%- endif -%}
+      <div class="cta-big__form reveal">
+        <label for="CtaEmail-{{ section.id }}" class="visually-hidden">{{ 'newsletter.label' | t }}</label>
+        <input type="email" id="CtaEmail-{{ section.id }}" name="contact[email]" placeholder="{{ section.settings.placeholder | escape }}" autocomplete="email" required>
+        <button type="submit" class="button" data-magnetic>{{ section.settings.button_label | escape }}</button>
+      </div>
+    {%- endform -%}
+    {%- if section.settings.note != blank -%}<p class="cta-big__note">{{ section.settings.note | escape }}</p>{%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Email signup: large",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "inline_richtext", "id": "title", "label": "Heading", "default": "First to know, first to own." },
+    { "type": "text", "id": "placeholder", "label": "Field placeholder", "default": "your@email.com" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Subscribe" },
+    { "type": "text", "id": "note", "label": "Note", "default": "One email a week. New drops, restocks and nothing else." },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "header", "content": "Section padding" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Top padding", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Bottom padding", "default": 64 }
+  ],
+  "presets": [ { "name": "Email signup: large" } ]
+}
+{% endschema %}

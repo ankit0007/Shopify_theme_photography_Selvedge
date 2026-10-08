@@ -1,0 +1,8 @@
+{%- comment -%} Wishlist heart. Params: product, class {%- endcomment -%}
+<button type="button" class="wish-btn {{ class }}" aria-pressed="false" data-wish
+  data-handle="{{ product.handle }}"
+  data-title="{{ product.title | escape }}"
+  data-url="{{ product.url }}"
+  data-price="{{ product.price | money | escape }}"
+  data-image="{% if product.featured_media %}{{ product.featured_media | image_url: width: 600 }}{% endif %}"
+  aria-label="{{ 'wishlist.add' | t: product: product.title }}">{% render 'icon', name: 'heart' %}</button>

@@ -1,0 +1,43 @@
+{% render 'section-spacing' %}
+<div class="color-{{ section.settings.color_scheme }} section-bg section-padding">
+  <div class="page-width">
+    <div class="newsletter reveal">
+      {%- if section.settings.subheading != blank -%}<span class="subtitle">{{ section.settings.subheading | escape }}</span>{%- endif -%}
+      <h2 data-split-lines>{{ section.settings.title | escape }}</h2>
+      {%- if section.settings.text != blank -%}<div class="rte">{{ section.settings.text }}</div>{%- endif -%}
+      {%- assign form_id = 'NewsletterForm-' | append: section.id -%}
+      {%- form 'customer', id: form_id -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        {%- if form.posted_successfully? -%}
+          <p class="form-message form-message--success" role="status" style="margin-top: 2rem;">{{ 'newsletter.success' | t }}</p>
+        {%- elsif form.errors -%}
+          <p class="form-message form-message--error" role="alert" style="margin-top: 2rem;">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</p>
+        {%- endif -%}
+        <div class="inline-form">
+          <label for="NewsletterEmail-{{ section.id }}" class="visually-hidden">{{ 'newsletter.label' | t }}</label>
+          <input type="email" id="NewsletterEmail-{{ section.id }}" name="contact[email]" class="input" placeholder="{{ 'newsletter.label' | t }}" autocomplete="email" required>
+          <button type="submit" class="button">{{ 'newsletter.button_label' | t }}</button>
+        </div>
+      {%- endform -%}
+      <p class="newsletter__note">{{ 'newsletter.note' | t }}</p>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Email signup",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Join the list" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Get 10% off your first order" },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Be the first to hear about new collections and exclusive offers.</p>" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-2" },
+    { "type": "header", "content": "Section padding" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Top padding", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Bottom padding", "default": 64 }
+  ],
+  "presets": [ { "name": "Email signup" } ]
+}
+{% endschema %}

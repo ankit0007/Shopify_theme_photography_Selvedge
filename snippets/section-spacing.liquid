@@ -1,0 +1,6 @@
+{%- style -%}
+  #shopify-section-{{ section.id }} .section-padding {
+    --pt: {{ section.settings.padding_top | default: 64 }}px;
+    --pb: {{ section.settings.padding_bottom | default: 64 }}px;
+  }
+{%- endstyle -%}

@@ -1,0 +1,530 @@
+{
+  "current": "Atelier",
+  "presets": {
+    "Atelier": {
+      "type_header_font": "tenor_sans_n4",
+      "type_body_font": "manrope_n4",
+      "type_accent_font": "instrument_serif_i4",
+      "heading_tracking": -2,
+      "heading_case": "none",
+      "nav_case": "uppercase",
+      "heading_scale": 100,
+      "body_scale": 100,
+      "radius_large": 0,
+      "radius_small": 0,
+      "buttons_radius": 0,
+      "inputs_radius": 0,
+      "buttons_uppercase": true,
+      "card_style": "editorial",
+      "card_image_ratio": "portrait",
+      "card_show_secondary_image": true,
+      "card_show_type": false,
+      "card_show_vendor": false,
+      "card_quick_add": true,
+      "card_quick_view": true,
+      "card_show_swatches": true,
+      "wishlist": true,
+      "color_schemes": {
+        "scheme-1": {
+          "settings": {
+            "background": "#FFFFFF",
+            "background_gradient": "",
+            "surface": "#F1EFEC",
+            "text": "#191817",
+            "accent": "#7B1E2D",
+            "button": "#191817",
+            "button_label": "#FFFFFF",
+            "secondary_button_label": "#191817"
+          }
+        },
+        "scheme-2": {
+          "settings": {
+            "background": "#191817",
+            "background_gradient": "",
+            "surface": "#252321",
+            "text": "#F4F2EE",
+            "accent": "#E3A8B1",
+            "button": "#F4F2EE",
+            "button_label": "#191817",
+            "secondary_button_label": "#F4F2EE"
+          }
+        },
+        "scheme-3": {
+          "settings": {
+            "background": "#F1EFEC",
+            "background_gradient": "",
+            "surface": "#E6E3DE",
+            "text": "#191817",
+            "accent": "#7B1E2D",
+            "button": "#191817",
+            "button_label": "#FFFFFF",
+            "secondary_button_label": "#191817"
+          }
+        },
+        "scheme-4": {
+          "settings": {
+            "background": "#7B1E2D",
+            "background_gradient": "",
+            "surface": "#6B1826",
+            "text": "#FFFFFF",
+            "accent": "#F4D9DD",
+            "button": "#FFFFFF",
+            "button_label": "#7B1E2D",
+            "secondary_button_label": "#FFFFFF"
+          }
+        },
+        "scheme-5": {
+          "settings": {
+            "background": "#F7F6F3",
+            "background_gradient": "",
+            "surface": "#EEECE8",
+            "text": "#191817",
+            "accent": "#7B1E2D",
+            "button": "#191817",
+            "button_label": "#FFFFFF",
+            "secondary_button_label": "#191817"
+          }
+        }
+      },
+      "logo_width": 140,
+      "page_width": 1680,
+      "grid_gap": 8,
+      "spacing_sections": 0,
+      "header_style": "center",
+      "header_transparent": false,
+      "header_search_shortcut": true,
+      "buttons_magnetic": false,
+      "cart_type": "drawer",
+      "show_cart_note": true,
+      "free_shipping_threshold": "4999",
+      "animations_reveal": true,
+      "animations_text": true,
+      "page_transitions": true,
+      "custom_cursor": true,
+      "grain": false,
+      "animations_hover": true,
+      "badge_new_tag": "new",
+      "badge_hot_tag": "last-pieces"
+    },
+    "Noir": {
+      "type_header_font": "bodoni_moda_n5",
+      "type_body_font": "jost_n4",
+      "type_accent_font": "bodoni_moda_i4",
+      "heading_tracking": -1,
+      "heading_case": "none",
+      "nav_case": "uppercase",
+      "heading_scale": 110,
+      "body_scale": 100,
+      "radius_large": 0,
+      "radius_small": 0,
+      "buttons_radius": 0,
+      "inputs_radius": 0,
+      "buttons_uppercase": true,
+      "card_style": "editorial",
+      "card_image_ratio": "tall",
+      "card_show_secondary_image": true,
+      "card_show_type": false,
+      "card_show_vendor": false,
+      "card_quick_add": true,
+      "card_quick_view": true,
+      "card_show_swatches": true,
+      "wishlist": true,
+      "color_schemes": {
+        "scheme-1": {
+          "settings": {
+            "background": "#111110",
+            "background_gradient": "",
+            "surface": "#1C1B19",
+            "text": "#EDEAE4",
+            "accent": "#C9A66B",
+            "button": "#EDEAE4",
+            "button_label": "#111110",
+            "secondary_button_label": "#EDEAE4"
+          }
+        },
+        "scheme-2": {
+          "settings": {
+            "background": "#080807",
+            "background_gradient": "",
+            "surface": "#151413",
+            "text": "#EDEAE4",
+            "accent": "#C9A66B",
+            "button": "#C9A66B",
+            "button_label": "#080807",
+            "secondary_button_label": "#EDEAE4"
+          }
+        },
+        "scheme-3": {
+          "settings": {
+            "background": "#1C1B19",
+            "background_gradient": "",
+            "surface": "#262422",
+            "text": "#EDEAE4",
+            "accent": "#C9A66B",
+            "button": "#EDEAE4",
+            "button_label": "#111110",
+            "secondary_button_label": "#EDEAE4"
+          }
+        },
+        "scheme-4": {
+          "settings": {
+            "background": "#C9A66B",
+            "background_gradient": "",
+            "surface": "#B8955C",
+            "text": "#111110",
+            "accent": "#111110",
+            "button": "#111110",
+            "button_label": "#C9A66B",
+            "secondary_button_label": "#111110"
+          }
+        },
+        "scheme-5": {
+          "settings": {
+            "background": "#EDEAE4",
+            "background_gradient": "",
+            "surface": "#E2DED6",
+            "text": "#111110",
+            "accent": "#8C6A33",
+            "button": "#111110",
+            "button_label": "#EDEAE4",
+            "secondary_button_label": "#111110"
+          }
+        }
+      },
+      "logo_width": 140,
+      "page_width": 1680,
+      "grid_gap": 8,
+      "spacing_sections": 0,
+      "header_style": "center",
+      "header_transparent": false,
+      "header_search_shortcut": true,
+      "buttons_magnetic": false,
+      "cart_type": "drawer",
+      "show_cart_note": true,
+      "free_shipping_threshold": "4999",
+      "animations_reveal": true,
+      "animations_text": true,
+      "page_transitions": true,
+      "custom_cursor": true,
+      "grain": false,
+      "animations_hover": true,
+      "badge_new_tag": "new",
+      "badge_hot_tag": "last-pieces"
+    },
+    "Denim": {
+      "type_header_font": "archivo_narrow_n7",
+      "type_body_font": "inter_n4",
+      "type_accent_font": "instrument_serif_i4",
+      "heading_tracking": -1,
+      "heading_case": "uppercase",
+      "nav_case": "uppercase",
+      "heading_scale": 115,
+      "body_scale": 100,
+      "radius_large": 0,
+      "radius_small": 0,
+      "buttons_radius": 0,
+      "inputs_radius": 0,
+      "buttons_uppercase": true,
+      "card_style": "boxed",
+      "card_image_ratio": "portrait",
+      "card_show_secondary_image": true,
+      "card_show_type": false,
+      "card_show_vendor": false,
+      "card_quick_add": true,
+      "card_quick_view": true,
+      "card_show_swatches": true,
+      "wishlist": true,
+      "color_schemes": {
+        "scheme-1": {
+          "settings": {
+            "background": "#F3F4F6",
+            "background_gradient": "",
+            "surface": "#E4E7EC",
+            "text": "#121826",
+            "accent": "#2B4C9B",
+            "button": "#121826",
+            "button_label": "#F3F4F6",
+            "secondary_button_label": "#121826"
+          }
+        },
+        "scheme-2": {
+          "settings": {
+            "background": "#16213D",
+            "background_gradient": "",
+            "surface": "#1F2C4D",
+            "text": "#F3F4F6",
+            "accent": "#9DB4F0",
+            "button": "#F3F4F6",
+            "button_label": "#16213D",
+            "secondary_button_label": "#F3F4F6"
+          }
+        },
+        "scheme-3": {
+          "settings": {
+            "background": "#E4E7EC",
+            "background_gradient": "",
+            "surface": "#D6DAE1",
+            "text": "#121826",
+            "accent": "#2B4C9B",
+            "button": "#121826",
+            "button_label": "#F3F4F6",
+            "secondary_button_label": "#121826"
+          }
+        },
+        "scheme-4": {
+          "settings": {
+            "background": "#2B4C9B",
+            "background_gradient": "",
+            "surface": "#24418A",
+            "text": "#FFFFFF",
+            "accent": "#F3F4F6",
+            "button": "#FFFFFF",
+            "button_label": "#2B4C9B",
+            "secondary_button_label": "#FFFFFF"
+          }
+        },
+        "scheme-5": {
+          "settings": {
+            "background": "#FFFFFF",
+            "background_gradient": "",
+            "surface": "#F3F4F6",
+            "text": "#121826",
+            "accent": "#2B4C9B",
+            "button": "#121826",
+            "button_label": "#FFFFFF",
+            "secondary_button_label": "#121826"
+          }
+        }
+      },
+      "logo_width": 140,
+      "page_width": 1680,
+      "grid_gap": 8,
+      "spacing_sections": 0,
+      "header_style": "center",
+      "header_transparent": false,
+      "header_search_shortcut": true,
+      "buttons_magnetic": false,
+      "cart_type": "drawer",
+      "show_cart_note": true,
+      "free_shipping_threshold": "4999",
+      "animations_reveal": true,
+      "animations_text": true,
+      "page_transitions": true,
+      "custom_cursor": true,
+      "grain": false,
+      "animations_hover": true,
+      "badge_new_tag": "new",
+      "badge_hot_tag": "last-pieces"
+    },
+    "Linen": {
+      "type_header_font": "marcellus_n4",
+      "type_body_font": "figtree_n4",
+      "type_accent_font": "instrument_serif_i4",
+      "heading_tracking": 0,
+      "heading_case": "none",
+      "nav_case": "none",
+      "heading_scale": 105,
+      "body_scale": 100,
+      "radius_large": 0,
+      "radius_small": 0,
+      "buttons_radius": 40,
+      "inputs_radius": 0,
+      "buttons_uppercase": false,
+      "card_style": "editorial",
+      "card_image_ratio": "tall",
+      "card_show_secondary_image": true,
+      "card_show_type": false,
+      "card_show_vendor": false,
+      "card_quick_add": true,
+      "card_quick_view": true,
+      "card_show_swatches": true,
+      "wishlist": true,
+      "color_schemes": {
+        "scheme-1": {
+          "settings": {
+            "background": "#EEF1EC",
+            "background_gradient": "",
+            "surface": "#E1E6DE",
+            "text": "#27322A",
+            "accent": "#A0522D",
+            "button": "#27322A",
+            "button_label": "#EEF1EC",
+            "secondary_button_label": "#27322A"
+          }
+        },
+        "scheme-2": {
+          "settings": {
+            "background": "#27322A",
+            "background_gradient": "",
+            "surface": "#323E35",
+            "text": "#EEF1EC",
+            "accent": "#E3A27F",
+            "button": "#EEF1EC",
+            "button_label": "#27322A",
+            "secondary_button_label": "#EEF1EC"
+          }
+        },
+        "scheme-3": {
+          "settings": {
+            "background": "#E1E6DE",
+            "background_gradient": "",
+            "surface": "#D3DACF",
+            "text": "#27322A",
+            "accent": "#A0522D",
+            "button": "#27322A",
+            "button_label": "#EEF1EC",
+            "secondary_button_label": "#27322A"
+          }
+        },
+        "scheme-4": {
+          "settings": {
+            "background": "#A0522D",
+            "background_gradient": "",
+            "surface": "#8E4826",
+            "text": "#FFFFFF",
+            "accent": "#EEF1EC",
+            "button": "#FFFFFF",
+            "button_label": "#A0522D",
+            "secondary_button_label": "#FFFFFF"
+          }
+        },
+        "scheme-5": {
+          "settings": {
+            "background": "#F7F8F5",
+            "background_gradient": "",
+            "surface": "#EEF1EC",
+            "text": "#27322A",
+            "accent": "#A0522D",
+            "button": "#27322A",
+            "button_label": "#F7F8F5",
+            "secondary_button_label": "#27322A"
+          }
+        }
+      },
+      "logo_width": 140,
+      "page_width": 1680,
+      "grid_gap": 8,
+      "spacing_sections": 0,
+      "header_style": "center",
+      "header_transparent": false,
+      "header_search_shortcut": true,
+      "buttons_magnetic": false,
+      "cart_type": "drawer",
+      "show_cart_note": true,
+      "free_shipping_threshold": "4999",
+      "animations_reveal": true,
+      "animations_text": true,
+      "page_transitions": true,
+      "custom_cursor": true,
+      "grain": false,
+      "animations_hover": true,
+      "badge_new_tag": "new",
+      "badge_hot_tag": "last-pieces"
+    },
+    "Mono": {
+      "type_header_font": "syne_n7",
+      "type_body_font": "inter_n4",
+      "type_accent_font": "instrument_serif_i4",
+      "heading_tracking": -3,
+      "heading_case": "uppercase",
+      "nav_case": "uppercase",
+      "heading_scale": 105,
+      "body_scale": 100,
+      "radius_large": 0,
+      "radius_small": 0,
+      "buttons_radius": 0,
+      "inputs_radius": 0,
+      "buttons_uppercase": true,
+      "card_style": "minimal",
+      "card_image_ratio": "portrait",
+      "card_show_secondary_image": true,
+      "card_show_type": false,
+      "card_show_vendor": false,
+      "card_quick_add": true,
+      "card_quick_view": true,
+      "card_show_swatches": true,
+      "wishlist": true,
+      "color_schemes": {
+        "scheme-1": {
+          "settings": {
+            "background": "#FFFFFF",
+            "background_gradient": "",
+            "surface": "#F2F2F2",
+            "text": "#0A0A0A",
+            "accent": "#E4002B",
+            "button": "#0A0A0A",
+            "button_label": "#FFFFFF",
+            "secondary_button_label": "#0A0A0A"
+          }
+        },
+        "scheme-2": {
+          "settings": {
+            "background": "#0A0A0A",
+            "background_gradient": "",
+            "surface": "#161616",
+            "text": "#FFFFFF",
+            "accent": "#FF3B57",
+            "button": "#FFFFFF",
+            "button_label": "#0A0A0A",
+            "secondary_button_label": "#FFFFFF"
+          }
+        },
+        "scheme-3": {
+          "settings": {
+            "background": "#F2F2F2",
+            "background_gradient": "",
+            "surface": "#E6E6E6",
+            "text": "#0A0A0A",
+            "accent": "#E4002B",
+            "button": "#0A0A0A",
+            "button_label": "#FFFFFF",
+            "secondary_button_label": "#0A0A0A"
+          }
+        },
+        "scheme-4": {
+          "settings": {
+            "background": "#E4002B",
+            "background_gradient": "",
+            "surface": "#C90026",
+            "text": "#FFFFFF",
+            "accent": "#0A0A0A",
+            "button": "#FFFFFF",
+            "button_label": "#E4002B",
+            "secondary_button_label": "#FFFFFF"
+          }
+        },
+        "scheme-5": {
+          "settings": {
+            "background": "#FAFAFA",
+            "background_gradient": "",
+            "surface": "#F2F2F2",
+            "text": "#0A0A0A",
+            "accent": "#E4002B",
+            "button": "#0A0A0A",
+            "button_label": "#FFFFFF",
+            "secondary_button_label": "#0A0A0A"
+          }
+        }
+      },
+      "logo_width": 140,
+      "page_width": 1680,
+      "grid_gap": 8,
+      "spacing_sections": 0,
+      "header_style": "center",
+      "header_transparent": false,
+      "header_search_shortcut": true,
+      "buttons_magnetic": false,
+      "cart_type": "drawer",
+      "show_cart_note": true,
+      "free_shipping_threshold": "4999",
+      "animations_reveal": true,
+      "animations_text": true,
+      "page_transitions": true,
+      "custom_cursor": true,
+      "grain": false,
+      "animations_hover": true,
+      "badge_new_tag": "new",
+      "badge_hot_tag": "last-pieces"
+    }
+  }
+}

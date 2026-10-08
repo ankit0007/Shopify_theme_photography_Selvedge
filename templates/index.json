@@ -1,0 +1,320 @@
+{
+  "sections": {
+    "runway": {
+      "type": "runway-hero",
+      "blocks": {
+        "look_1": {
+          "type": "look",
+          "settings": {
+            "title": "Rust wool wrap coat",
+            "text": "Over a cream rib knit, sleeves pushed up."
+          }
+        },
+        "look_2": {
+          "type": "look",
+          "settings": {
+            "title": "Pink cotton trench",
+            "text": "Belted loose, worn with a wide-leg trouser."
+          }
+        },
+        "look_3": {
+          "type": "look",
+          "settings": {
+            "title": "Navy double cloth suit",
+            "text": "Soft shoulder, no lining, one button."
+          }
+        },
+        "look_4": {
+          "type": "look",
+          "settings": {
+            "title": "Raw selvedge jacket",
+            "text": "Fourteen ounce denim that fades to you."
+          }
+        },
+        "look_5": {
+          "type": "look",
+          "settings": {
+            "title": "Silk cami, black",
+            "text": "Bias cut, worn alone or under tailoring."
+          }
+        },
+        "look_6": {
+          "type": "look",
+          "settings": {
+            "title": "Ivory double-breasted blazer",
+            "text": "Linen and wool, for warm evenings."
+          }
+        }
+      },
+      "block_order": [
+        "look_1",
+        "look_2",
+        "look_3",
+        "look_4",
+        "look_5",
+        "look_6"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "kicker": "Autumn Winter 2026",
+        "title": "Cut close, worn loose",
+        "text": "Six looks in wool, cotton gabardine and raw denim. Click the photo to walk to the next one.",
+        "button_label": "Shop the collection",
+        "button_link": "shopify://collections/all",
+        "speed": 6
+      }
+    },
+    "new": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "New this week",
+        "text": "Hover a piece to pick your size without leaving the page.",
+        "collection": "all",
+        "products_to_show": 10,
+        "columns": 4,
+        "show_view_all": true,
+        "color_scheme": "scheme-1",
+        "insert_position": 3,
+        "insert_title": "The coat edit",
+        "insert_text": "Twelve shapes in wool and cashmere",
+        "insert_link": "shopify://collections/outerwear",
+        "padding_top": 96,
+        "padding_bottom": 96
+      }
+    },
+    "spread": {
+      "type": "lookbook-spread",
+      "settings": {
+        "color_scheme": "scheme-3",
+        "kicker_left": "Chapter two",
+        "kicker_right": "Shot in Lisbon",
+        "title": "The trench, rewritten",
+        "quote": "We kept the storm flap and took out everything that was only there for show.",
+        "text": "<p>Cotton gabardine from a mill in Biella, cut a size bigger through the shoulder so it closes over a knit. Bound seams inside, horn buttons, and a lining you can see.</p>",
+        "button_label": "See the full lookbook",
+        "button_link": "shopify://pages/lookbook",
+        "folio_left": "12",
+        "folio_right": "13",
+        "reverse": false,
+        "padding_top": 120,
+        "padding_bottom": 136
+      }
+    },
+    "look": {
+      "type": "shop-the-look",
+      "blocks": {
+        "piece_1": {
+          "type": "piece",
+          "settings": {
+            "x": 48,
+            "y": 30
+          }
+        },
+        "piece_2": {
+          "type": "piece",
+          "settings": {
+            "x": 52,
+            "y": 58
+          }
+        },
+        "piece_3": {
+          "type": "piece",
+          "settings": {
+            "x": 40,
+            "y": 86
+          }
+        }
+      },
+      "block_order": [
+        "piece_1",
+        "piece_2",
+        "piece_3"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "kicker": "Look 04",
+        "title": "Everything in this photo",
+        "text": "Tap a number on the photo to find the piece. Sizes can be changed in the bag.",
+        "button_label": "Add the whole look to bag",
+        "padding_top": 120,
+        "padding_bottom": 96
+      }
+    },
+    "fabrics": {
+      "type": "material-library",
+      "blocks": {
+        "fabric_1": {
+          "type": "fabric",
+          "settings": {
+            "name": "Raw selvedge denim",
+            "composition": "100% cotton",
+            "weight": "14 oz",
+            "origin": "Kojima, Japan",
+            "feel": "Stiff at first, fades to your shape"
+          }
+        },
+        "fabric_2": {
+          "type": "fabric",
+          "settings": {
+            "name": "Merino jersey",
+            "composition": "100% merino wool",
+            "weight": "190 gsm",
+            "origin": "Biella, Italy",
+            "feel": "Soft, breathes, does not hold smell"
+          }
+        },
+        "fabric_3": {
+          "type": "fabric",
+          "settings": {
+            "name": "Handloom ikat",
+            "composition": "100% cotton",
+            "weight": "160 gsm",
+            "origin": "Pochampally, India",
+            "feel": "Light, softens with every wash"
+          }
+        },
+        "fabric_4": {
+          "type": "fabric",
+          "settings": {
+            "name": "Silk crepe",
+            "composition": "100% mulberry silk",
+            "weight": "18 momme",
+            "origin": "Como, Italy",
+            "feel": "Fluid drape, matte surface"
+          }
+        }
+      },
+      "block_order": [
+        "fabric_1",
+        "fabric_2",
+        "fabric_3",
+        "fabric_4"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "title": "What it is made of",
+        "text": "Every cloth is listed with its mill, weight and how it wears over time.",
+        "link_label": "Read about our mills",
+        "link_url": "shopify://pages/about",
+        "padding_top": 96,
+        "padding_bottom": 120
+      }
+    },
+    "press": {
+      "type": "press-quotes",
+      "blocks": {
+        "quote_1": {
+          "type": "quote",
+          "settings": {
+            "quote": "The rare label where the coat in the photograph is the coat that arrives.",
+            "source": "Weekend Review"
+          }
+        },
+        "quote_2": {
+          "type": "quote",
+          "settings": {
+            "quote": "Tailoring with the ease of something you have owned for years.",
+            "source": "The Line Journal"
+          }
+        },
+        "quote_3": {
+          "type": "quote",
+          "settings": {
+            "quote": "Quietly the best denim being cut in India right now.",
+            "source": "Indigo Quarterly"
+          }
+        }
+      },
+      "block_order": [
+        "quote_1",
+        "quote_2",
+        "quote_3"
+      ],
+      "settings": {
+        "color_scheme": "scheme-2",
+        "speed": 6,
+        "padding_top": 120,
+        "padding_bottom": 120
+      }
+    },
+    "stores": {
+      "type": "boutiques",
+      "blocks": {
+        "store_1": {
+          "type": "store",
+          "settings": {
+            "city": "Mumbai",
+            "name": "Kala Ghoda",
+            "address": "12 Rampart Row\nKala Ghoda, Mumbai 400001",
+            "hours": "Monday to Saturday: 11:00 to 20:00\nSunday: 12:00 to 18:00",
+            "phone": "+91 22 4000 0000",
+            "utc_offset": 5.5,
+            "open_hour": 11,
+            "close_hour": 20,
+            "closed_day": "none"
+          }
+        },
+        "store_2": {
+          "type": "store",
+          "settings": {
+            "city": "New Delhi",
+            "name": "Mehrauli",
+            "address": "The Courtyard, Kalka Das Marg\nMehrauli, New Delhi 110030",
+            "hours": "Tuesday to Sunday: 11:00 to 19:30\nMonday: Closed",
+            "phone": "+91 11 4000 0000",
+            "utc_offset": 5.5,
+            "open_hour": 11,
+            "close_hour": 19,
+            "closed_day": "1"
+          }
+        },
+        "store_3": {
+          "type": "store",
+          "settings": {
+            "city": "Bengaluru",
+            "name": "Lavelle Road",
+            "address": "7 Lavelle Road\nBengaluru 560001",
+            "hours": "Every day: 11:00 to 20:00",
+            "phone": "+91 80 4000 0000",
+            "utc_offset": 5.5,
+            "open_hour": 11,
+            "close_hour": 20,
+            "closed_day": "none"
+          }
+        }
+      },
+      "block_order": [
+        "store_1",
+        "store_2",
+        "store_3"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "title": "Try it on in person",
+        "text": "Book a fitting or walk in. Online orders can be collected and altered at any boutique.",
+        "padding_top": 120,
+        "padding_bottom": 96
+      }
+    },
+    "recent": {
+      "type": "recently-viewed",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "title": "Recently viewed",
+        "limit": 6,
+        "padding_top": 0,
+        "padding_bottom": 96
+      }
+    }
+  },
+  "order": [
+    "runway",
+    "new",
+    "spread",
+    "look",
+    "fabrics",
+    "press",
+    "stores",
+    "recent"
+  ]
+}

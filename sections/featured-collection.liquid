@@ -1,0 +1,61 @@
+{% render 'section-spacing' %}
+{%- liquid
+  assign collection = section.settings.collection
+  assign limit = section.settings.products_to_show
+  assign link_label = ''
+  if section.settings.show_view_all
+    assign link_label = 'sections.featured_collection.view_all' | t
+  endif
+-%}
+<div class="color-{{ section.settings.color_scheme }} section-bg section-padding">
+  <div class="page-width">
+    {% render 'intro', title: section.settings.title, text: section.settings.text, link_label: link_label, link_url: collection.url %}
+    <ul class="grid" role="list" data-stagger style="--cols: {{ section.settings.columns }}; --cols-tablet: 3;">
+      {%- if collection != blank and collection.products_count > 0 -%}
+        {%- for product in collection.products limit: limit -%}
+          {%- if section.settings.insert_image != blank and forloop.index == section.settings.insert_position -%}
+            <li class="grid-insert-cell">
+              <a href="{{ section.settings.insert_link | default: collection.url }}" class="grid-insert">
+                {{ section.settings.insert_image | image_url: width: 1400 | image_tag: loading: 'lazy', widths: '600, 1000, 1400', sizes: '(min-width: 990px) 50vw, 100vw', alt: section.settings.insert_image.alt }}
+                <span class="grid-insert__text">
+                  <h3>{{ section.settings.insert_title | escape }}</h3>
+                  {%- if section.settings.insert_text != blank -%}<span>{{ section.settings.insert_text | escape }}</span>{%- endif -%}
+                </span>
+              </a>
+            </li>
+          {%- endif -%}
+          <li>{% render 'product-card', card_product: product, section_id: section.id, index: forloop.index0 %}</li>
+        {%- endfor -%}
+      {%- else -%}
+        {%- for i in (1..limit) -%}<li>{% render 'product-card', card_product: blank %}</li>{%- endfor -%}
+      {%- endif -%}
+    </ul>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product grid",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "inline_richtext", "id": "title", "label": "Heading", "default": "Most loved right now" },
+    { "type": "text", "id": "text", "label": "Text" },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "range", "id": "products_to_show", "min": 2, "max": 16, "step": 1, "label": "Maximum products to show", "default": 8 },
+    { "type": "range", "id": "columns", "min": 2, "max": 5, "step": 1, "label": "Columns on desktop", "default": 4 },
+    { "type": "checkbox", "id": "show_view_all", "label": "Show 'View all' link", "default": true },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "header", "content": "Editorial tile" },
+    { "type": "image_picker", "id": "insert_image", "label": "Image", "info": "Takes the space of two products." },
+    { "type": "range", "id": "insert_position", "min": 1, "max": 12, "step": 1, "label": "Show before product number", "default": 3 },
+    { "type": "text", "id": "insert_title", "label": "Title", "default": "The coat edit" },
+    { "type": "text", "id": "insert_text", "label": "Text", "default": "Twelve shapes in wool and cashmere" },
+    { "type": "url", "id": "insert_link", "label": "Link" },
+    { "type": "header", "content": "Section padding" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Top padding", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Bottom padding", "default": 64 }
+  ],
+  "presets": [ { "name": "Product grid" } ]
+}
+{% endschema %}

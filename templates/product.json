@@ -1,0 +1,134 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title_1": {
+          "type": "title"
+        },
+        "price_2": {
+          "type": "price"
+        },
+        "variant_picker_3": {
+          "type": "variant_picker",
+          "settings": {
+            "image_swatches": true,
+            "size_table": "Size, Chest, Waist, Hips\nXS, 82, 64, 88\nS, 86, 68, 92\nM, 90, 72, 96\nL, 96, 78, 102\nXL, 102, 84, 108",
+            "size_note": "Body measurements in cm. The model is 178 cm and wears size S."
+          }
+        },
+        "fit_4": {
+          "type": "fit",
+          "settings": {
+            "heading": "Fit",
+            "position": 70,
+            "left_label": "Close",
+            "middle_label": "True to size",
+            "right_label": "Relaxed",
+            "note": "Cut generously through the shoulder. Take your usual size."
+          }
+        },
+        "buy_buttons_5": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true
+          }
+        },
+        "delivery_6": {
+          "type": "delivery",
+          "settings": {
+            "min_days": 2,
+            "max_days": 4,
+            "cutoff": 14
+          }
+        },
+        "description_7": {
+          "type": "description"
+        },
+        "care_label_8": {
+          "type": "care_label",
+          "settings": {
+            "heading": "Composition and care",
+            "composition": "Shell 100% virgin wool\nLining 100% cupro",
+            "wash": "none",
+            "no_bleach": true,
+            "iron": "low",
+            "dry_clean": true,
+            "no_tumble": true,
+            "origin": "Made in India",
+            "open": false
+          }
+        },
+        "collapsible_tab_9": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Delivery and returns",
+            "content": "<p>Free delivery in India over ₹4,999. Returns are free within 30 days, by courier or at any boutique.</p>",
+            "open": false
+          }
+        },
+        "complete_look_10": {
+          "type": "complete_look",
+          "settings": {
+            "heading": "Wear it with"
+          }
+        },
+        "trust_11": {
+          "type": "trust",
+          "settings": {
+            "text_1": "Free delivery over ₹4,999",
+            "text_2": "Free returns within 30 days",
+            "text_3": "Free alterations in store"
+          }
+        },
+        "share_12": {
+          "type": "share"
+        }
+      },
+      "block_order": [
+        "title_1",
+        "price_2",
+        "variant_picker_3",
+        "fit_4",
+        "buy_buttons_5",
+        "delivery_6",
+        "description_7",
+        "care_label_8",
+        "collapsible_tab_9",
+        "complete_look_10",
+        "trust_11",
+        "share_12"
+      ],
+      "settings": {
+        "layout": "grid",
+        "hover_zoom": true,
+        "sticky_atc": true
+      }
+    },
+    "related": {
+      "type": "related-products",
+      "settings": {
+        "heading": "You might also like",
+        "products_to_show": 8,
+        "color_scheme": "scheme-1",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    },
+    "recent": {
+      "type": "recently-viewed",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "title": "Recently viewed",
+        "limit": 6,
+        "padding_top": 0,
+        "padding_bottom": 96
+      }
+    }
+  },
+  "order": [
+    "main",
+    "related",
+    "recent"
+  ]
+}

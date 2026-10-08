@@ -1,0 +1,59 @@
+<div class="page-width">
+  <div class="page-header">
+    <h1>{{ 'general.search.title' | t }}</h1>
+  </div>
+  <form action="{{ routes.search_url }}" method="get" role="search" class="search-page__form">
+    <div class="inline-form">
+      <label for="SearchPageInput" class="visually-hidden">{{ 'general.search.search' | t }}</label>
+      <input type="search" id="SearchPageInput" name="q" class="input" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}">
+      <input type="hidden" name="options[prefix]" value="last">
+      <button type="submit" class="button">{{ 'general.search.submit' | t }}</button>
+    </div>
+  </form>
+
+  {%- if search.performed -%}
+    {%- paginate search.results by 24 -%}
+      <p class="text-center caption" style="margin-bottom: 3.2rem;" role="status">
+        {{ 'general.search.results_count' | t: count: search.results_count, terms: search.terms }}
+      </p>
+      {% render 'active-filters', results: search %}
+      {%- if search.results_count == 0 -%}
+        <div class="empty-state"><p>{{ 'general.search.no_results_html' | t: terms: search.terms }}</p></div>
+      {%- else -%}
+        <ul class="grid" role="list" style="--cols: 4; --cols-tablet: 3; padding-bottom: 4rem;">
+          {%- for item in search.results -%}
+            <li>
+              {%- case item.object_type -%}
+                {%- when 'product' -%}
+                  {% render 'product-card', card_product: item, section_id: section.id, index: forloop.index0 %}
+                {%- else -%}
+                  <a href="{{ item.url }}" class="article-card" style="text-decoration:none;">
+                    <div class="media media--portrait article-card__media">
+                      {%- if item.image -%}
+                        {{ item.image | image_url: width: 600 | image_tag: loading: 'lazy', alt: item.title }}
+                      {%- else -%}
+                        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:2rem;" class="h3">{{ item.title | escape }}</div>
+                      {%- endif -%}
+                    </div>
+                    <span class="search-result-type">{{ item.object_type }}</span>
+                    <h3 style="margin:0;font-size:1.6rem;">{{ item.title | escape }}</h3>
+                  </a>
+              {%- endcase -%}
+            </li>
+          {%- endfor -%}
+        </ul>
+        {% render 'pagination', paginate: paginate, anchor: '' %}
+      {%- endif -%}
+    {%- endpaginate -%}
+  {%- endif -%}
+  <div style="height: 8rem;"></div>
+</div>
+
+{% schema %}
+{
+  "name": "Search results",
+  "tag": "section",
+  "class": "section",
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,28 @@
+{%- comment -%}
+  Renders a product media item. Params: media, loading
+{%- endcomment -%}
+{%- case media.media_type -%}
+  {%- when 'image' -%}
+    <div class="media" style="--ratio: {{ media.aspect_ratio | default: 1 }}; aspect-ratio: {{ media.aspect_ratio | default: 1 }};">
+      {{ media | image_url: width: 1800 | image_tag:
+        loading: loading,
+        widths: '400, 600, 800, 1000, 1200, 1500, 1800',
+        sizes: '(min-width: 990px) 55vw, 90vw',
+        alt: media.alt
+      }}
+    </div>
+  {%- when 'video' -%}
+    <div class="media" style="aspect-ratio: {{ media.aspect_ratio | default: 1.77 }};">
+      {{ media | video_tag: controls: true, playsinline: true, muted: true, loop: true, image_size: '1200x' }}
+    </div>
+  {%- when 'external_video' -%}
+    <div class="media" style="aspect-ratio: {{ media.aspect_ratio | default: 1.77 }};">
+      {{ media | external_video_tag: loading: 'lazy' }}
+    </div>
+  {%- when 'model' -%}
+    <div class="media media--square">
+      {{ media | model_viewer_tag: image_size: '1200x', reveal: 'interaction', toggleable: true }}
+    </div>
+  {%- else -%}
+    <div class="media media--square">{{ media | media_tag }}</div>
+{%- endcase -%}

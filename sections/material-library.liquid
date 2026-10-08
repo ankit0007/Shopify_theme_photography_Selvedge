@@ -1,0 +1,57 @@
+{%- render 'section-spacing' -%}
+<div class="color-{{ section.settings.color_scheme }} section-bg section-padding">
+  <div class="page-width">
+    {% render 'intro', title: section.settings.title, text: section.settings.text, link_label: section.settings.link_label, link_url: section.settings.link_url %}
+    <ul class="swatches" role="list" data-stagger="0.08">
+      {%- for block in section.blocks -%}
+        <li class="swatch-card" {{ block.shopify_attributes }}>
+          {%- if block.settings.link != blank -%}<a href="{{ block.settings.link }}" class="swatch-card__fabric" aria-label="{{ block.settings.name | escape }}">{%- else -%}<div class="swatch-card__fabric">{%- endif -%}
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 800 | image_tag: loading: 'lazy', widths: '300, 500, 800', sizes: '(min-width: 990px) 25vw, 50vw', alt: block.settings.image.alt }}
+            {%- else -%}
+              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+          {%- if block.settings.link != blank -%}</a>{%- else -%}</div>{%- endif -%}
+          <h3>{{ block.settings.name | escape }}</h3>
+          <dl class="swatch-card__facts">
+            {%- if block.settings.composition != blank -%}<dt>{{ 'sections.fabrics.composition' | t }}</dt><dd>{{ block.settings.composition | escape }}</dd>{%- endif -%}
+            {%- if block.settings.weight != blank -%}<dt>{{ 'sections.fabrics.weight' | t }}</dt><dd>{{ block.settings.weight | escape }}</dd>{%- endif -%}
+            {%- if block.settings.origin != blank -%}<dt>{{ 'sections.fabrics.origin' | t }}</dt><dd>{{ block.settings.origin | escape }}</dd>{%- endif -%}
+            {%- if block.settings.feel != blank -%}<dt>{{ 'sections.fabrics.feel' | t }}</dt><dd>{{ block.settings.feel | escape }}</dd>{%- endif -%}
+          </dl>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Material library",
+  "tag": "section",
+  "class": "section-fabrics",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "inline_richtext", "id": "title", "label": "Heading", "default": "What it is made of" },
+    { "type": "text", "id": "text", "label": "Text", "default": "Every cloth is listed with its mill, weight and how it wears over time." },
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "Read about our mills" },
+    { "type": "url", "id": "link_url", "label": "Link" },
+    { "type": "header", "content": "Section padding" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Top padding", "default": 96 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Bottom padding", "default": 96 }
+  ],
+  "blocks": [
+    { "type": "fabric", "name": "Fabric", "settings": [
+      { "type": "image_picker", "id": "image", "label": "Close-up of the fabric" },
+      { "type": "text", "id": "name", "label": "Name", "default": "Raw selvedge denim" },
+      { "type": "text", "id": "composition", "label": "Composition", "default": "100% cotton" },
+      { "type": "text", "id": "weight", "label": "Weight", "default": "14 oz" },
+      { "type": "text", "id": "origin", "label": "Origin", "default": "Kojima, Japan" },
+      { "type": "text", "id": "feel", "label": "Wear", "default": "Stiff at first, fades to your shape" },
+      { "type": "url", "id": "link", "label": "Link" }
+    ] }
+  ],
+  "max_blocks": 8,
+  "presets": [ { "name": "Material library", "blocks": [ { "type": "fabric" }, { "type": "fabric", "settings": { "name": "Merino jersey", "composition": "100% merino wool", "weight": "190 gsm", "origin": "Biella, Italy" } }, { "type": "fabric", "settings": { "name": "Silk crepe", "composition": "100% mulberry silk", "weight": "18 momme", "origin": "Como, Italy" } }, { "type": "fabric", "settings": { "name": "Handloom ikat", "composition": "100% cotton", "weight": "160 gsm", "origin": "Pochampally, India" } } ] } ]
+}
+{% endschema %}

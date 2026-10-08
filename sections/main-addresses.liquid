@@ -1,0 +1,44 @@
+{%- paginate customer.addresses by 20 -%}
+<div class="page-width" style="padding-top: 6.4rem; padding-bottom: 9.6rem;">
+  <a href="{{ routes.account_url }}" class="button button--link">{% render 'icon', name: 'arrow-left' %} {{ 'customer.account.return' | t }}</a>
+  <h1 style="margin-top: 2rem;">{{ 'customer.addresses.title' | t }}</h1>
+
+  <details class="accordion" style="max-width:72rem;">
+    <summary>{{ 'customer.addresses.add_new' | t }} {% render 'icon', name: 'plus' %}</summary>
+    <div class="accordion__content">
+      {%- form 'customer_address', customer.new_address -%}
+        {% render 'address-form', form: form, id: 'new' %}
+        <button type="submit" class="button">{{ 'customer.addresses.add' | t }}</button>
+      {%- endform -%}
+    </div>
+  </details>
+
+  <div class="address-grid">
+    {%- for address in customer.addresses -%}
+      <div class="address-card">
+        {%- if address == customer.default_address -%}<p class="badge badge--sale">{{ 'customer.addresses.default' | t }}</p>{%- endif -%}
+        {{ address | format_address }}
+        <details style="margin-top:1.6rem;">
+          <summary class="button button--link" style="list-style:none;">{{ 'customer.addresses.edit' | t }}</summary>
+          {%- form 'customer_address', address -%}
+            {% render 'address-form', form: form, id: address.id %}
+            <button type="submit" class="button button--small">{{ 'customer.addresses.update' | t }}</button>
+          {%- endform -%}
+        </details>
+        <form method="post" action="{{ address.url }}" style="margin-top:1rem;" onsubmit="return confirm('{{ 'customer.addresses.delete_confirm' | t }}');">
+          <input type="hidden" name="_method" value="delete">
+          <button type="submit" class="button button--link">{{ 'customer.addresses.delete' | t }}</button>
+        </form>
+      </div>
+    {%- endfor -%}
+  </div>
+  {% render 'pagination', paginate: paginate, anchor: '' %}
+</div>
+{%- endpaginate -%}
+<script>
+  document.querySelectorAll('select[data-default]').forEach(function (s) { if (s.dataset.default) s.value = s.dataset.default; });
+</script>
+
+{% schema %}
+{ "name": "Addresses", "tag": "section", "class": "section", "settings": [] }
+{% endschema %}

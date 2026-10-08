@@ -1,0 +1,33 @@
+{%- render 'section-spacing' -%}
+<div class="color-{{ section.settings.color_scheme }} section-bg section-padding">
+  <div class="page-width">
+    <header class="page-header" style="padding-top: 0;">
+      <h1>{{ page.title | default: section.settings.title | escape }}</h1>
+      {%- if section.settings.text != blank -%}<p class="lead">{{ section.settings.text | escape }}</p>{%- endif -%}
+    </header>
+    <div data-wishlist-page data-empty="{{ 'wishlist.empty' | t | escape }}" data-remove="{{ 'wishlist.remove' | t | escape }}">
+      <ul class="grid" role="list" style="--cols: {{ section.settings.columns }}; --cols-tablet: 3;" data-wishlist-grid></ul>
+      <div class="wishlist-empty" data-wishlist-empty hidden>
+        <p>{{ 'wishlist.empty' | t }}</p>
+        <a href="{{ routes.all_products_collection_url }}" class="button">{{ 'wishlist.browse' | t }}</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Wishlist",
+  "tag": "section",
+  "class": "section-wishlist",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Saved pieces" },
+    { "type": "text", "id": "text", "label": "Text", "default": "Saved on this device. Sign in to keep them across devices." },
+    { "type": "range", "id": "columns", "min": 2, "max": 5, "step": 1, "label": "Columns on desktop", "default": 4 },
+    { "type": "header", "content": "Section padding" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Top padding", "default": 48 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Bottom padding", "default": 96 }
+  ]
+}
+{% endschema %}

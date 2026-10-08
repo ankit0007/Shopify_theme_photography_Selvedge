@@ -1,0 +1,52 @@
+{
+  "type": "footer",
+  "name": "Footer group",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "m1": {
+          "type": "menu",
+          "settings": {
+            "heading": "Shop",
+            "menu": "main-menu"
+          }
+        },
+        "m2": {
+          "type": "menu",
+          "settings": {
+            "heading": "Help",
+            "menu": "footer"
+          }
+        },
+        "t1": {
+          "type": "text",
+          "settings": {
+            "heading": "Workshop",
+            "text": "<p>Unit 4, Kamala Mills<br>Lower Parel, Mumbai 400013</p><p>Visits by appointment.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "m1",
+        "m2",
+        "t1"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "join_title": "Hear about new collections first",
+        "join_note": "One letter a month. Early access to sale and new drops.",
+        "heading": "Clothing cut in Mumbai from cloth we can trace to the mill.",
+        "show_social": true,
+        "enable_country_selector": true,
+        "enable_language_selector": true,
+        "payment_enable": true,
+        "show_policy": true,
+        "show_wordmark": true
+      }
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}

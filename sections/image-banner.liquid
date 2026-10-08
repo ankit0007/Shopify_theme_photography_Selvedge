@@ -1,0 +1,100 @@
+{%- liquid
+  assign has_image = false
+  if section.settings.image != blank or section.settings.image_2 != blank
+    assign has_image = true
+  endif
+  assign overlay = section.settings.overlay | divided_by: 100.0
+-%}
+<div class="banner banner--{{ section.settings.height }}{% if section.settings.text_on_image %} banner--on-image{% endif %} color-{{ section.settings.color_scheme }} section-bg" style="--overlay: {% if section.settings.text_on_image %}{{ overlay }}{% else %}0{% endif %};">
+  <div class="banner__media{% if section.settings.image_2 != blank %} banner__media--split{% endif %}">
+    {%- if section.settings.image != blank -%}
+      <div>
+        {{ section.settings.image | image_url: width: 3000 | image_tag:
+          loading: 'eager', fetchpriority: 'high',
+          widths: '600, 900, 1200, 1600, 2000, 2400, 3000',
+          sizes: '100vw',
+          alt: section.settings.image.alt
+        }}
+      </div>
+    {%- endif -%}
+    {%- if section.settings.image_2 != blank -%}
+      <div>
+        {{ section.settings.image_2 | image_url: width: 1600 | image_tag:
+          loading: 'eager', widths: '600, 900, 1200, 1600', sizes: '50vw',
+          alt: section.settings.image_2.alt
+        }}
+      </div>
+    {%- endif -%}
+    {%- unless has_image -%}
+      {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- endunless -%}
+  </div>
+
+  <div class="banner__content banner__content--{{ section.settings.vertical }}">
+    <div class="page-width" style="width:100%;">
+      <div class="banner__box banner__box--{{ section.settings.alignment }}">
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'subheading' -%}
+              <p class="subtitle" {{ block.shopify_attributes }}>{{ block.settings.text | escape }}</p>
+            {%- when 'heading' -%}
+              <h2 class="{{ block.settings.size }}" data-split-lines {{ block.shopify_attributes }}>{{ block.settings.heading }}</h2>
+            {%- when 'text' -%}
+              <div class="banner__text rte" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+            {%- when 'buttons' -%}
+              <div class="button-group" style="margin-top: 1.2rem;" {{ block.shopify_attributes }}>
+                {%- if block.settings.label_1 != blank -%}
+                  <a href="{{ block.settings.link_1 | default: routes.all_products_collection_url }}" class="button">{{ block.settings.label_1 | escape }}</a>
+                {%- endif -%}
+                {%- if block.settings.label_2 != blank -%}
+                  <a href="{{ block.settings.link_2 | default: routes.collections_url }}" class="button button--secondary">{{ block.settings.label_2 | escape }}</a>
+                {%- endif -%}
+              </div>
+          {%- endcase -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Image banner",
+  "tag": "section",
+  "class": "section",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "image_picker", "id": "image_2", "label": "Second image (split layout)" },
+    { "type": "select", "id": "height", "label": "Banner height", "default": "large",
+      "options": [
+        { "value": "small", "label": "Small" }, { "value": "medium", "label": "Medium" },
+        { "value": "large", "label": "Large" }, { "value": "full", "label": "Full screen" }
+      ] },
+    { "type": "checkbox", "id": "text_on_image", "label": "Light text over image", "default": true },
+    { "type": "range", "id": "overlay", "min": 0, "max": 90, "step": 5, "unit": "%", "label": "Image overlay opacity", "default": 30 },
+    { "type": "select", "id": "vertical", "label": "Content position", "default": "bottom",
+      "options": [ { "value": "top", "label": "Top" }, { "value": "middle", "label": "Middle" }, { "value": "bottom", "label": "Bottom" } ] },
+    { "type": "select", "id": "alignment", "label": "Content alignment", "default": "left",
+      "options": [ { "value": "left", "label": "Left" }, { "value": "center", "label": "Center" }, { "value": "right", "label": "Right" } ] },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-3" }
+  ],
+  "blocks": [
+    { "type": "subheading", "name": "Subheading", "limit": 1, "settings": [ { "type": "text", "id": "text", "label": "Text", "default": "New season" } ] },
+    { "type": "heading", "name": "Heading", "limit": 1, "settings": [
+      { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Made to be <em>noticed</em>" },
+      { "type": "select", "id": "size", "label": "Size", "default": "h0", "options": [ { "value": "h1", "label": "Medium" }, { "value": "h0", "label": "Large" } ] }
+    ] },
+    { "type": "text", "name": "Text", "limit": 1, "settings": [ { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Discover pieces designed with care and built to last. Fresh arrivals, every week.</p>" } ] },
+    { "type": "buttons", "name": "Buttons", "limit": 1, "settings": [
+      { "type": "text", "id": "label_1", "label": "First button label", "default": "Shop now" },
+      { "type": "url", "id": "link_1", "label": "First button link" },
+      { "type": "text", "id": "label_2", "label": "Second button label", "default": "Explore collections" },
+      { "type": "url", "id": "link_2", "label": "Second button link" }
+    ] }
+  ],
+  "presets": [
+    { "name": "Image banner", "blocks": [ { "type": "subheading" }, { "type": "heading" }, { "type": "text" }, { "type": "buttons" } ] }
+  ]
+}
+{% endschema %}

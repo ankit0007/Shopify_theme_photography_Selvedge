@@ -1,0 +1,16 @@
+<div class="page-width section-padding" style="--pt: 32px; --pb: 32px;">
+  {%- for block in section.blocks -%}
+    {% render block %}
+  {%- endfor -%}
+</div>
+
+{% schema %}
+{
+  "name": "Apps",
+  "tag": "section",
+  "class": "section",
+  "settings": [],
+  "blocks": [ { "type": "@app" } ],
+  "presets": [ { "name": "Apps" } ]
+}
+{% endschema %}

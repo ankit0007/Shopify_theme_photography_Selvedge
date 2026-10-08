@@ -1,0 +1,55 @@
+{%- comment -%} Global overlays: command search, quick view modal, toast, cursor, back to top {%- endcomment -%}
+<div class="cmdk" id="SearchPalette" aria-hidden="true" data-cmdk>
+  <button type="button" class="drawer__overlay" data-drawer-close tabindex="-1" aria-label="{{ 'accessibility.close' | t }}"></button>
+  <div class="cmdk__panel" role="dialog" aria-modal="true" aria-label="{{ 'general.search.search' | t }}" data-predictive-search>
+    <form action="{{ routes.search_url }}" method="get" role="search" class="cmdk__form">
+      {% render 'icon', name: 'search' %}
+      <label for="PaletteInput" class="visually-hidden">{{ 'general.search.search' | t }}</label>
+      <input type="search" id="PaletteInput" name="q" placeholder="{{ 'general.search.placeholder' | t }}" autocomplete="off">
+      <input type="hidden" name="options[prefix]" value="last">
+      <kbd>Esc</kbd>
+    </form>
+    <div class="cmdk__body">
+      <div class="predictive-results" data-predictive-results aria-live="polite">
+        {%- assign search_menu = linklists['main-menu'] -%}
+        {%- if search_menu.links.size > 0 -%}
+          <p class="cmdk__group">{{ 'general.search.browse' | t }}</p>
+          <div class="cmdk__chips">
+            {%- for link in search_menu.links limit: 8 -%}
+              <a href="{{ link.url }}" class="pill">{{ link.title | escape }}</a>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="QuickView" aria-hidden="true" data-quick-view>
+  <button type="button" class="drawer__overlay" data-drawer-close tabindex="-1" aria-label="{{ 'accessibility.close' | t }}"></button>
+  <div class="modal__panel" role="dialog" aria-modal="true" aria-label="{{ 'products.product.quick_view' | t }}">
+    <button type="button" class="drawer__close modal__close" data-drawer-close aria-label="{{ 'accessibility.close' | t }}">{% render 'icon', name: 'close' %}</button>
+    <div data-quick-view-content><div class="quick-view-loading"></div></div>
+  </div>
+</div>
+
+<div class="toast" id="Toast" role="status" aria-live="polite"></div>
+<button type="button" class="icon-btn icon-btn--solid back-to-top" data-back-to-top aria-label="{{ 'accessibility.back_to_top' | t }}">{% render 'icon', name: 'arrow-up' %}</button>
+{%- if settings.custom_cursor -%}<div class="cursor" aria-hidden="true" data-cursor><span></span></div>{%- endif -%}
+
+<div class="lightbox" id="Lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="{{ 'sections.lightbox.label' | t }}" data-lightbox>
+  <div class="lightbox__top">
+    <span class="data" data-lightbox-count></span>
+    <button type="button" class="icon-btn icon-btn--light" data-lightbox-close aria-label="{{ 'accessibility.close' | t }}">{% render 'icon', name: 'close' %}</button>
+  </div>
+  <div class="lightbox__stage" data-lightbox-stage></div>
+  <div class="lightbox__bottom">
+    <div>
+      <p class="lightbox__caption" data-lightbox-caption style="margin: 0 0 0.4rem;"></p>
+    </div>
+    <div class="button-group">
+      <button type="button" class="icon-btn icon-btn--light" data-lightbox-prev aria-label="{{ 'general.slider.previous' | t }}">{% render 'icon', name: 'arrow-left' %}</button>
+      <button type="button" class="icon-btn icon-btn--light" data-lightbox-next aria-label="{{ 'general.slider.next' | t }}">{% render 'icon', name: 'arrow' %}</button>
+    </div>
+  </div>
+</div>

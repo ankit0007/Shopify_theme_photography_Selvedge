@@ -1,0 +1,41 @@
+<aside class="slide-in color-{{ section.settings.color_scheme }}" id="SlideIn-{{ section.id }}" data-slide-in data-delay="{{ section.settings.delay }}" data-version="{{ section.settings.version | escape }}" aria-labelledby="SlideInTitle-{{ section.id }}" {{ section.shopify_attributes }}>
+  <button type="button" class="icon-btn icon-btn--sm icon-btn--glass slide-in__close" data-slide-in-close aria-label="{{ 'accessibility.close' | t }}">{% render 'icon', name: 'close' %}</button>
+  {%- if section.settings.image != blank -%}
+    <div class="slide-in__media">{{ section.settings.image | image_url: width: 800 | image_tag: loading: 'lazy', widths: '400, 800', sizes: '380px', alt: '' }}</div>
+  {%- endif -%}
+  <div class="slide-in__body">
+    <h2 id="SlideInTitle-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
+    {%- if section.settings.text != blank -%}<p class="muted">{{ section.settings.text | escape }}</p>{%- endif -%}
+    {%- assign form_id = 'SlideInForm-' | append: section.id -%}
+    {%- form 'customer', id: form_id -%}
+      <input type="hidden" name="contact[tags]" value="newsletter,slide-in">
+      {%- if form.posted_successfully? -%}
+        <p class="form-message form-message--success" role="status" data-slide-in-success>{{ 'newsletter.success' | t }}</p>
+      {%- elsif form.errors -%}
+        <p class="form-message form-message--error" role="alert">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</p>
+      {%- endif -%}
+      <div class="inline-form">
+        <label for="SlideInEmail-{{ section.id }}" class="visually-hidden">{{ 'newsletter.label' | t }}</label>
+        <input type="email" id="SlideInEmail-{{ section.id }}" name="contact[email]" class="input" placeholder="{{ 'newsletter.label' | t }}" autocomplete="email" required>
+        <button type="submit" class="icon-btn icon-btn--solid" aria-label="{{ 'newsletter.button_label' | t }}">{% render 'icon', name: 'arrow' %}</button>
+      </div>
+    {%- endform -%}
+  </div>
+</aside>
+
+{% schema %}
+{
+  "name": "Newsletter slide-in",
+  "class": "section-slide-in",
+  "enabled_on": { "groups": ["footer"] },
+  "settings": [
+    { "type": "range", "id": "delay", "min": 3, "max": 60, "step": 1, "unit": "s", "label": "Show after", "default": 12 },
+    { "type": "text", "id": "version", "label": "Version", "default": "1", "info": "Change to show it again to visitors who closed it." },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Your first order, 10% lighter" },
+    { "type": "text", "id": "text", "label": "Text", "default": "One email a week with new arrivals. Unsubscribe anytime." },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+  ],
+  "presets": [ { "name": "Newsletter slide-in" } ]
+}
+{% endschema %}

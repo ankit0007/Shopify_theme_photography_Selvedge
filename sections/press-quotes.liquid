@@ -1,0 +1,42 @@
+{%- render 'section-spacing' -%}
+<div class="color-{{ section.settings.color_scheme }} section-bg section-padding">
+  <div class="page-width">
+    <div class="press" data-press data-speed="{{ section.settings.speed }}">
+      <div class="press__stage" aria-live="polite">
+        {%- for block in section.blocks -%}
+          <figure class="press__quote{% if forloop.first %} is-active{% endif %}" data-press-quote {{ block.shopify_attributes }}>
+            <blockquote>{{ block.settings.quote | escape }}</blockquote>
+          </figure>
+        {%- endfor -%}
+      </div>
+      <ul class="press__names" role="list">
+        {%- for block in section.blocks -%}
+          <li><button type="button" data-press-name="{{ forloop.index0 }}" aria-current="{% if forloop.first %}true{% else %}false{% endif %}">{{ block.settings.source | escape }}</button></li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Press quotes",
+  "tag": "section",
+  "class": "section-press",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "range", "id": "speed", "label": "Seconds per quote", "min": 0, "max": 15, "step": 1, "unit": "s", "default": 6 },
+    { "type": "header", "content": "Section padding" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Top padding", "default": 96 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Bottom padding", "default": 96 }
+  ],
+  "blocks": [
+    { "type": "quote", "name": "Quote", "settings": [
+      { "type": "textarea", "id": "quote", "label": "Quote", "default": "The rare label where the coat in the photograph is the coat that arrives." },
+      { "type": "text", "id": "source", "label": "Publication", "default": "Weekend Review" }
+    ] }
+  ],
+  "max_blocks": 6,
+  "presets": [ { "name": "Press quotes", "blocks": [ { "type": "quote" }, { "type": "quote", "settings": { "quote": "Tailoring with the ease of something you have owned for years.", "source": "The Line Journal" } } ] } ]
+}
+{% endschema %}

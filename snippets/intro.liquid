@@ -1,0 +1,16 @@
+{%- comment -%}
+  Section intro: large heading with an aside.
+  Params: title, text, link_label, link_url, center (bool), aside_extra (html)
+{%- endcomment -%}
+{%- if title != blank or text != blank or aside_extra != blank -%}
+  <div class="intro{% if center %} intro--center{% endif %}">
+    {%- if title != blank -%}<h2 data-split-lines>{{ title }}</h2>{%- endif -%}
+    {%- if text != blank or link_label != blank or aside_extra != blank -%}
+      <div class="intro__aside reveal">
+        {%- if text != blank -%}<p>{{ text }}</p>{%- endif -%}
+        {%- if link_label != blank -%}<a href="{{ link_url | default: routes.all_products_collection_url }}" class="button button--link">{{ link_label | escape }}</a>{%- endif -%}
+        {{ aside_extra }}
+      </div>
+    {%- endif -%}
+  </div>
+{%- endif -%}

@@ -1,0 +1,47 @@
+{%- comment -%}
+  Size guide drawer. Params: id, table (text: first line headings, one row per line, comma separated),
+  unit (cm|in), fit_label, note
+{%- endcomment -%}
+{%- assign rows = table | newline_to_br | split: '<br />' -%}
+<div class="drawer drawer--right" id="{{ id }}" aria-hidden="true" data-size-guide data-unit="{{ unit | default: 'cm' }}">
+  <button type="button" class="drawer__overlay" data-drawer-close tabindex="-1" aria-label="{{ 'accessibility.close' | t }}"></button>
+  <div class="drawer__panel" role="dialog" aria-modal="true" aria-label="{{ 'products.size_guide.title' | t }}">
+    <div class="drawer__header">
+      <h2>{{ 'products.size_guide.title' | t }}</h2>
+      <button type="button" class="drawer__close" data-drawer-close aria-label="{{ 'accessibility.close' | t }}">{% render 'icon', name: 'close' %}</button>
+    </div>
+    <div class="drawer__body">
+      <div class="tape" aria-hidden="true"><div class="tape__ticks" data-tape></div><span class="tape__value" data-tape-value>&nbsp;</span></div>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.6rem;">
+        <p class="caption" style="margin: 0;">{{ 'products.size_guide.body_measurements' | t }}</p>
+        <div class="unit-toggle" role="group" aria-label="{{ 'products.size_guide.units' | t }}">
+          <button type="button" data-unit-btn="cm" aria-pressed="true">cm</button>
+          <button type="button" data-unit-btn="in" aria-pressed="false">in</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="size-table" data-size-table>
+          {%- assign head_cells = rows.first | strip | split: ',' -%}
+          <thead><tr>{%- for c in head_cells -%}<th scope="col">{{ c | strip | escape }}</th>{%- endfor -%}</tr></thead>
+          <tbody>
+            {%- for row in rows offset: 1 -%}
+              {%- assign cells = row | strip | split: ',' -%}
+              {%- if cells.size > 1 -%}
+                <tr>{%- for c in cells -%}{%- if forloop.first -%}<th scope="row">{{ c | strip | escape }}</th>{%- else -%}<td data-cm="{{ c | strip }}">{{ c | strip | escape }}</td>{%- endif -%}{%- endfor -%}</tr>
+              {%- endif -%}
+            {%- endfor -%}
+          </tbody>
+        </table>
+      </div>
+      {%- if note != blank -%}<p class="caption" style="margin-top: 1.6rem;">{{ note | escape }}</p>{%- endif -%}
+      <div class="finder" data-size-finder>
+        <h3 class="h4" style="margin: 0;">{{ 'products.size_guide.finder' | t }}</h3>
+        <div class="finder__row">
+          <div class="field" style="margin: 0;"><label for="{{ id }}-a">{{ 'products.size_guide.measure_a' | t }} (<span data-unit-label>cm</span>)</label><input id="{{ id }}-a" type="number" inputmode="decimal" min="0" data-finder-a></div>
+          <div class="field" style="margin: 0;"><label for="{{ id }}-b">{{ 'products.size_guide.measure_b' | t }} (<span data-unit-label>cm</span>)</label><input id="{{ id }}-b" type="number" inputmode="decimal" min="0" data-finder-b></div>
+        </div>
+        <div class="finder__result" data-finder-result aria-live="polite">{{ 'products.size_guide.finder_hint' | t }}</div>
+      </div>
+    </div>
+  </div>
+</div>

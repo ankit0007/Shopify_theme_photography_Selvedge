@@ -1,0 +1,28 @@
+<div class="page-width" style="padding-bottom: 8rem;">
+  <div class="page-header"><h1>{{ blog.title | escape }}</h1></div>
+  {%- if blog.all_tags.size > 0 and section.settings.show_tags -%}
+    <div class="blog-tags">
+      <a href="{{ blog.url }}" class="pill"{% unless current_tags %} aria-current="page"{% endunless %}>{{ 'blogs.all' | t }}</a>
+      {%- for tag in blog.all_tags -%}
+        <a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="pill"{% if current_tags contains tag %} aria-current="page"{% endif %}>{{ tag | escape }}</a>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+  {%- paginate blog.articles by 9 -%}
+    <ul class="grid" role="list" style="--cols: 3; --cols-tablet: 2; --cols-mobile: 1; row-gap: 5.6rem;">
+      {%- for article in blog.articles -%}
+        <li>{% render 'article-card', article: article, index: forloop.index0 %}</li>
+      {%- endfor -%}
+    </ul>
+    {% render 'pagination', paginate: paginate, anchor: '' %}
+  {%- endpaginate -%}
+</div>
+
+{% schema %}
+{
+  "name": "Blog posts",
+  "tag": "section",
+  "class": "section",
+  "settings": [ { "type": "checkbox", "id": "show_tags", "label": "Show tag filter", "default": true } ]
+}
+{% endschema %}

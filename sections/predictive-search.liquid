@@ -1,0 +1,37 @@
+<div data-predictive-inner>
+  {%- if predictive_search.performed -%}
+    {%- assign r = predictive_search.resources -%}
+    {%- if predictive_search.terms != blank and r.products.size == 0 and r.collections.size == 0 and r.articles.size == 0 and r.pages.size == 0 -%}
+      <p>{{ 'general.search.no_results_html' | t: terms: predictive_search.terms }}</p>
+    {%- else -%}
+      {%- if r.products.size > 0 -%}
+        <p class="search-result-type">{{ 'general.search.products' | t }}</p>
+        <ul role="list">
+          {%- for product in r.products -%}
+            <li>
+              <a href="{{ product.url }}">
+                {%- if product.featured_media -%}
+                  {{ product.featured_media | image_url: width: 120 | image_tag: loading: 'lazy', alt: product.featured_media.alt }}
+                {%- endif -%}
+                <span>
+                  <span>{{ product.title | escape }}</span>
+                  {% render 'price', product: product, use_variant: false %}
+                </span>
+              </a>
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+      {%- assign others = r.collections | concat: r.pages | concat: r.articles -%}
+      {%- if others.size > 0 -%}
+        <p class="search-result-type" style="margin-top: 2.4rem;">{{ 'general.search.suggestions' | t }}</p>
+        <ul role="list">
+          {%- for item in others -%}
+            <li><a href="{{ item.url }}">{{ item.title | escape }}</a></li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+      <p style="margin-top: 2.4rem;"><a href="{{ routes.search_url }}?q={{ predictive_search.terms | url_encode }}&options%5Bprefix%5D=last" class="button button--secondary button--small">{{ 'general.search.view_all' | t: terms: predictive_search.terms }}</a></p>
+    {%- endif -%}
+  {%- endif -%}
+</div>

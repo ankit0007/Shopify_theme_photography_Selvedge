@@ -1,0 +1,66 @@
+{
+  "sections": {
+    "stores": {
+      "type": "boutiques",
+      "blocks": {
+        "store_1": {
+          "type": "store",
+          "settings": {
+            "city": "Mumbai",
+            "name": "Kala Ghoda",
+            "address": "12 Rampart Row\nKala Ghoda, Mumbai 400001",
+            "hours": "Monday to Saturday: 11:00 to 20:00\nSunday: 12:00 to 18:00",
+            "phone": "+91 22 4000 0000",
+            "utc_offset": 5.5,
+            "open_hour": 11,
+            "close_hour": 20,
+            "closed_day": "none"
+          }
+        },
+        "store_2": {
+          "type": "store",
+          "settings": {
+            "city": "New Delhi",
+            "name": "Mehrauli",
+            "address": "The Courtyard, Kalka Das Marg\nMehrauli, New Delhi 110030",
+            "hours": "Tuesday to Sunday: 11:00 to 19:30\nMonday: Closed",
+            "phone": "+91 11 4000 0000",
+            "utc_offset": 5.5,
+            "open_hour": 11,
+            "close_hour": 19,
+            "closed_day": "1"
+          }
+        },
+        "store_3": {
+          "type": "store",
+          "settings": {
+            "city": "Bengaluru",
+            "name": "Lavelle Road",
+            "address": "7 Lavelle Road\nBengaluru 560001",
+            "hours": "Every day: 11:00 to 20:00",
+            "phone": "+91 80 4000 0000",
+            "utc_offset": 5.5,
+            "open_hour": 11,
+            "close_hour": 20,
+            "closed_day": "none"
+          }
+        }
+      },
+      "block_order": [
+        "store_1",
+        "store_2",
+        "store_3"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "title": "Try it on in person",
+        "text": "Book a fitting or walk in. Online orders can be collected and altered at any boutique.",
+        "padding_top": 48,
+        "padding_bottom": 96
+      }
+    }
+  },
+  "order": [
+    "stores"
+  ]
+}

@@ -1,0 +1,194 @@
+{%- liquid
+  assign menu = section.settings.menu
+  assign overlay = false
+  if settings.header_transparent and request.page_type == 'index'
+    assign overlay = true
+  endif
+-%}
+<div class="site-header site-header--{{ settings.header_style }} color-{{ section.settings.color_scheme }}" data-site-header{% if overlay %} data-overlay{% endif %}>
+  <header class="site-header__bar">
+    <button type="button" class="header__icon header__menu-toggle" data-drawer-open="MenuDrawer" aria-controls="MenuDrawer" aria-label="{{ 'sections.header.menu' | t }}">
+      {% render 'icon', name: 'menu' %}
+    </button>
+
+    {%- capture nav -%}
+      <nav class="header__nav" aria-label="{{ 'sections.header.main_nav' | t }}">
+        <ul class="menu" role="list">
+          {%- for link in menu.links -%}
+            <li>
+              {%- if link.links != blank -%}
+                <button type="button" class="menu__link" aria-expanded="false" aria-controls="Mega-{{ forloop.index }}" data-dropdown-toggle>{{ link.title | escape }}</button>
+              {%- else -%}
+                <a href="{{ link.url }}" class="menu__link"{% if link.current %} aria-current="page"{% endif %}>{{ link.title | escape }}</a>
+              {%- endif -%}
+            </li>
+          {%- endfor -%}
+        </ul>
+      </nav>
+    {%- endcapture -%}
+
+    {%- if settings.header_style == 'center' -%}{{ nav }}{%- endif -%}
+
+    {%- if request.page_type == 'index' -%}<h1 class="header__logo">{%- else -%}<div class="header__logo">{%- endif -%}
+      <a href="{{ routes.root_url }}">
+        {%- if settings.logo != blank -%}
+          {%- assign logo_w2 = settings.logo_width | times: 2 -%}
+          {%- capture logo_class -%}logo--dark{% if section.settings.logo_light != blank %} has-light{% endif %}{%- endcapture -%}
+          {{ settings.logo | image_url: width: logo_w2 | image_tag: widths: '100, 200, 300, 400, 600', sizes: '300px', alt: shop.name, class: logo_class }}
+          {%- if section.settings.logo_light != blank -%}
+            {{ section.settings.logo_light | image_url: width: logo_w2 | image_tag: widths: '100, 200, 300, 400, 600', sizes: '300px', alt: shop.name, class: 'logo--light' }}
+          {%- endif -%}
+        {%- else -%}
+          {{ shop.name }}
+        {%- endif -%}
+      </a>
+    {%- if request.page_type == 'index' -%}</h1>{%- else -%}</div>{%- endif -%}
+
+    {%- if settings.header_style == 'left' -%}{{ nav }}{%- endif -%}
+
+    <div class="header__icons">
+      <a href="{{ routes.search_url }}" class="header__icon" data-drawer-open="SearchPalette" aria-label="{{ 'general.search.search' | t }}">{% render 'icon', name: 'search' %}</a>
+      {%- if shop.customer_accounts_enabled -%}
+        <a href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}" class="header__icon header__icon--account" aria-label="{{ 'customer.account_fallback' | t }}">{% render 'icon', name: 'account' %}</a>
+      {%- endif -%}
+      {%- if settings.wishlist -%}
+        <a href="{{ section.settings.wishlist_page.url | default: routes.root_url }}" class="header__icon" aria-label="{{ 'wishlist.title' | t }}">
+          {% render 'icon', name: 'heart' %}<span class="wish-count" data-wish-count aria-hidden="true"></span>
+        </a>
+      {%- endif -%}
+      <a href="{{ routes.cart_url }}" class="header__icon" data-drawer-open="CartDrawer" aria-label="{{ 'cart.title' | t }}">
+        {% render 'icon', name: 'cart' %}
+        <span class="cart-count" data-cart-count aria-hidden="true">{% if cart.item_count > 0 %}{{ cart.item_count }}{% endif %}</span>
+        <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
+      </a>
+    </div>
+  </header>
+
+  {%- for link in menu.links -%}
+    {%- if link.links != blank -%}
+      <div class="mega" id="Mega-{{ forloop.index }}">
+        <div class="mega__inner">
+          <div class="mega__cols">
+            {%- for child in link.links -%}
+              <div>
+                <a href="{{ child.url }}" class="mega__title">{{ child.title | escape }}</a>
+                {%- if child.links != blank -%}
+                  <ul class="mega__list" role="list">
+                    {%- for grandchild in child.links -%}
+                      <li><a href="{{ grandchild.url }}">{{ grandchild.title | escape }}</a></li>
+                    {%- endfor -%}
+                  </ul>
+                {%- endif -%}
+              </div>
+            {%- endfor -%}
+          </div>
+          {%- if section.settings.feature_image_1 != blank or section.settings.feature_image_2 != blank -%}
+            <div class="mega__features">
+              {%- if section.settings.feature_image_1 != blank -%}
+                <a href="{{ section.settings.feature_link_1 | default: routes.all_products_collection_url }}" class="mega__feature">
+                  {{ section.settings.feature_image_1 | image_url: width: 700 | image_tag: loading: 'lazy', widths: '350, 700', sizes: '25vw', alt: '' }}
+                  <span><em>{{ section.settings.feature_title_1 | escape }}</em>{{ section.settings.feature_label_1 | escape }}</span>
+                </a>
+              {%- endif -%}
+              {%- if section.settings.feature_image_2 != blank -%}
+                <a href="{{ section.settings.feature_link_2 | default: routes.all_products_collection_url }}" class="mega__feature">
+                  {{ section.settings.feature_image_2 | image_url: width: 700 | image_tag: loading: 'lazy', widths: '350, 700', sizes: '25vw', alt: '' }}
+                  <span><em>{{ section.settings.feature_title_2 | escape }}</em>{{ section.settings.feature_label_2 | escape }}</span>
+                </a>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endif -%}
+  {%- endfor -%}
+
+  <div class="cart-notice color-{{ section.settings.color_scheme }}" data-cart-notice role="status" aria-live="polite"></div>
+</div>
+
+<div class="drawer drawer--left color-{{ section.settings.color_scheme }}" id="MenuDrawer" aria-hidden="true">
+  <button type="button" class="drawer__overlay" data-drawer-close tabindex="-1" aria-label="{{ 'accessibility.close' | t }}"></button>
+  <div class="drawer__panel" role="dialog" aria-modal="true" aria-label="{{ 'sections.header.menu' | t }}">
+    <div class="drawer__header">
+      <span class="data">{{ shop.name }}</span>
+      <button type="button" class="drawer__close" data-drawer-close aria-label="{{ 'accessibility.close' | t }}">{% render 'icon', name: 'close' %}</button>
+    </div>
+    <div class="drawer__body">
+      <ul class="mobile-nav" role="list">
+        {%- for link in menu.links -%}
+          <li style="--i: {{ forloop.index0 }};">
+            {%- if link.links != blank -%}
+              <details>
+                <summary>{{ link.title | escape }} {% render 'icon', name: 'caret' %}</summary>
+                <ul role="list">
+                  <li><a href="{{ link.url }}">{{ 'sections.header.view_all' | t }}</a></li>
+                  {%- for child in link.links -%}
+                    <li><a href="{{ child.url }}">{{ child.title | escape }}</a></li>
+                    {%- for grandchild in child.links -%}
+                      <li><a href="{{ grandchild.url }}" style="padding-left: 1.6rem;">{{ grandchild.title | escape }}</a></li>
+                    {%- endfor -%}
+                  {%- endfor -%}
+                </ul>
+              </details>
+            {%- else -%}
+              <a href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title | escape }}</a>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+      <div class="mobile-nav__footer">
+        {%- if shop.customer_accounts_enabled -%}
+          <a href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}" class="button button--secondary button--full">
+            {%- if customer -%}{{ 'customer.account.title' | t }}{%- else -%}{{ 'customer.log_in' | t }}{%- endif -%}
+          </a>
+        {%- endif -%}
+        {% render 'social-icons' %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{%- if request.page_type == 'index' -%}
+  {%- assign potential_action_target = request.origin | append: routes.search_url | append: '?q={search_term_string}' -%}
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "name": {{ shop.name | json }},
+      {%- if settings.logo -%}"logo": {{ settings.logo | image_url: width: 500 | prepend: 'https:' | json }},{%- endif -%}
+      "url": {{ request.origin | json }}
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "name": {{ shop.name | json }},
+      "potentialAction": { "@type": "SearchAction", "target": {{ potential_action_target | json }}, "query-input": "required name=search_term_string" },
+      "url": {{ request.origin | json }}
+    }
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Header",
+  "class": "section-site-header",
+  "enabled_on": { "groups": ["header"] },
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu", "info": "Links with sub-links open a full-width menu. Add a third level for long lists." },
+    { "type": "image_picker", "id": "logo_light", "label": "Light logo", "info": "Used while the header is transparent." },
+    { "type": "page", "id": "wishlist_page", "label": "Wishlist page", "info": "Create a page with the 'wishlist' template and select it here." },
+    { "type": "header", "content": "Menu images" },
+    { "type": "image_picker", "id": "feature_image_1", "label": "Image 1" },
+    { "type": "text", "id": "feature_title_1", "label": "Image 1 title", "default": "The coat edit" },
+    { "type": "text", "id": "feature_label_1", "label": "Image 1 text", "default": "Twelve shapes in wool and cashmere" },
+    { "type": "url", "id": "feature_link_1", "label": "Image 1 link" },
+    { "type": "image_picker", "id": "feature_image_2", "label": "Image 2" },
+    { "type": "text", "id": "feature_title_2", "label": "Image 2 title", "default": "Denim, raw" },
+    { "type": "text", "id": "feature_label_2", "label": "Image 2 text", "default": "Selvedge cotton from Kojima" },
+    { "type": "url", "id": "feature_link_2", "label": "Image 2 link" }
+  ]
+}
+{% endschema %}

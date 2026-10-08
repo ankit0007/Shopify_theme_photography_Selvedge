@@ -1,0 +1,74 @@
+{%- render 'section-spacing' -%}
+<div class="color-{{ section.settings.color_scheme }} section-bg section-padding">
+  <div class="page-width">
+    <div class="look" data-shop-look>
+      <div class="look__media">
+        <div class="media media--portrait develop" data-observe>
+          {%- if section.settings.image != blank -%}
+            {{ section.settings.image | image_url: width: 1600 | image_tag: loading: 'lazy', widths: '600, 900, 1200, 1600', sizes: '(min-width: 990px) 50vw, 100vw', alt: section.settings.image.alt }}
+          {%- else -%}
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
+        {%- for block in section.blocks -%}
+          {%- if block.settings.product != blank -%}
+            <button type="button" class="look__dot" style="--x: {{ block.settings.x }}%; --y: {{ block.settings.y }}%;" data-look-dot="{{ forloop.index0 }}" aria-label="{{ block.settings.product.title | escape }}" {{ block.shopify_attributes }}>{{ forloop.index }}</button>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+      <div>
+        {%- if section.settings.kicker != blank -%}<p class="data muted">{{ section.settings.kicker | escape }}</p>{%- endif -%}
+        {%- if section.settings.title != blank -%}<h2 data-split-lines>{{ section.settings.title }}</h2>{%- endif -%}
+        {%- if section.settings.text != blank -%}<p class="muted reveal" style="max-width: 46rem; margin-bottom: 3.2rem;">{{ section.settings.text | escape }}</p>{%- endif -%}
+        {%- assign total = 0 -%}
+        <ol class="look__list reveal" role="list">
+          {%- for block in section.blocks -%}
+            {%- assign p = block.settings.product -%}
+            {%- if p != blank -%}
+              {%- assign total = total | plus: p.price -%}
+              <li class="look__row" data-look-row="{{ forloop.index0 }}" data-variant="{{ p.selected_or_first_available_variant.id }}">
+                <span aria-hidden="true">{{ forloop.index }}</span>
+                {%- if p.featured_media -%}{{ p.featured_media | image_url: width: 240 | image_tag: loading: 'lazy', alt: '' }}{%- else -%}<span></span>{%- endif -%}
+                <span>
+                  <a href="{{ p.url }}">{{ p.title | escape }}</a><br>
+                  <span class="caption">{{ p.selected_or_first_available_variant.title | replace: 'Default Title', '' }}</span>
+                </span>
+                <span class="price">{{ p.price | money }}</span>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ol>
+        <div class="look__total reveal"><span class="muted">{{ 'sections.look.total' | t }}</span><span class="price price--large">{{ total | money }}</span></div>
+        <button type="button" class="button button--full reveal" data-look-add>{{ section.settings.button_label | escape }}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Shop the look",
+  "tag": "section",
+  "class": "section-look",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "image_picker", "id": "image", "label": "Photo" },
+    { "type": "text", "id": "kicker", "label": "Small text", "default": "Look 07" },
+    { "type": "inline_richtext", "id": "title", "label": "Heading", "default": "Everything in this photo" },
+    { "type": "text", "id": "text", "label": "Text", "default": "Tap a number on the photo to find the piece. Sizes can be changed in the bag." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Add the whole look to bag" },
+    { "type": "header", "content": "Section padding" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Top padding", "default": 96 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Bottom padding", "default": 96 }
+  ],
+  "blocks": [
+    { "type": "piece", "name": "Piece", "settings": [
+      { "type": "product", "id": "product", "label": "Product" },
+      { "type": "range", "id": "x", "label": "Dot position, horizontal", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
+      { "type": "range", "id": "y", "label": "Dot position, vertical", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 40 }
+    ] }
+  ],
+  "max_blocks": 6,
+  "presets": [ { "name": "Shop the look", "blocks": [ { "type": "piece" }, { "type": "piece", "settings": { "x": 45, "y": 70 } } ] } ]
+}
+{% endschema %}

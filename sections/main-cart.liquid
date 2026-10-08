@@ -1,0 +1,68 @@
+<div class="page-width cart-page">
+  <div class="intro" style="margin-bottom: 3.2rem;">
+    <h1 style="margin:0;">{{ 'cart.title' | t }}</h1>
+    {%- if cart.item_count > 0 -%}
+      <a href="{{ routes.all_products_collection_url }}" class="button button--link">{{ 'cart.continue_shopping' | t }}</a>
+    {%- endif -%}
+  </div>
+
+  {%- if cart.item_count > 0 -%}
+    <form action="{{ routes.cart_url }}" method="post" id="CartForm" data-cart-page-form>
+      <div class="cart-page__layout">
+        <div>
+          <ul class="cart-items" role="list">
+            {%- for item in cart.items -%}
+              {% render 'cart-line', item: item, line: forloop.index, context: 'page' %}
+            {%- endfor -%}
+          </ul>
+          <noscript><button type="submit" name="update" class="button button--secondary" style="margin-top:2rem;">{{ 'cart.update' | t }}</button></noscript>
+          {%- if settings.show_cart_note -%}
+            <div class="field" style="margin-top: 3.2rem; max-width: 48rem;">
+              <label for="CartNote">{{ 'cart.note' | t }}</label>
+              <textarea id="CartNote" name="note" class="textarea">{{ cart.note }}</textarea>
+            </div>
+          {%- endif -%}
+        </div>
+
+        <aside class="cart-summary" aria-label="{{ 'cart.summary' | t }}">
+          <h2 class="h4" style="margin:0;">{{ 'cart.summary' | t }}</h2>
+          {% render 'free-shipping' %}
+          {%- if cart.cart_level_discount_applications.size > 0 -%}
+            <ul class="cart-discounts" role="list">
+              {%- for discount in cart.cart_level_discount_applications -%}
+                <li>{{ discount.title }} (-{{ discount.total_allocated_amount | money }})</li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+          <div class="cart-summary__row cart-summary__total">
+            <span>{{ 'cart.subtotal' | t }}</span>
+            <span>{{ cart.total_price | money_with_currency }}</span>
+          </div>
+          <p class="cart-summary__note">{{ 'cart.taxes_and_shipping' | t }}</p>
+          <button type="submit" name="checkout" class="button button--full">{% render 'icon', name: 'lock' %} {{ 'cart.checkout' | t }}</button>
+          {%- if additional_checkout_buttons -%}
+            <div class="additional-checkout-buttons">{{ content_for_additional_checkout_buttons }}</div>
+          {%- endif -%}
+        </aside>
+      </div>
+    </form>
+  {%- else -%}
+    <div class="empty-state">
+      <h2>{{ 'cart.empty' | t }}</h2>
+      <p>{{ 'cart.empty_hint' | t }}</p>
+      <a href="{{ routes.all_products_collection_url }}" class="button">{{ 'cart.continue_shopping' | t }}</a>
+      {%- if shop.customer_accounts_enabled and customer == null -%}
+        <p style="margin-top: 3.2rem;">{{ 'cart.login_html' | t: link: routes.account_login_url }}</p>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Cart",
+  "tag": "section",
+  "class": "section",
+  "settings": []
+}
+{% endschema %}

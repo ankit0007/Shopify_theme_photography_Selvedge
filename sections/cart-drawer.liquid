@@ -1,0 +1,73 @@
+<div class="drawer drawer--right cart-drawer" id="CartDrawer" aria-hidden="true" data-cart-drawer>
+  <button type="button" class="drawer__overlay" data-drawer-close tabindex="-1" aria-label="{{ 'accessibility.close' | t }}"></button>
+  <div class="drawer__panel" role="dialog" aria-modal="true" aria-labelledby="CartDrawerTitle">
+    <div data-cart-drawer-inner style="display:flex;flex-direction:column;height:100%;">
+      <div class="drawer__header">
+        <h2 id="CartDrawerTitle" class="h3" style="margin:0;">{{ 'cart.title' | t }}{% if cart.item_count > 0 %} ({{ cart.item_count }}){% endif %}</h2>
+        <button type="button" class="drawer__close" data-drawer-close aria-label="{{ 'accessibility.close' | t }}">{% render 'icon', name: 'close' %}</button>
+      </div>
+      {%- if cart.item_count > 0 -%}
+        <div class="drawer__body">
+          {% render 'free-shipping' %}
+          <ul class="cart-items" role="list">
+            {%- for item in cart.items -%}
+              {% render 'cart-line', item: item, line: forloop.index, context: 'drawer' %}
+            {%- endfor -%}
+          </ul>
+          {%- assign upsell = settings.cart_upsell_collection -%}
+          {%- if upsell != blank and upsell.products_count > 0 -%}
+            <div class="cart-drawer__upsell">
+              <h3>{{ 'cart.upsell' | t }}</h3>
+              {%- assign shown = 0 -%}
+              {%- for p in upsell.products -%}
+                {%- assign in_cart = false -%}
+                {%- for item in cart.items -%}{%- if item.product_id == p.id -%}{%- assign in_cart = true -%}{%- endif -%}{%- endfor -%}
+                {%- if in_cart == false and p.available and shown < 2 -%}
+                  {%- assign shown = shown | plus: 1 -%}
+                  {% render 'mini-product', product: p %}
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+          {%- if settings.show_cart_note -%}
+            <details class="cart-note" style="margin-top: 2rem;">
+              <summary>{{ 'cart.note' | t }}</summary>
+              <label for="CartDrawerNote" class="visually-hidden">{{ 'cart.note' | t }}</label>
+              <textarea id="CartDrawerNote" name="note" class="textarea">{{ cart.note }}</textarea>
+            </details>
+          {%- endif -%}
+        </div>
+        <div class="drawer__footer">
+          {%- if cart.cart_level_discount_applications.size > 0 -%}
+            <ul class="cart-discounts" role="list">
+              {%- for discount in cart.cart_level_discount_applications -%}
+                <li>{{ discount.title }} (-{{ discount.total_allocated_amount | money }})</li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+          <div class="cart-drawer__footer-row">
+            <span>{{ 'cart.subtotal' | t }}</span>
+            <strong>{{ cart.total_price | money_with_currency }}</strong>
+          </div>
+          <p class="cart-summary__note" style="margin-bottom: 1.6rem;">{{ 'cart.taxes_and_shipping' | t }}</p>
+          <form action="{{ routes.cart_url }}" method="post">
+            <button type="submit" name="checkout" class="button button--full">{% render 'icon', name: 'lock' %} {{ 'cart.checkout' | t }}</button>
+          </form>
+          <a href="{{ routes.cart_url }}" class="button button--link button--full" style="margin-top: 1.4rem;">{{ 'cart.view_cart' | t }}</a>
+        </div>
+      {%- else -%}
+        <div class="drawer__body cart-drawer__empty">
+          <p class="h3">{{ 'cart.empty' | t }}</p>
+          <a href="{{ routes.all_products_collection_url }}" class="button" style="margin-top: 1.6rem;">{{ 'cart.continue_shopping' | t }}</a>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Cart drawer",
+  "settings": []
+}
+{% endschema %}

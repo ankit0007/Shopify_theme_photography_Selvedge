@@ -1,0 +1,35 @@
+{%- liquid
+  assign active_count = 0
+  for filter in results.filters
+    assign active_count = active_count | plus: filter.active_values.size
+    if filter.type == 'price_range'
+      if filter.min_value.value != null or filter.max_value.value != null
+        assign active_count = active_count | plus: 1
+      endif
+    endif
+  endfor
+-%}
+{%- if active_count > 0 -%}
+  <div class="active-filters">
+    {%- for filter in results.filters -%}
+      {%- for value in filter.active_values -%}
+        <a href="{{ value.url_to_remove }}" class="pill">{{ filter.label | escape }}: {{ value.label | escape }} {% render 'icon', name: 'close' %}<span class="visually-hidden">{{ 'collections.filters.remove' | t }}</span></a>
+      {%- endfor -%}
+      {%- if filter.type == 'price_range' -%}
+        {%- if filter.min_value.value != null or filter.max_value.value != null -%}
+          <a href="{{ filter.url_to_remove }}" class="pill">
+            {%- if filter.min_value.value -%}{{ filter.min_value.value | money }}{%- else -%}{{ 0 | money }}{%- endif -%}
+            &ndash;
+            {%- if filter.max_value.value -%}{{ filter.max_value.value | money }}{%- else -%}{{ filter.range_max | money }}{%- endif -%}
+            {% render 'icon', name: 'close' %}
+          </a>
+        {%- endif -%}
+      {%- endif -%}
+    {%- endfor -%}
+    {%- if results.terms -%}
+      <a href="{{ routes.search_url }}?q={{ results.terms | url_encode }}&options%5Bprefix%5D=last" class="button button--link">{{ 'collections.filters.clear_all' | t }}</a>
+    {%- else -%}
+      <a href="{{ results.url }}" class="button button--link">{{ 'collections.filters.clear_all' | t }}</a>
+    {%- endif -%}
+  </div>
+{%- endif -%}

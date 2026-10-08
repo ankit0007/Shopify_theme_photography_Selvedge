@@ -1,0 +1,73 @@
+<article class="article" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="page-width page-width--narrow">
+    <header class="article__header">
+      <p class="article-card__meta">{{ article.published_at | time_tag: format: 'date' }}{% if section.settings.show_author %} · {{ 'blogs.by_author' | t: author: article.author }}{% endif %}</p>
+      <h1 itemprop="headline">{{ article.title | escape }}</h1>
+    </header>
+  </div>
+  {%- if article.image -%}
+    <div class="page-width">
+      <div class="article__image media media--wide">
+        {{ article.image | image_url: width: 2400 | image_tag: loading: 'eager', widths: '750, 1100, 1500, 2000, 2400', sizes: '(min-width: 1300px) 1220px, 100vw', alt: article.image.alt }}
+      </div>
+    </div>
+  {%- endif -%}
+  <div class="page-width page-width--narrow">
+    <div class="article__content rte" itemprop="articleBody">{{ article.content }}</div>
+
+    <div class="article__footer">
+      {%- if article.tags.size > 0 -%}
+        <div class="blog-tags" style="margin:0;">
+          {%- for tag in article.tags -%}<a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="pill">{{ tag | escape }}</a>{%- endfor -%}
+        </div>
+      {%- endif -%}
+      <button type="button" class="button button--link" data-share="{{ request.origin }}{{ article.url }}" data-copied="{{ 'general.share.copied' | t }}">{% render 'icon', name: 'share' %} {{ 'general.share.label' | t }}</button>
+    </div>
+
+    <p style="margin-top: 4rem;"><a href="{{ blog.url }}" class="button button--secondary">{% render 'icon', name: 'arrow-left' %} {{ 'blogs.back_to_blog' | t: title: blog.title }}</a></p>
+
+    {%- if blog.comments_enabled? -%}
+      <section class="comments" id="comments">
+        {%- if article.comments_count > 0 -%}
+          <h2 class="h3">{{ 'blogs.comments.count' | t: count: article.comments_count }}</h2>
+          {%- paginate article.comments by 10 -%}
+            {%- for comment in article.comments -%}
+              <div class="comment">
+                <div class="rte">{{ comment.content }}</div>
+                <p class="comment__meta">{{ comment.author }} · {{ comment.created_at | time_tag: format: 'date' }}</p>
+              </div>
+            {%- endfor -%}
+            {% render 'pagination', paginate: paginate, anchor: '#comments' %}
+          {%- endpaginate -%}
+        {%- endif -%}
+
+        {%- form 'new_comment', article -%}
+          <h2 class="h3" style="margin-top: 4.8rem;">{{ 'blogs.comments.title' | t }}</h2>
+          {%- if form.posted_successfully? -%}
+            <p class="form-message form-message--success" role="status">
+              {%- if blog.moderated? -%}{{ 'blogs.comments.success_moderated' | t }}{%- else -%}{{ 'blogs.comments.success' | t }}{%- endif -%}
+            </p>
+          {%- elsif form.errors -%}
+            <div class="form-message form-message--error" role="alert">{{ form.errors | default_errors }}</div>
+          {%- endif -%}
+          <div class="contact-grid">
+            <div class="field"><label for="CommentAuthor">{{ 'blogs.comments.name' | t }}</label><input type="text" id="CommentAuthor" name="comment[author]" value="{{ form.author }}" required autocomplete="name"></div>
+            <div class="field"><label for="CommentEmail">{{ 'blogs.comments.email' | t }}</label><input type="email" id="CommentEmail" name="comment[email]" value="{{ form.email }}" required autocomplete="email"></div>
+            <div class="field field--full"><label for="CommentBody">{{ 'blogs.comments.message' | t }}</label><textarea id="CommentBody" name="comment[body]" required>{{ form.body }}</textarea></div>
+          </div>
+          {%- if blog.moderated? -%}<p class="caption">{{ 'blogs.comments.moderated' | t }}</p>{%- endif -%}
+          <button type="submit" class="button">{{ 'blogs.comments.post' | t }}</button>
+        {%- endform -%}
+      </section>
+    {%- endif -%}
+  </div>
+</article>
+
+{% schema %}
+{
+  "name": "Blog post",
+  "tag": "section",
+  "class": "section",
+  "settings": [ { "type": "checkbox", "id": "show_author", "label": "Show author", "default": true } ]
+}
+{% endschema %}

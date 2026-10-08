@@ -1,0 +1,75 @@
+{
+  "sections": {
+    "spread1": {
+      "type": "lookbook-spread",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "kicker_left": "Chapter one",
+        "kicker_right": "Shot in Mumbai",
+        "title": "Wool for a warm winter",
+        "quote": "Coats that work at twenty degrees, not just at zero.",
+        "text": "<p>Lighter cloths, half linings and open weaves. The shapes are the ones you know, cut so they breathe.</p>",
+        "button_label": "",
+        "folio_left": "04",
+        "folio_right": "05",
+        "reverse": false,
+        "padding_top": 48,
+        "padding_bottom": 136
+      }
+    },
+    "spread2": {
+      "type": "lookbook-spread",
+      "settings": {
+        "color_scheme": "scheme-3",
+        "kicker_left": "Chapter two",
+        "kicker_right": "Shot in Lisbon",
+        "title": "The trench, rewritten",
+        "quote": "We kept the storm flap and took out everything that was only there for show.",
+        "text": "<p>Cotton gabardine from a mill in Biella, cut a size bigger through the shoulder so it closes over a knit.</p>",
+        "button_label": "",
+        "folio_left": "12",
+        "folio_right": "13",
+        "reverse": true,
+        "padding_top": 120,
+        "padding_bottom": 136
+      }
+    },
+    "look": {
+      "type": "shop-the-look",
+      "blocks": {
+        "piece_1": {
+          "type": "piece",
+          "settings": {
+            "x": 50,
+            "y": 32
+          }
+        },
+        "piece_2": {
+          "type": "piece",
+          "settings": {
+            "x": 48,
+            "y": 62
+          }
+        }
+      },
+      "block_order": [
+        "piece_1",
+        "piece_2"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "kicker": "Look 09",
+        "title": "Everything in this photo",
+        "text": "Tap a number on the photo to find the piece.",
+        "button_label": "Add the whole look to bag",
+        "padding_top": 120,
+        "padding_bottom": 120
+      }
+    }
+  },
+  "order": [
+    "spread1",
+    "spread2",
+    "look"
+  ]
+}

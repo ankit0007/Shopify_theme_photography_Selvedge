@@ -1,0 +1,99 @@
+{%- assign looks = section.blocks -%}
+<section class="color-{{ section.settings.color_scheme }} section-bg" data-runway data-speed="{{ section.settings.speed }}" aria-roledescription="carousel" aria-label="{{ section.settings.title | strip_html | escape }}">
+  <div class="runway">
+    <div class="runway__number">
+      <p class="runway__num accent-type" aria-hidden="true" data-runway-num>01</p>
+      <div class="runway__season">
+        {%- if section.settings.kicker != blank -%}<p class="data muted">{{ section.settings.kicker | escape }}</p>{%- endif -%}
+        <h2>{{ section.settings.title }}</h2>
+        {%- if section.settings.text != blank -%}<p>{{ section.settings.text | escape }}</p>{%- endif -%}
+        {%- if section.settings.button_label != blank -%}
+          <a href="{{ section.settings.button_link | default: routes.all_products_collection_url }}" class="button">{{ section.settings.button_label | escape }}</a>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="runway__stage" data-cursor="{{ 'sections.runway.next' | t }}">
+      {%- for block in looks -%}
+        <figure class="runway__look{% if forloop.first %} is-active{% endif %}" data-look {{ block.shopify_attributes }} style="margin: 0;" aria-roledescription="slide" aria-label="{{ 'sections.runway.look' | t: number: forloop.index }}">
+          {%- if block.settings.image != blank -%}
+            {%- if forloop.first -%}{%- assign loading = 'eager' -%}{%- else -%}{%- assign loading = 'lazy' -%}{%- endif -%}
+            {{ block.settings.image | image_url: width: 1600 | image_tag: loading: loading, widths: '600, 900, 1200, 1600', sizes: '(min-width: 990px) 36vw, 100vw', alt: block.settings.image.alt }}
+          {%- else -%}
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </figure>
+      {%- endfor -%}
+    </div>
+
+    <div class="runway__details">
+      {%- for block in looks -%}
+        <div class="runway__panel{% if forloop.first %} is-active{% endif %}" data-look-panel>
+          <h3>{{ block.settings.title | escape }}</h3>
+          {%- if block.settings.text != blank -%}<p class="muted" style="margin: 0;">{{ block.settings.text | escape }}</p>{%- endif -%}
+          {%- if block.settings.products.count > 0 -%}
+            <ul class="runway__items" role="list">
+              {%- for p in block.settings.products -%}
+                <li class="runway__item">
+                  {%- if p.featured_media -%}{{ p.featured_media | image_url: width: 160 | image_tag: loading: 'lazy', alt: '' }}{%- endif -%}
+                  <a href="{{ p.url }}">{{ p.title | escape }}</a>
+                  <span class="price">{{ p.price | money }}</span>
+                </li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+      {%- if looks.size > 1 -%}
+        <div class="runway__controls">
+          <button type="button" class="icon-btn" data-look-prev aria-label="{{ 'general.slider.previous' | t }}">{% render 'icon', name: 'arrow-left' %}</button>
+          <button type="button" class="icon-btn" data-look-next aria-label="{{ 'general.slider.next' | t }}">{% render 'icon', name: 'arrow' %}</button>
+          <span class="runway__count" data-look-count aria-live="polite">01 / {{ looks.size | prepend: '0' | slice: -2, 2 }}</span>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+
+  {%- if looks.size > 1 -%}
+    <div class="lineup" role="tablist" aria-label="{{ 'sections.runway.lineup' | t }}">
+      <span class="lineup__label" aria-hidden="true">{{ 'sections.runway.lineup' | t }}</span>
+      {%- for block in looks -%}
+        <button type="button" role="tab" data-look-thumb="{{ forloop.index0 }}" aria-current="{% if forloop.first %}true{% else %}false{% endif %}" aria-label="{{ 'sections.runway.look' | t: number: forloop.index }}">
+          {%- if block.settings.image != blank -%}{{ block.settings.image | image_url: width: 160 | image_tag: loading: 'lazy', alt: '' }}{%- endif -%}
+          <i></i>
+        </button>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Runway",
+  "tag": "div",
+  "class": "section-runway",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "text", "id": "kicker", "label": "Small text", "default": "Autumn Winter 2026" },
+    { "type": "inline_richtext", "id": "title", "label": "Heading", "default": "Cut close, worn loose" },
+    { "type": "text", "id": "text", "label": "Text", "default": "Fourteen looks in wool, cotton twill and raw denim. Click the photo to walk to the next one." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop the collection" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "range", "id": "speed", "label": "Seconds per look", "min": 0, "max": 12, "step": 1, "unit": "s", "default": 6, "info": "Set to 0 to change looks only by clicking." }
+  ],
+  "blocks": [
+    {
+      "type": "look",
+      "name": "Look",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Photo", "info": "Portrait, 3:4 or taller." },
+        { "type": "text", "id": "title", "label": "Title", "default": "Rust wool wrap coat" },
+        { "type": "text", "id": "text", "label": "Text", "default": "Worn over a cream rib knit and straight raw denim." },
+        { "type": "product_list", "id": "products", "label": "Pieces in this look", "limit": 4 }
+      ]
+    }
+  ],
+  "max_blocks": 16,
+  "presets": [ { "name": "Runway", "blocks": [ { "type": "look" }, { "type": "look", "settings": { "title": "Pink cotton trench" } }, { "type": "look", "settings": { "title": "Navy double cloth suit" } } ] } ]
+}
+{% endschema %}

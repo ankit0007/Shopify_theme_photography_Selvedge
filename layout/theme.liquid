@@ -1,0 +1,91 @@
+<!doctype html>
+<html class="no-js" lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="{{ settings.color_schemes.first.settings.background }}">
+    <link rel="canonical" href="{{ canonical_url }}">
+    <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    {%- endif -%}
+
+    <title>
+      {{ page_title }}
+      {%- if current_tags %} &ndash; {{ 'general.tagged_with' | t: tags: current_tags | join: ', ' }}{% endif -%}
+      {%- if current_page != 1 %} &ndash; {{ 'general.page' | t: page: current_page }}{% endif -%}
+      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+    </title>
+
+    {% if page_description %}
+      <meta name="description" content="{{ page_description | escape }}">
+    {% endif %}
+
+    {% render 'meta-tags' %}
+
+    {%- unless settings.type_header_font.system? -%}
+      {{ settings.type_header_font | font_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: true }}
+    {%- endunless -%}
+    {%- unless settings.type_body_font.system? -%}
+      {{ settings.type_body_font | font_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: true }}
+    {%- endunless -%}
+
+    {% render 'theme-styles' %}
+    {%- if settings.page_transitions -%}<style>@view-transition { navigation: auto; }</style>{%- endif -%}
+
+    {{ 'base.css' | asset_url | stylesheet_tag }}
+    <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+
+    <script>
+      document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+      window.theme = {
+        routes: {
+          root: {{ routes.root_url | json }},
+          cart: {{ routes.cart_url | json }},
+          cart_add: {{ routes.cart_add_url | json }},
+          cart_change: {{ routes.cart_change_url | json }},
+          search: {{ routes.search_url | json }},
+          checkout: '/checkout'
+        },
+        cartType: {{ settings.cart_type | json }},
+        searchShortcut: {{ settings.header_search_shortcut | json }},
+        magnetic: {{ settings.buttons_magnetic | json }},
+        moneyFormat: {{ shop.money_format | json }},
+        strings: {
+          addToCart: {{ 'products.product.add_to_cart' | t | json }},
+          soldOut: {{ 'products.product.sold_out' | t | json }},
+          unavailable: {{ 'products.product.unavailable' | t | json }},
+          cartError: {{ 'cart.error' | t | json }},
+          added: {{ 'cart.added' | t | json }},
+          viewCart: {{ 'cart.view_cart' | t | json }},
+          checkout: {{ 'cart.checkout' | t | json }},
+          view: {{ 'general.cursor.view' | t | json }},
+          drag: {{ 'general.cursor.drag' | t | json }},
+          wishAdded: {{ 'wishlist.added' | t | json }},
+          storeOpen: {{ 'sections.stores.open' | t | json }},
+          storeClosed: {{ 'sections.stores.closed' | t | json }},
+          sizeResult: {{ 'products.size_guide.result' | t | json }}
+        }
+      };
+    </script>
+
+    {{ content_for_header }}
+  </head>
+
+  <body class="template-{{ template.name | handle }} color-{{ settings.color_schemes.first.id }} card-style--{{ settings.card_style }}{% if settings.header_transparent and request.page_type == 'index' %} has-overlay-header{% endif %}{% if settings.animations_hover %} has-hover-zoom{% endif %}{% if settings.animations_reveal %} has-reveal{% endif %}{% if settings.animations_text %} has-split{% endif %}{% if settings.grain %} has-grain{% endif %}{% if settings.custom_cursor %} has-cursor{% endif %}">
+    <a class="skip-link visually-hidden-focusable" href="#MainContent">{{ 'accessibility.skip_to_text' | t }}</a>
+
+    {% sections 'header-group' %}
+
+    <main id="MainContent" class="main-content" role="main" tabindex="-1">
+      {{ content_for_layout }}
+    </main>
+
+    {% sections 'footer-group' %}
+
+    {% section 'cart-drawer' %}
+    {% render 'overlays' %}
+  </body>
+</html>

@@ -1,0 +1,21 @@
+{%- comment -%} Compact product row with quick add. Params: product {%- endcomment -%}
+<div class="mini-product">
+  {%- if product.featured_media -%}
+    {{ product.featured_media | image_url: width: 160 | image_tag: loading: 'lazy', alt: '' }}
+  {%- else -%}
+    {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+  {%- endif -%}
+  <div style="min-width:0;">
+    <a href="{{ product.url }}">{{ product.title | escape }}</a>
+    {% render 'price', product: product, use_variant: false %}
+  </div>
+  {%- if product.has_only_default_variant -%}
+    {%- assign mini_form = 'Mini-' | append: product.id -%}
+    {%- form 'product', product, id: mini_form, data-product-form: '' -%}
+      <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+      <button type="submit" class="icon-btn icon-btn--sm" aria-label="{{ 'products.product.add_to_cart' | t }}: {{ product.title | escape }}">{% render 'icon', name: 'plus' %}</button>
+    {%- endform -%}
+  {%- else -%}
+    <a href="{{ product.url }}" class="icon-btn icon-btn--sm" aria-label="{{ 'products.product.choose_options' | t }}: {{ product.title | escape }}">{% render 'icon', name: 'arrow' %}</a>
+  {%- endif -%}
+</div>

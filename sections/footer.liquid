@@ -1,0 +1,123 @@
+<footer class="footer color-{{ section.settings.color_scheme }}" style="--footer-cols: {{ section.blocks.size | at_least: 1 }};">
+  <div class="page-width">
+    {%- if section.settings.join_title != blank -%}
+      <div class="footer__join">
+        <h2>{{ section.settings.join_title }}</h2>
+        <div>
+          {%- form 'customer', id: 'FooterJoin' -%}
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <label for="FooterJoinEmail" class="visually-hidden">{{ 'newsletter.label' | t }}</label>
+            <input type="email" id="FooterJoinEmail" name="contact[email]" placeholder="{{ 'newsletter.label' | t }}" autocomplete="email" required>
+            <button type="submit">{{ 'newsletter.button_label' | t }}</button>
+          {%- endform -%}
+          {%- if section.settings.join_note != blank -%}<p class="caption" style="margin: 1.2rem 0 0;">{{ section.settings.join_note | escape }}</p>{%- endif -%}
+        </div>
+      </div>
+    {%- endif -%}
+    <div class="footer__top">
+      <div class="footer__brand">
+        {%- if section.settings.heading != blank -%}<p>{{ section.settings.heading | escape }}</p>{%- endif -%}
+        {%- if section.settings.show_social -%}{% render 'social-icons' %}{%- endif -%}
+      </div>
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'menu' -%}
+            <div {{ block.shopify_attributes }}>
+              {%- if block.settings.heading != blank -%}<h2 class="footer__heading">{{ block.settings.heading | escape }}</h2>{%- endif -%}
+              <ul class="footer__list" role="list">
+                {%- for link in block.settings.menu.links -%}
+                  <li><a href="{{ link.url }}">{{ link.title | escape }}</a></li>
+                {%- endfor -%}
+              </ul>
+            </div>
+          {%- when 'text' -%}
+            <div {{ block.shopify_attributes }}>
+              {%- if block.settings.heading != blank -%}<h2 class="footer__heading">{{ block.settings.heading | escape }}</h2>{%- endif -%}
+              <div class="rte">{{ block.settings.text }}</div>
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+
+    <div class="footer__bottom">
+      <div>
+        <small>&copy; {{ 'now' | date: '%Y' }} {{ shop.name | link_to: routes.root_url }}. {{ powered_by_link }}</small>
+        {%- if section.settings.show_policy -%}
+          <ul class="footer__list" role="list" style="display:flex;flex-wrap:wrap;gap:1.6rem;margin-top:0.8rem;">
+            {%- for policy in shop.policies -%}
+              {%- if policy != blank -%}<li><a href="{{ policy.url }}">{{ policy.title | escape }}</a></li>{%- endif -%}
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      </div>
+      {%- if section.settings.enable_country_selector or section.settings.enable_language_selector -%}
+        {%- form 'localization', id: 'FooterLocalization', class: 'footer__localization', data-localization: '' -%}
+          {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
+            <div class="select-wrap">
+              <label for="FooterCountry" class="visually-hidden">{{ 'localization.country_label' | t }}</label>
+              <select id="FooterCountry" name="country_code" class="select">
+                {%- for country in localization.available_countries -%}
+                  <option value="{{ country.iso_code }}"{% if country.iso_code == localization.country.iso_code %} selected{% endif %}>{{ country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})</option>
+                {%- endfor -%}
+              </select>
+              {% render 'icon', name: 'caret' %}
+            </div>
+          {%- endif -%}
+          {%- if section.settings.enable_language_selector and localization.available_languages.size > 1 -%}
+            <div class="select-wrap">
+              <label for="FooterLanguage" class="visually-hidden">{{ 'localization.language_label' | t }}</label>
+              <select id="FooterLanguage" name="language_code" class="select">
+                {%- for language in localization.available_languages -%}
+                  <option value="{{ language.iso_code }}" lang="{{ language.iso_code }}"{% if language.iso_code == localization.language.iso_code %} selected{% endif %}>{{ language.endonym_name | capitalize }}</option>
+                {%- endfor -%}
+              </select>
+              {% render 'icon', name: 'caret' %}
+            </div>
+          {%- endif -%}
+          <noscript><button type="submit" class="button button--small">{{ 'localization.update' | t }}</button></noscript>
+        {%- endform -%}
+      {%- endif -%}
+      {%- if section.settings.payment_enable -%}
+        <ul class="footer__payments" role="list">
+          <li class="visually-hidden">{{ 'sections.footer.payment' | t }}</li>
+          {%- for type in shop.enabled_payment_types -%}<li>{{ type | payment_type_svg_tag }}</li>{%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+  </div>
+  {%- if section.settings.show_wordmark -%}<p class="footer__wordmark" aria-hidden="true">{{ section.settings.wordmark | default: shop.name | escape }}</p>{%- endif -%}
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "class": "section-footer",
+  "max_blocks": 4,
+  "enabled_on": { "groups": ["footer"] },
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "header", "content": "Email signup" },
+    { "type": "inline_richtext", "id": "join_title", "label": "Heading", "default": "Hear about new collections first" },
+    { "type": "text", "id": "join_note", "label": "Note", "default": "One letter a month. Early access to sale and new drops." },
+    { "type": "header", "content": "Columns" },
+    { "type": "text", "id": "heading", "label": "Short text", "default": "Clothing cut in Mumbai from cloth we can trace to the mill." },
+    { "type": "checkbox", "id": "show_social", "label": "Show social icons", "default": true },
+    { "type": "checkbox", "id": "enable_country_selector", "label": "Show country/region selector", "default": true },
+    { "type": "checkbox", "id": "enable_language_selector", "label": "Show language selector", "default": true },
+    { "type": "checkbox", "id": "payment_enable", "label": "Show payment icons", "default": true },
+    { "type": "checkbox", "id": "show_policy", "label": "Show policy links", "default": true },
+    { "type": "checkbox", "id": "show_wordmark", "label": "Show large store name", "default": true },
+    { "type": "text", "id": "wordmark", "label": "Large text", "info": "Defaults to the store name" }
+  ],
+  "blocks": [
+    { "type": "menu", "name": "Menu", "settings": [
+      { "type": "text", "id": "heading", "label": "Heading", "default": "Shop" },
+      { "type": "link_list", "id": "menu", "label": "Menu", "default": "footer" }
+    ] },
+    { "type": "text", "name": "Text", "settings": [
+      { "type": "text", "id": "heading", "label": "Heading", "default": "Visit" },
+      { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Open Monday to Saturday, 10am to 7pm.</p>" }
+    ] }
+  ]
+}
+{% endschema %}
