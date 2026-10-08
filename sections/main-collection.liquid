@@ -72,11 +72,12 @@
         {% render 'active-filters', results: collection %}
 
         {%- if collection.products.size == 0 -%}
-          <div class="empty-state">
-            <h2 class="h3">{{ 'collections.empty' | t }}</h2>
-            <p>{{ 'collections.empty_hint' | t }}</p>
-            <a href="{{ collection.url }}?sort_by={{ sort_by }}" class="button button--secondary">{{ 'collections.filters.clear_all' | t }}</a>
-          </div>
+          {% render 'empty-state',
+            title: section.settings.empty_title,
+            text: section.settings.empty_text,
+            link_label: section.settings.empty_button_label,
+            link_url: section.settings.empty_button_link | default: routes.all_products_collection_url
+          %}
         {%- else -%}
           <ul class="grid" role="list" data-stagger="0.05" data-product-grid style="--cols: {{ section.settings.columns }}; --cols-tablet: 3; --cols-mobile: {{ section.settings.columns_mobile }};">
             {%- for product in collection.products -%}
@@ -118,7 +119,12 @@
     { "type": "range", "id": "columns", "min": 2, "max": 5, "step": 1, "label": "Columns on desktop", "default": 3 },
     { "type": "range", "id": "columns_mobile", "min": 1, "max": 2, "step": 1, "label": "Columns on mobile", "default": 2 },
     { "type": "checkbox", "id": "enable_filtering", "label": "Enable filtering", "default": true, "info": "Customize filters with the Search & Discovery app." },
-    { "type": "checkbox", "id": "enable_sorting", "label": "Enable sorting", "default": true }
+    { "type": "checkbox", "id": "enable_sorting", "label": "Enable sorting", "default": true },
+    { "type": "header", "content": "Empty collection" },
+    { "type": "text", "id": "empty_title", "label": "Empty heading", "default": "No pieces here yet" },
+    { "type": "text", "id": "empty_text", "label": "Empty text", "default": "New work is being prepared for this edit. Explore the rest of the store while it takes shape." },
+    { "type": "text", "id": "empty_button_label", "label": "Empty button label", "default": "View all pieces" },
+    { "type": "url", "id": "empty_button_link", "label": "Empty button link", "info": "Leave blank to link to all products." }
   ]
 }
 {% endschema %}

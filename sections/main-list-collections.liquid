@@ -1,26 +1,35 @@
 <div class="page-width">
   <div class="page-header"><h1>{{ section.settings.title | escape }}</h1></div>
   {%- paginate collections by 24 -%}
-    <ul class="grid" role="list" style="--cols: {{ section.settings.columns }}; --cols-tablet: 2; padding-bottom: 8rem;">
-      {%- for collection in collections -%}
-        <li>
-          <a href="{{ collection.url }}" class="collection-card zoom-hover">
-            <div class="media media--{{ section.settings.image_ratio }}" style="border-radius: var(--radius-card);">
-              {%- if collection.featured_image -%}
-                {{ collection.featured_image | image_url: width: 1000 | image_tag: loading: 'lazy', widths: '300, 500, 750, 1000', sizes: '(min-width: 990px) 33vw, 50vw', alt: collection.title }}
-              {%- else -%}
-                {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
-              {%- endif -%}
-            </div>
-            <div class="collection-card__info">
-              <h2 class="h3" style="margin:0;">{{ collection.title | escape }}</h2>
-              <span class="caption">{{ 'collections.product_count' | t: count: collection.products_count }}</span>
-            </div>
-          </a>
-        </li>
-      {%- endfor -%}
-    </ul>
-    {% render 'pagination', paginate: paginate, anchor: '' %}
+    {%- if collections.size > 0 -%}
+      <ul class="grid" role="list" style="--cols: {{ section.settings.columns }}; --cols-tablet: 2; padding-bottom: 8rem;">
+        {%- for collection in collections -%}
+          <li>
+            <a href="{{ collection.url }}" class="collection-card zoom-hover">
+              <div class="media media--{{ section.settings.image_ratio }}" style="border-radius: var(--radius-card);">
+                {%- if collection.featured_image -%}
+                  {{ collection.featured_image | image_url: width: 1000 | image_tag: loading: 'lazy', widths: '300, 500, 750, 1000', sizes: '(min-width: 990px) 33vw, 50vw', alt: collection.title }}
+                {%- else -%}
+                  {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                {%- endif -%}
+              </div>
+              <div class="collection-card__info">
+                <h2 class="h3" style="margin:0;">{{ collection.title | escape }}</h2>
+                <span class="caption">{{ 'collections.product_count' | t: count: collection.products_count }}</span>
+              </div>
+            </a>
+          </li>
+        {%- endfor -%}
+      </ul>
+      {% render 'pagination', paginate: paginate, anchor: '' %}
+    {%- else -%}
+      {% render 'empty-state',
+        title: section.settings.empty_title,
+        text: section.settings.empty_text,
+        link_label: section.settings.empty_button_label,
+        link_url: section.settings.empty_button_link | default: routes.all_products_collection_url
+      %}
+    {%- endif -%}
   {%- endpaginate -%}
 </div>
 
@@ -33,7 +42,12 @@
     { "type": "text", "id": "title", "label": "Heading", "default": "Collections" },
     { "type": "range", "id": "columns", "min": 2, "max": 5, "step": 1, "label": "Columns on desktop", "default": 3 },
     { "type": "select", "id": "image_ratio", "label": "Image ratio", "default": "portrait",
-      "options": [ { "value": "portrait", "label": "Portrait" }, { "value": "square", "label": "Square" }, { "value": "landscape", "label": "Landscape" } ] }
+      "options": [ { "value": "portrait", "label": "Portrait" }, { "value": "square", "label": "Square" }, { "value": "landscape", "label": "Landscape" } ] },
+    { "type": "header", "content": "Empty collections" },
+    { "type": "text", "id": "empty_title", "label": "Empty heading", "default": "The first edit is taking shape" },
+    { "type": "text", "id": "empty_text", "label": "Empty text", "default": "Collections will appear here as the store's point of view comes together." },
+    { "type": "text", "id": "empty_button_label", "label": "Empty button label", "default": "Return to the store" },
+    { "type": "url", "id": "empty_button_link", "label": "Empty button link", "info": "Leave blank to link to all products." }
   ]
 }
 {% endschema %}
