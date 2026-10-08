@@ -51,7 +51,7 @@
     <div class="header__icons">
       <a href="{{ routes.search_url }}" class="header__icon" data-drawer-open="SearchPalette" aria-label="{{ 'general.search.search' | t }}">{% render 'icon', name: 'search' %}</a>
       {%- if shop.customer_accounts_enabled -%}
-        <a href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}" class="header__icon header__icon--account" aria-label="{{ 'customer.account_fallback' | t }}">{% render 'icon', name: 'account' %}</a>
+        <shopify-account class="header__account" menu="{{ section.settings.customer_account_menu | default: 'customer-account-main-menu' }}"></shopify-account>
       {%- endif -%}
       {%- if settings.wishlist -%}
         <a href="{{ section.settings.wishlist_page.url | default: routes.root_url }}" class="header__icon" aria-label="{{ 'wishlist.title' | t }}">
@@ -180,6 +180,7 @@
   "settings": [
     { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
     { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu", "info": "Links with sub-links open a full-width menu. Add a third level for long lists." },
+    { "type": "link_list", "id": "customer_account_menu", "label": "Customer account menu", "default": "customer-account-main-menu" },
     { "type": "image_picker", "id": "logo_light", "label": "Light logo", "info": "Used while the header is transparent." },
     { "type": "page", "id": "wishlist_page", "label": "Wishlist page", "info": "Create a page with the 'wishlist' template and select it here." },
     { "type": "header", "content": "Menu images" },

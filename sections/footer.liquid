@@ -78,6 +78,7 @@
           <noscript><button type="submit" class="button button--small">{{ 'localization.update' | t }}</button></noscript>
         {%- endform -%}
       {%- endif -%}
+      <div class="footer__follow">{{ shop | login_button: action: 'follow' }}</div>
       {%- if section.settings.payment_enable -%}
         <ul class="footer__payments" role="list">
           <li class="visually-hidden">{{ 'sections.footer.payment' | t }}</li>

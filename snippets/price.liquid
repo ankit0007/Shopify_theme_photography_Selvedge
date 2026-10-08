@@ -10,6 +10,10 @@
   assign compare_at_price = target.compare_at_price
   assign price = target.price | default: 1999
   assign money_price = price | money
+  assign unit_target = target
+  unless use_variant
+    assign unit_target = product.selected_or_first_available_variant
+  endunless
   assign on_sale = false
   if compare_at_price > price
     assign on_sale = true
@@ -32,11 +36,9 @@
     <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
     <s class="price__compare">{{ compare_at_price | money }}</s>
   {%- endif -%}
-  {%- if use_variant and target.unit_price_measurement -%}
+  {%- if unit_target.unit_price_measurement -%}
     <span class="unit-price">
-      {{ target.unit_price | money }}/
-      {%- if target.unit_price_measurement.reference_value != 1 -%}{{ target.unit_price_measurement.reference_value }}{%- endif -%}
-      {{ target.unit_price_measurement.reference_unit }}
+      {{ unit_target.unit_price | unit_price_with_measurement: unit_target.unit_price_measurement }}
     </span>
   {%- endif -%}
 </div>

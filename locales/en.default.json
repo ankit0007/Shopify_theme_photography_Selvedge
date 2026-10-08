@@ -143,6 +143,7 @@
       "view_full_details": "View full details",
       "delivery_fallback": "Arrives in {{ min }} to {{ max }} business days",
       "delivery_html": "Order within <strong>{{ time }}</strong> to get it by <strong>{{ date }}</strong>",
+      "pickup_unavailable": "Unavailable for pickup",
       "quick_add": "Add to bag",
       "add_size": "Add size {{ size }} of {{ product }} to bag"
     },

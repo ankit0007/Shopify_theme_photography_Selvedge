@@ -47,6 +47,9 @@
     {%- if item.original_line_price != item.final_line_price -%}
       <s class="price__compare">{{ item.original_line_price | money }}</s><br>
     {%- endif -%}
-    {{ item.final_line_price | money }}
+    <span>{{ item.final_line_price | money }}</span>
+    {%- if item.unit_price_measurement -%}
+      <span class="unit-price">{{ item.unit_price | unit_price_with_measurement: item.unit_price_measurement }}</span>
+    {%- endif -%}
   </div>
 </li>

@@ -11,8 +11,25 @@
       <div class="feature-product__gallery">
         {%- if fp.media.size > 0 -%}
           {%- for media in fp.media limit: 3 -%}
-            <div class="media {% if forloop.first %}media--landscape{% else %}media--square{% endif %} reveal" data-media-id="{{ section.id }}-{{ media.id }}">
-              {{ media.preview_image | image_url: width: 1400 | image_tag: loading: 'lazy', widths: '400, 700, 1000, 1400', sizes: '(min-width: 990px) 55vw, 100vw', alt: media.alt }}
+            <div class="reveal" data-media-id="{{ section.id }}-{{ media.id }}">
+              {%- case media.media_type -%}
+                {%- when 'image' -%}
+                  <div class="media {% if forloop.first %}media--landscape{% else %}media--square{% endif %}">
+                    {{ media | image_url: width: 1400 | image_tag: loading: 'lazy', widths: '400, 700, 1000, 1400', sizes: '(min-width: 990px) 55vw, 100vw', alt: media.alt }}
+                  </div>
+                {%- when 'video' -%}
+                  <div class="media {% if forloop.first %}media--landscape{% else %}media--square{% endif %}">
+                    {{ media | video_tag: controls: true, playsinline: true, muted: true, loop: true, image_size: '1400x' }}
+                  </div>
+                {%- when 'external_video' -%}
+                  <div class="media {% if forloop.first %}media--landscape{% else %}media--square{% endif %}">
+                    {{ media | external_video_tag: loading: 'lazy' }}
+                  </div>
+                {%- when 'model' -%}
+                  <div class="media media--square">
+                    {{ media | model_viewer_tag: image_size: '1400x', reveal: 'interaction', toggleable: true }}
+                  </div>
+              {%- endcase -%}
             </div>
           {%- endfor -%}
         {%- else -%}
@@ -85,6 +102,14 @@
     {%- else -%}
       {% render 'empty-state', title: 'Choose a featured product', text: 'Select a product in the Theme Editor to bring this editorial feature to life.', link_label: 'Explore the store', link_url: routes.all_products_collection_url %}
     {%- endif -%}
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+        {%- when '@app' -%}
+          {% render block %}
+        {%- when 'custom_liquid' -%}
+          <div {{ block.shopify_attributes }}>{{ block.settings.custom_liquid }}</div>
+      {%- endcase -%}
+    {%- endfor -%}
   </div>
 </div>
 
@@ -93,6 +118,12 @@
   "name": "Featured product",
   "tag": "section",
   "class": "section",
+  "blocks": [
+    { "type": "@app" },
+    { "type": "custom_liquid", "name": "Custom liquid", "settings": [
+      { "type": "liquid", "id": "custom_liquid", "label": "Custom liquid" }
+    ] }
+  ],
   "settings": [
     { "type": "product", "id": "product", "label": "Product" },
     { "type": "text", "id": "label", "label": "Label", "default": "Best seller this month" },

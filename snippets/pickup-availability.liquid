@@ -1,0 +1,22 @@
+{%- liquid
+  assign pickup_locations = variant.store_availabilities | where: 'pick_up_enabled', true
+-%}
+<div class="pickup-availability" data-pickup-availability aria-live="polite" {{ block.shopify_attributes }}>
+  {%- if pickup_locations.size > 0 -%}
+    <h3 class="field__label">{{ block.settings.heading | default: 'Pickup availability' | escape }}</h3>
+    <ul class="pickup-availability__list" role="list">
+      {%- for pickup in pickup_locations -%}
+        <li>
+          <strong>{{ pickup.location.name | escape }}</strong>
+          <span>
+            {%- if pickup.available -%}
+              {{ pickup.pick_up_time | escape }}
+            {%- else -%}
+              {{ 'products.product.pickup_unavailable' | t }}
+            {%- endif -%}
+          </span>
+        </li>
+      {%- endfor -%}
+    </ul>
+  {%- endif -%}
+</div>

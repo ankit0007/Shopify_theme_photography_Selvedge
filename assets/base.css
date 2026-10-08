@@ -644,6 +644,7 @@ body.overflow-hidden { overflow: hidden; }
 .header__logo img { width: var(--logo-width); height: auto; }
 .header__logo .logo--light { display: none; }
 .header__icons { display: flex; align-items: center; justify-content: flex-end; gap: 0.2rem; }
+.header__account { display: inline-flex; align-items: center; justify-content: center; width: 4.4rem; height: 4.4rem; }
 .header__icon { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 4.4rem; height: 4.4rem; background: none; border: 0; text-decoration: none; color: inherit; }
 .header__icon .icon { width: 2rem; height: 2rem; }
 .header__icon:hover { opacity: 0.6; }
@@ -964,4 +965,4 @@ h1 em, h2 em, .h0 em, .h1 em, .h2 em { font-family: var(--font-accent-family); f
 .lightbox .icon-btn--light:hover:not([disabled]) { background: rgb(var(--color-fg)); color: rgb(var(--color-bg)); }
 .stores, .swatches { list-style: none; margin: 0; padding: 0; }
 .card__media { isolation: auto; } .card__title a::after { z-index: 1; } .card__sizes { z-index: 4; }
-@media (max-width: 749px) { .site-header__bar { gap: 0.4rem; } .header__logo { font-size: 1.8rem; } .header__logo a { letter-spacing: 0.2em; padding-left: 0.2em; } .header__icon { width: 3.8rem; } }
+@media (max-width: 749px) { .site-header__bar { gap: 0.4rem; } .header__logo { font-size: 1.8rem; } .header__logo a { letter-spacing: 0.2em; padding-left: 0.2em; } .header__icon, .header__account { width: 3.8rem; } }

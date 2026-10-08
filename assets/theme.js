@@ -6,6 +6,7 @@
   const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
   const debounce = (fn, wait = 300) => { let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), wait); }; };
   const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+  const escapeHtml = (value) => String(value ?? '').replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   const theme = (window.theme = window.theme || {});
@@ -261,9 +262,12 @@
   function islandNotice(item) {
     const notice = $('[data-cart-notice]');
     if (!notice) { openOverlay('CartDrawer'); return; }
-    const img = item.image ? `<img src="${item.image}${item.image.includes('?') ? '&' : '?'}width=160" alt="">` : '';
-    notice.innerHTML = `<div class="cart-notice__item">${img}<div><span class="data muted">${theme.strings.added || 'Added'}</span><strong>${item.product_title || item.title || ''}</strong>${item.variant_title && item.variant_title !== 'Default Title' ? `<span class="caption">${item.variant_title}</span>` : ''}</div></div>
-      <div class="button-group"><a href="${theme.routes.cart}" class="button button--secondary button--small" data-drawer-open="CartDrawer">${theme.strings.viewCart || 'View cart'}</a><a href="${theme.routes.checkout || '/checkout'}" class="button button--small">${theme.strings.checkout || 'Check out'}</a></div>`;
+    const imageUrl = item.image ? escapeHtml(`${item.image}${item.image.includes('?') ? '&' : '?'}width=160`) : '';
+    const img = imageUrl ? `<img src="${imageUrl}" alt="">` : '';
+    const productTitle = escapeHtml(item.product_title || item.title || '');
+    const variantTitle = item.variant_title && item.variant_title !== 'Default Title' ? `<span class="caption">${escapeHtml(item.variant_title)}</span>` : '';
+    notice.innerHTML = `<div class="cart-notice__item">${img}<div><span class="data muted">${escapeHtml(theme.strings.added || 'Added')}</span><strong>${productTitle}</strong>${variantTitle}</div></div>
+      <div class="button-group"><a href="${escapeHtml(theme.routes.cart)}" class="button button--secondary button--small" data-drawer-open="CartDrawer">${escapeHtml(theme.strings.viewCart || 'View cart')}</a><a href="${escapeHtml(theme.routes.checkout || '/checkout')}" class="button button--small">${escapeHtml(theme.strings.checkout || 'Check out')}</a></div>`;
     header.classList.remove('is-hidden');
     notice.classList.add('is-open');
     clearTimeout(notice._t);
@@ -556,7 +560,7 @@
     if (page) {
       const grid = $('[data-wishlist-grid]', page), empty = $('[data-wishlist-empty]', page);
       empty.hidden = list.length > 0;
-      grid.innerHTML = list.map((p) => `<li><div class="card"><div class="card__media"><div class="media media--portrait">${p.image ? `<img src="${p.image}" alt="" loading="lazy">` : ''}</div></div><div class="card__wish"><button type="button" class="wish-btn" aria-pressed="true" data-wish data-handle="${p.handle}" aria-label="${page.dataset.remove || 'Remove'}"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></button></div><div class="card__info"><h3 class="card__title"><a href="${p.url}">${p.title}</a></h3><span class="price">${p.price || ''}</span></div></div></li>`).join('');
+      grid.innerHTML = list.map((p) => `<li><div class="card"><div class="card__media"><div class="media media--portrait">${p.image ? `<img src="${escapeHtml(p.image)}" alt="" loading="lazy">` : ''}</div></div><div class="card__wish"><button type="button" class="wish-btn" aria-pressed="true" data-wish data-handle="${escapeHtml(p.handle)}" aria-label="${escapeHtml(page.dataset.remove || 'Remove')}"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></button></div><div class="card__info"><h3 class="card__title"><a href="${escapeHtml(p.url)}">${escapeHtml(p.title)}</a></h3><span class="price">${escapeHtml(p.price || '')}</span></div></div></li>`).join('');
     }
   }
   function initWishlist() {
@@ -591,7 +595,7 @@
     $$('[data-recent]').forEach((sec) => {
       const items = list.filter((x) => x.handle !== sec.dataset.current).slice(0, parseInt(sec.dataset.limit, 10) || 6);
       if (!items.length) return;
-      $('[data-recent-list]', sec).innerHTML = items.map((p) => `<li><a href="${p.url}" class="card" style="text-decoration:none"><span class="card__media"><span class="media media--portrait">${p.image ? `<img src="${p.image}" alt="" loading="lazy">` : ''}</span></span><span class="card__info"><span class="card__title">${p.title}</span><span class="price">${p.price || ''}</span></span></a></li>`).join('');
+      $('[data-recent-list]', sec).innerHTML = items.map((p) => `<li><a href="${escapeHtml(p.url)}" class="card" style="text-decoration:none"><span class="card__media"><span class="media media--portrait">${p.image ? `<img src="${escapeHtml(p.image)}" alt="" loading="lazy">` : ''}</span></span><span class="card__info"><span class="card__title">${escapeHtml(p.title)}</span><span class="price">${escapeHtml(p.price || '')}</span></span></a></li>`).join('');
       sec.hidden = false;
       initRails(sec);
     });
@@ -830,7 +834,7 @@
         try {
           const html = await fetch(`${productUrl}?variant=${variant.id}&section_id=${sectionId}`).then((r) => r.text());
           const doc = new DOMParser().parseFromString(html, 'text/html');
-          ['[data-price]', '[data-inventory]', '[data-sku]', '[data-sticky-price]'].forEach((sel) => {
+          ['[data-price]', '[data-inventory]', '[data-sku]', '[data-sticky-price]', '[data-selling-plan]', '[data-pickup-availability]'].forEach((sel) => {
             const fresh = $$(sel, doc), cur = $$(sel, section);
             cur.forEach((el, n) => { if (fresh[n]) el.innerHTML = fresh[n].innerHTML; });
           });
