@@ -13,6 +13,7 @@
   if section.settings.enable_demo_fallbacks and settings.enable_demo_fallbacks
     assign show_demo = true
   endif
+  assign fallback_link_url = section.settings.fallback_button_link | default: routes.all_products_collection_url
 -%}
 <div class="color-{{ section.settings.color_scheme }} section-bg section-padding">
   <div class="page-width">
@@ -39,7 +40,7 @@
         title: section.settings.fallback_title,
         text: section.settings.fallback_text,
         link_label: section.settings.fallback_button_label,
-        link_url: section.settings.fallback_button_link | default: routes.all_products_collection_url
+        link_url: fallback_link_url
       %}
       <ul class="grid" role="list" data-stagger style="--cols: {{ section.settings.columns }}; --cols-tablet: 3;">
         {%- assign demo_count = limit | at_most: 6 -%}
@@ -65,7 +66,7 @@
         title: section.settings.fallback_title,
         text: section.settings.fallback_text,
         link_label: section.settings.fallback_button_label,
-        link_url: section.settings.fallback_button_link | default: routes.all_products_collection_url
+        link_url: fallback_link_url
       %}
     {%- endif -%}
   </div>
