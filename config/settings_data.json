@@ -85,7 +85,7 @@
       }
     },
     "logo_width": 140,
-    "page_width": 1680,
+    "page_width": 1400,
     "grid_gap": 8,
     "spacing_sections": 0,
     "header_style": "center",
@@ -193,7 +193,7 @@
         }
       },
       "logo_width": 140,
-      "page_width": 1680,
+      "page_width": 1400,
       "grid_gap": 8,
       "spacing_sections": 0,
       "header_style": "center",
@@ -300,7 +300,7 @@
         }
       },
       "logo_width": 140,
-      "page_width": 1680,
+      "page_width": 1400,
       "grid_gap": 8,
       "spacing_sections": 0,
       "header_style": "center",
@@ -407,7 +407,7 @@
         }
       },
       "logo_width": 140,
-      "page_width": 1680,
+      "page_width": 1400,
       "grid_gap": 8,
       "spacing_sections": 0,
       "header_style": "center",
@@ -514,7 +514,7 @@
         }
       },
       "logo_width": 140,
-      "page_width": 1680,
+      "page_width": 1400,
       "grid_gap": 8,
       "spacing_sections": 0,
       "header_style": "center",
@@ -621,7 +621,7 @@
         }
       },
       "logo_width": 140,
-      "page_width": 1680,
+      "page_width": 1400,
       "grid_gap": 8,
       "spacing_sections": 0,
       "header_style": "center",
