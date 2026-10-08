@@ -1,6 +1,7 @@
 {%- liquid
   assign menu = section.settings.menu
   assign brand_name = settings.brand_name | default: 'Selvedge'
+  assign logo_alt = settings.logo.alt | default: brand_name
   assign overlay = false
   if settings.header_transparent and request.page_type == 'index'
     assign overlay = true
@@ -34,10 +35,10 @@
       <a href="{{ routes.root_url }}">
         {%- if settings.logo != blank -%}
           {%- assign logo_w2 = settings.logo_width | times: 2 -%}
-          {%- capture logo_class -%}logo--dark{% if section.settings.logo_light != blank %} has-light{% endif %}{%- endcapture -%}
-          {{ settings.logo | image_url: width: logo_w2 | image_tag: widths: '100, 200, 300, 400, 600', sizes: '300px', alt: brand_name, class: logo_class }}
+          {%- capture logo_class -%}header__logo-image logo--dark{% if section.settings.logo_light != blank %} has-light{% endif %}{%- endcapture -%}
+          {{ settings.logo | image_url: width: logo_w2 | image_tag: widths: '100, 200, 300, 400, 600', sizes: '300px', alt: logo_alt, loading: 'eager', class: logo_class }}
           {%- if section.settings.logo_light != blank -%}
-            {{ section.settings.logo_light | image_url: width: logo_w2 | image_tag: widths: '100, 200, 300, 400, 600', sizes: '300px', alt: brand_name, class: 'logo--light' }}
+            {{ section.settings.logo_light | image_url: width: logo_w2 | image_tag: widths: '100, 200, 300, 400, 600', sizes: '300px', alt: logo_alt, loading: 'eager', class: 'header__logo-image logo--light' }}
           {%- endif -%}
         {%- else -%}
           {{ brand_name }}
