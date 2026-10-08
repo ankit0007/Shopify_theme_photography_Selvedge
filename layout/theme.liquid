@@ -26,13 +26,6 @@
 
     {% render 'meta-tags' %}
 
-    {%- unless settings.type_header_font.system? -%}
-      {{ settings.type_header_font | font_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: true }}
-    {%- endunless -%}
-    {%- unless settings.type_body_font.system? -%}
-      {{ settings.type_body_font | font_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: true }}
-    {%- endunless -%}
-
     {% render 'theme-styles' %}
     {%- if settings.page_transitions -%}<style>@view-transition { navigation: auto; }</style>{%- endif -%}
 

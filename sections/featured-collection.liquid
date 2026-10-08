@@ -3,7 +3,7 @@
   assign collection = section.settings.collection
   assign limit = section.settings.products_to_show
   assign has_products = false
-  if collection != blank and collection.products_count > 0
+  if collection != blank and collection.products.size > 0
     assign has_products = true
   endif
   assign link_label = ''

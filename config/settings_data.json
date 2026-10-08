@@ -103,7 +103,8 @@
     "animations_hover": true,
     "badge_new_tag": "new",
     "badge_hot_tag": "last-pieces",
-    "brand_name": "Selvedge"
+    "brand_name": "Selvedge",
+    "enable_demo_fallbacks": true
   },
   "presets": {
     "Atelier": {
@@ -210,7 +211,8 @@
       "animations_hover": true,
       "badge_new_tag": "new",
       "badge_hot_tag": "last-pieces",
-      "brand_name": "Selvedge"
+      "brand_name": "Selvedge",
+      "enable_demo_fallbacks": true
     },
     "Noir": {
       "type_header_font": "bodoni_moda_n5",
@@ -315,7 +317,9 @@
       "grain": false,
       "animations_hover": true,
       "badge_new_tag": "new",
-      "badge_hot_tag": "last-pieces"
+      "badge_hot_tag": "last-pieces",
+      "brand_name": "Selvedge",
+      "enable_demo_fallbacks": true
     },
     "Denim": {
       "type_header_font": "archivo_narrow_n7",
@@ -420,7 +424,9 @@
       "grain": false,
       "animations_hover": true,
       "badge_new_tag": "new",
-      "badge_hot_tag": "last-pieces"
+      "badge_hot_tag": "last-pieces",
+      "brand_name": "Selvedge",
+      "enable_demo_fallbacks": true
     },
     "Linen": {
       "type_header_font": "marcellus_n4",
@@ -525,7 +531,9 @@
       "grain": false,
       "animations_hover": true,
       "badge_new_tag": "new",
-      "badge_hot_tag": "last-pieces"
+      "badge_hot_tag": "last-pieces",
+      "brand_name": "Selvedge",
+      "enable_demo_fallbacks": true
     },
     "Mono": {
       "type_header_font": "syne_n7",
@@ -630,7 +638,9 @@
       "grain": false,
       "animations_hover": true,
       "badge_new_tag": "new",
-      "badge_hot_tag": "last-pieces"
+      "badge_hot_tag": "last-pieces",
+      "brand_name": "Selvedge",
+      "enable_demo_fallbacks": true
     }
   }
 }

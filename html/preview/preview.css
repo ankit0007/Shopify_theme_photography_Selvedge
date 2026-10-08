@@ -1,0 +1,70 @@
+/* Generated from config/settings_data.json presets (preview only) */
+html[data-preset="atelier"] {
+  --font-heading-family: "Tenor Sans", sans-serif; --font-heading-weight: 400;
+  --font-body-family: "Manrope", sans-serif; --font-body-weight: 400;
+  --font-accent-family: "Instrument Serif", serif; --font-accent-weight: 400; --font-accent-style: italic; --nav-case: uppercase;
+  --font-heading-scale: 1; --heading-tracking: -0.02em; --heading-case: none;
+  --radius-lg: 0px; --radius-sm: 0px; --radius-button: 0px; --radius-input: 0px; --button-case: uppercase; --button-tracking: 0.08em;
+}
+html[data-preset="atelier"], html[data-preset="atelier"] body, html[data-preset="atelier"] .color-scheme-1 { --color-bg: 255, 255, 255; --color-surface: 241, 239, 236; --color-fg: 25, 24, 23; --color-accent: 123, 30, 45; --color-btn: 25, 24, 23; --color-btn-label: 255, 255, 255; --color-btn-outline: 25, 24, 23; --gradient-bg: #FFFFFF; }
+html[data-preset="atelier"], html[data-preset="atelier"] .color-scheme-2 { --color-bg: 25, 24, 23; --color-surface: 37, 35, 33; --color-fg: 244, 242, 238; --color-accent: 227, 168, 177; --color-btn: 244, 242, 238; --color-btn-label: 25, 24, 23; --color-btn-outline: 244, 242, 238; --gradient-bg: #191817; }
+html[data-preset="atelier"], html[data-preset="atelier"] .color-scheme-3 { --color-bg: 241, 239, 236; --color-surface: 230, 227, 222; --color-fg: 25, 24, 23; --color-accent: 123, 30, 45; --color-btn: 25, 24, 23; --color-btn-label: 255, 255, 255; --color-btn-outline: 25, 24, 23; --gradient-bg: #F1EFEC; }
+html[data-preset="atelier"], html[data-preset="atelier"] .color-scheme-4 { --color-bg: 123, 30, 45; --color-surface: 107, 24, 38; --color-fg: 255, 255, 255; --color-accent: 244, 217, 221; --color-btn: 255, 255, 255; --color-btn-label: 123, 30, 45; --color-btn-outline: 255, 255, 255; --gradient-bg: #7B1E2D; }
+html[data-preset="atelier"], html[data-preset="atelier"] .color-scheme-5 { --color-bg: 247, 246, 243; --color-surface: 238, 236, 232; --color-fg: 25, 24, 23; --color-accent: 123, 30, 45; --color-btn: 25, 24, 23; --color-btn-label: 255, 255, 255; --color-btn-outline: 25, 24, 23; --gradient-bg: #F7F6F3; }
+html[data-preset="noir"] {
+  --font-heading-family: "Bodoni Moda", serif; --font-heading-weight: 500;
+  --font-body-family: "Jost", sans-serif; --font-body-weight: 400;
+  --font-accent-family: "Bodoni Moda", serif; --font-accent-weight: 400; --font-accent-style: italic; --nav-case: uppercase;
+  --font-heading-scale: 1.1; --heading-tracking: -0.01em; --heading-case: none;
+  --radius-lg: 0px; --radius-sm: 0px; --radius-button: 0px; --radius-input: 0px; --button-case: uppercase; --button-tracking: 0.08em;
+}
+html[data-preset="noir"], html[data-preset="noir"] body, html[data-preset="noir"] .color-scheme-1 { --color-bg: 17, 17, 16; --color-surface: 28, 27, 25; --color-fg: 237, 234, 228; --color-accent: 201, 166, 107; --color-btn: 237, 234, 228; --color-btn-label: 17, 17, 16; --color-btn-outline: 237, 234, 228; --gradient-bg: #111110; }
+html[data-preset="noir"], html[data-preset="noir"] .color-scheme-2 { --color-bg: 8, 8, 7; --color-surface: 21, 20, 19; --color-fg: 237, 234, 228; --color-accent: 201, 166, 107; --color-btn: 201, 166, 107; --color-btn-label: 8, 8, 7; --color-btn-outline: 237, 234, 228; --gradient-bg: #080807; }
+html[data-preset="noir"], html[data-preset="noir"] .color-scheme-3 { --color-bg: 28, 27, 25; --color-surface: 38, 36, 34; --color-fg: 237, 234, 228; --color-accent: 201, 166, 107; --color-btn: 237, 234, 228; --color-btn-label: 17, 17, 16; --color-btn-outline: 237, 234, 228; --gradient-bg: #1C1B19; }
+html[data-preset="noir"], html[data-preset="noir"] .color-scheme-4 { --color-bg: 201, 166, 107; --color-surface: 184, 149, 92; --color-fg: 17, 17, 16; --color-accent: 17, 17, 16; --color-btn: 17, 17, 16; --color-btn-label: 201, 166, 107; --color-btn-outline: 17, 17, 16; --gradient-bg: #C9A66B; }
+html[data-preset="noir"], html[data-preset="noir"] .color-scheme-5 { --color-bg: 237, 234, 228; --color-surface: 226, 222, 214; --color-fg: 17, 17, 16; --color-accent: 140, 106, 51; --color-btn: 17, 17, 16; --color-btn-label: 237, 234, 228; --color-btn-outline: 17, 17, 16; --gradient-bg: #EDEAE4; }
+html[data-preset="denim"] {
+  --font-heading-family: "Archivo Narrow", sans-serif; --font-heading-weight: 700;
+  --font-body-family: "Inter", sans-serif; --font-body-weight: 400;
+  --font-accent-family: "Instrument Serif", serif; --font-accent-weight: 400; --font-accent-style: italic; --nav-case: uppercase;
+  --font-heading-scale: 1.15; --heading-tracking: -0.01em; --heading-case: uppercase;
+  --radius-lg: 0px; --radius-sm: 0px; --radius-button: 0px; --radius-input: 0px; --button-case: uppercase; --button-tracking: 0.08em;
+}
+html[data-preset="denim"], html[data-preset="denim"] body, html[data-preset="denim"] .color-scheme-1 { --color-bg: 243, 244, 246; --color-surface: 228, 231, 236; --color-fg: 18, 24, 38; --color-accent: 43, 76, 155; --color-btn: 18, 24, 38; --color-btn-label: 243, 244, 246; --color-btn-outline: 18, 24, 38; --gradient-bg: #F3F4F6; }
+html[data-preset="denim"], html[data-preset="denim"] .color-scheme-2 { --color-bg: 22, 33, 61; --color-surface: 31, 44, 77; --color-fg: 243, 244, 246; --color-accent: 157, 180, 240; --color-btn: 243, 244, 246; --color-btn-label: 22, 33, 61; --color-btn-outline: 243, 244, 246; --gradient-bg: #16213D; }
+html[data-preset="denim"], html[data-preset="denim"] .color-scheme-3 { --color-bg: 228, 231, 236; --color-surface: 214, 218, 225; --color-fg: 18, 24, 38; --color-accent: 43, 76, 155; --color-btn: 18, 24, 38; --color-btn-label: 243, 244, 246; --color-btn-outline: 18, 24, 38; --gradient-bg: #E4E7EC; }
+html[data-preset="denim"], html[data-preset="denim"] .color-scheme-4 { --color-bg: 43, 76, 155; --color-surface: 36, 65, 138; --color-fg: 255, 255, 255; --color-accent: 243, 244, 246; --color-btn: 255, 255, 255; --color-btn-label: 43, 76, 155; --color-btn-outline: 255, 255, 255; --gradient-bg: #2B4C9B; }
+html[data-preset="denim"], html[data-preset="denim"] .color-scheme-5 { --color-bg: 255, 255, 255; --color-surface: 243, 244, 246; --color-fg: 18, 24, 38; --color-accent: 43, 76, 155; --color-btn: 18, 24, 38; --color-btn-label: 255, 255, 255; --color-btn-outline: 18, 24, 38; --gradient-bg: #FFFFFF; }
+html[data-preset="linen"] {
+  --font-heading-family: "Marcellus", serif; --font-heading-weight: 400;
+  --font-body-family: "Figtree", sans-serif; --font-body-weight: 400;
+  --font-accent-family: "Instrument Serif", serif; --font-accent-weight: 400; --font-accent-style: italic; --nav-case: none;
+  --font-heading-scale: 1.05; --heading-tracking: 0em; --heading-case: none;
+  --radius-lg: 0px; --radius-sm: 0px; --radius-button: 40px; --radius-input: 0px; --button-case: none; --button-tracking: 0em;
+}
+html[data-preset="linen"], html[data-preset="linen"] body, html[data-preset="linen"] .color-scheme-1 { --color-bg: 238, 241, 236; --color-surface: 225, 230, 222; --color-fg: 39, 50, 42; --color-accent: 160, 82, 45; --color-btn: 39, 50, 42; --color-btn-label: 238, 241, 236; --color-btn-outline: 39, 50, 42; --gradient-bg: #EEF1EC; }
+html[data-preset="linen"], html[data-preset="linen"] .color-scheme-2 { --color-bg: 39, 50, 42; --color-surface: 50, 62, 53; --color-fg: 238, 241, 236; --color-accent: 227, 162, 127; --color-btn: 238, 241, 236; --color-btn-label: 39, 50, 42; --color-btn-outline: 238, 241, 236; --gradient-bg: #27322A; }
+html[data-preset="linen"], html[data-preset="linen"] .color-scheme-3 { --color-bg: 225, 230, 222; --color-surface: 211, 218, 207; --color-fg: 39, 50, 42; --color-accent: 160, 82, 45; --color-btn: 39, 50, 42; --color-btn-label: 238, 241, 236; --color-btn-outline: 39, 50, 42; --gradient-bg: #E1E6DE; }
+html[data-preset="linen"], html[data-preset="linen"] .color-scheme-4 { --color-bg: 160, 82, 45; --color-surface: 142, 72, 38; --color-fg: 255, 255, 255; --color-accent: 238, 241, 236; --color-btn: 255, 255, 255; --color-btn-label: 160, 82, 45; --color-btn-outline: 255, 255, 255; --gradient-bg: #A0522D; }
+html[data-preset="linen"], html[data-preset="linen"] .color-scheme-5 { --color-bg: 247, 248, 245; --color-surface: 238, 241, 236; --color-fg: 39, 50, 42; --color-accent: 160, 82, 45; --color-btn: 39, 50, 42; --color-btn-label: 247, 248, 245; --color-btn-outline: 39, 50, 42; --gradient-bg: #F7F8F5; }
+html[data-preset="mono"] {
+  --font-heading-family: "Syne", sans-serif; --font-heading-weight: 700;
+  --font-body-family: "Inter", sans-serif; --font-body-weight: 400;
+  --font-accent-family: "Instrument Serif", serif; --font-accent-weight: 400; --font-accent-style: italic; --nav-case: uppercase;
+  --font-heading-scale: 1.05; --heading-tracking: -0.03em; --heading-case: uppercase;
+  --radius-lg: 0px; --radius-sm: 0px; --radius-button: 0px; --radius-input: 0px; --button-case: uppercase; --button-tracking: 0.08em;
+}
+html[data-preset="mono"], html[data-preset="mono"] body, html[data-preset="mono"] .color-scheme-1 { --color-bg: 255, 255, 255; --color-surface: 242, 242, 242; --color-fg: 10, 10, 10; --color-accent: 228, 0, 43; --color-btn: 10, 10, 10; --color-btn-label: 255, 255, 255; --color-btn-outline: 10, 10, 10; --gradient-bg: #FFFFFF; }
+html[data-preset="mono"], html[data-preset="mono"] .color-scheme-2 { --color-bg: 10, 10, 10; --color-surface: 22, 22, 22; --color-fg: 255, 255, 255; --color-accent: 255, 59, 87; --color-btn: 255, 255, 255; --color-btn-label: 10, 10, 10; --color-btn-outline: 255, 255, 255; --gradient-bg: #0A0A0A; }
+html[data-preset="mono"], html[data-preset="mono"] .color-scheme-3 { --color-bg: 242, 242, 242; --color-surface: 230, 230, 230; --color-fg: 10, 10, 10; --color-accent: 228, 0, 43; --color-btn: 10, 10, 10; --color-btn-label: 255, 255, 255; --color-btn-outline: 10, 10, 10; --gradient-bg: #F2F2F2; }
+html[data-preset="mono"], html[data-preset="mono"] .color-scheme-4 { --color-bg: 228, 0, 43; --color-surface: 201, 0, 38; --color-fg: 255, 255, 255; --color-accent: 10, 10, 10; --color-btn: 255, 255, 255; --color-btn-label: 228, 0, 43; --color-btn-outline: 255, 255, 255; --gradient-bg: #E4002B; }
+html[data-preset="mono"], html[data-preset="mono"] .color-scheme-5 { --color-bg: 250, 250, 250; --color-surface: 242, 242, 242; --color-fg: 10, 10, 10; --color-accent: 228, 0, 43; --color-btn: 10, 10, 10; --color-btn-label: 255, 255, 255; --color-btn-outline: 10, 10, 10; --gradient-bg: #FAFAFA; }
+/* Preview bar (not part of the Shopify theme) */
+.preview-bar { position: fixed; left: 50%; transform: translateX(-50%); bottom: 1.2rem; z-index: 300; display: flex; align-items: center; gap: 0.3rem; padding: 0.4rem; border-radius: 99px; background: rgba(14,14,13,0.92); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); color: #fff; font: 500 13px/1 system-ui, sans-serif; box-shadow: 0 12px 40px -12px rgba(0,0,0,0.5); max-width: calc(100vw - 1.6rem); overflow-x: auto; scrollbar-width: none; }
+.preview-bar::-webkit-scrollbar { display: none; }
+.preview-bar button { border: 0; background: transparent; color: #fff; padding: 0.8rem 1.3rem; border-radius: 99px; font: inherit; cursor: pointer; white-space: nowrap; }
+.preview-bar button:hover { background: rgba(255,255,255,0.12); }
+.preview-bar button[aria-pressed="true"] { background: #fff; color: #111; }
+.preview-bar select { background: #2a2a2a; color: #fff; border: 0; border-radius: 99px; padding: 0.8rem 1.2rem; font: inherit; flex-shrink: 0; max-width: 16rem; }
+.preview-bar .sep { width: 1px; height: 2rem; background: rgba(255,255,255,0.2); margin: 0 0.4rem; flex-shrink: 0; }
+.template-product .sticky-atc { bottom: 0; }
