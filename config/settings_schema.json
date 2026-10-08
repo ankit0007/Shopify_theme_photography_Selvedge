@@ -16,6 +16,12 @@
         "label": "Logo image"
       },
       {
+        "type": "text",
+        "id": "brand_name",
+        "label": "Brand name",
+        "default": "Selvedge"
+      },
+      {
         "type": "range",
         "id": "logo_width",
         "label": "Logo width",

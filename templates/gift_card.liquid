@@ -9,7 +9,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>{{ 'gift_cards.issued.title' | t: value: initial_money, shop: shop.name }}</title>
+    <title>{{ 'gift_cards.issued.title' | t: value: initial_money, shop: settings.brand_name | default: 'Selvedge' }}</title>
     <meta name="description" content="{{ 'gift_cards.issued.subtext' | t }}">
     <link rel="canonical" href="{{ canonical_url }}">
     {% render 'theme-styles' %}
@@ -19,7 +19,7 @@
   </head>
   <body class="color-{{ settings.color_schemes.first.id }}">
     <main class="gift-card">
-      <p class="h3">{{ shop.name }}</p>
+      <p class="h3">{{ settings.brand_name | default: 'Selvedge' }}</p>
       <h1>{{ 'gift_cards.issued.subtext' | t }}</h1>
       <p class="h2">{{ gift_card.initial_value | money }}</p>
       {%- if gift_card.balance != gift_card.initial_value -%}

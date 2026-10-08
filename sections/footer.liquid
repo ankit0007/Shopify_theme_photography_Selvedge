@@ -1,3 +1,4 @@
+{%- assign brand_name = settings.brand_name | default: 'Selvedge' -%}
 <footer class="footer color-{{ section.settings.color_scheme }}" style="--footer-cols: {{ section.blocks.size | at_least: 1 }};">
   <div class="page-width">
     {%- if section.settings.join_title != blank -%}
@@ -41,7 +42,7 @@
 
     <div class="footer__bottom">
       <div>
-        <small>&copy; {{ 'now' | date: '%Y' }} {{ shop.name | link_to: routes.root_url }}. {{ powered_by_link }}</small>
+        <small>&copy; {{ 'now' | date: '%Y' }} {{ brand_name | link_to: routes.root_url }}. {{ powered_by_link }}</small>
         {%- if section.settings.show_policy -%}
           <ul class="footer__list" role="list" style="display:flex;flex-wrap:wrap;gap:1.6rem;margin-top:0.8rem;">
             {%- for policy in shop.policies -%}
@@ -85,7 +86,7 @@
       {%- endif -%}
     </div>
   </div>
-  {%- if section.settings.show_wordmark -%}<p class="footer__wordmark" aria-hidden="true">{{ section.settings.wordmark | default: shop.name | escape }}</p>{%- endif -%}
+  {%- if section.settings.show_wordmark -%}<p class="footer__wordmark" aria-hidden="true">{{ section.settings.wordmark | default: brand_name | escape }}</p>{%- endif -%}
 </footer>
 
 {% schema %}

@@ -205,7 +205,7 @@
                 <summary>{{ block.settings.heading | escape }} {% render 'icon', name: 'plus' %}</summary>
                 <div class="accordion__content">
                   <div class="care-label">
-                    <div class="care-label__brand">{{ shop.name | escape }}</div>
+                    <div class="care-label__brand">{{ settings.brand_name | default: 'Selvedge' | escape }}</div>
                     <div class="care-label__comp">{{ product.metafields.custom.composition.value | default: block.settings.composition | newline_to_br }}</div>
                     <div class="care-label__icons" aria-hidden="true">
                       {%- if block.settings.wash != 'none' -%}<svg viewBox="0 0 24 24"><path d="M3 7l2 12h14l2-12"/><path d="M3 7c2 2 4 2 6 0s4-2 6 0 4 2 6 0"/>{%- if block.settings.wash == 'hand' -%}<path d="M10 13l2-2 2 2"/>{%- else -%}<text x="12" y="16.5" font-size="6" text-anchor="middle" fill="currentColor" stroke="none">{{ block.settings.wash }}</text>{%- endif -%}</svg>{%- endif -%}

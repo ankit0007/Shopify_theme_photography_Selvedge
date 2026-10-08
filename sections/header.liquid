@@ -1,5 +1,6 @@
 {%- liquid
   assign menu = section.settings.menu
+  assign brand_name = settings.brand_name | default: 'Selvedge'
   assign overlay = false
   if settings.header_transparent and request.page_type == 'index'
     assign overlay = true
@@ -34,12 +35,12 @@
         {%- if settings.logo != blank -%}
           {%- assign logo_w2 = settings.logo_width | times: 2 -%}
           {%- capture logo_class -%}logo--dark{% if section.settings.logo_light != blank %} has-light{% endif %}{%- endcapture -%}
-          {{ settings.logo | image_url: width: logo_w2 | image_tag: widths: '100, 200, 300, 400, 600', sizes: '300px', alt: shop.name, class: logo_class }}
+          {{ settings.logo | image_url: width: logo_w2 | image_tag: widths: '100, 200, 300, 400, 600', sizes: '300px', alt: brand_name, class: logo_class }}
           {%- if section.settings.logo_light != blank -%}
-            {{ section.settings.logo_light | image_url: width: logo_w2 | image_tag: widths: '100, 200, 300, 400, 600', sizes: '300px', alt: shop.name, class: 'logo--light' }}
+            {{ section.settings.logo_light | image_url: width: logo_w2 | image_tag: widths: '100, 200, 300, 400, 600', sizes: '300px', alt: brand_name, class: 'logo--light' }}
           {%- endif -%}
         {%- else -%}
-          {{ shop.name }}
+          {{ brand_name }}
         {%- endif -%}
       </a>
     {%- if request.page_type == 'index' -%}</h1>{%- else -%}</div>{%- endif -%}
@@ -110,7 +111,7 @@
   <button type="button" class="drawer__overlay" data-drawer-close tabindex="-1" aria-label="{{ 'accessibility.close' | t }}"></button>
   <div class="drawer__panel" role="dialog" aria-modal="true" aria-label="{{ 'sections.header.menu' | t }}">
     <div class="drawer__header">
-      <span class="data">{{ shop.name }}</span>
+      <span class="data">{{ brand_name }}</span>
       <button type="button" class="drawer__close" data-drawer-close aria-label="{{ 'accessibility.close' | t }}">{% render 'icon', name: 'close' %}</button>
     </div>
     <div class="drawer__body">
@@ -154,7 +155,7 @@
     {
       "@context": "http://schema.org",
       "@type": "Organization",
-      "name": {{ shop.name | json }},
+      "name": {{ brand_name | json }},
       {%- if settings.logo -%}"logo": {{ settings.logo | image_url: width: 500 | prepend: 'https:' | json }},{%- endif -%}
       "url": {{ request.origin | json }}
     }
@@ -163,7 +164,7 @@
     {
       "@context": "http://schema.org",
       "@type": "WebSite",
-      "name": {{ shop.name | json }},
+      "name": {{ brand_name | json }},
       "potentialAction": { "@type": "SearchAction", "target": {{ potential_action_target | json }}, "query-input": "required name=search_term_string" },
       "url": {{ request.origin | json }}
     }
