@@ -1,52 +1,76 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "runway": {
       "type": "runway-hero",
       "blocks": {
+        "look_PnKYBz": {
+          "type": "look",
+          "settings": {
+            "title": "Rust wool wrap coat",
+            "text": "Worn over a cream rib knit and straight raw denim.",
+            "products": []
+          }
+        },
         "look_1": {
           "type": "look",
           "settings": {
             "title": "Rust wool wrap coat",
-            "text": "Over a cream rib knit, sleeves pushed up."
+            "text": "Over a cream rib knit, sleeves pushed up.",
+            "products": []
           }
         },
         "look_2": {
           "type": "look",
           "settings": {
             "title": "Pink cotton trench",
-            "text": "Belted loose, worn with a wide-leg trouser."
+            "text": "Belted loose, worn with a wide-leg trouser.",
+            "products": []
           }
         },
         "look_3": {
           "type": "look",
           "settings": {
             "title": "Navy double cloth suit",
-            "text": "Soft shoulder, no lining, one button."
+            "text": "Soft shoulder, no lining, one button.",
+            "products": []
           }
         },
         "look_4": {
           "type": "look",
           "settings": {
             "title": "Raw selvedge jacket",
-            "text": "Fourteen ounce denim that fades to you."
+            "text": "Fourteen ounce denim that fades to you.",
+            "products": []
           }
         },
         "look_5": {
           "type": "look",
           "settings": {
             "title": "Silk cami, black",
-            "text": "Bias cut, worn alone or under tailoring."
+            "text": "Bias cut, worn alone or under tailoring.",
+            "products": []
           }
         },
         "look_6": {
           "type": "look",
           "settings": {
             "title": "Ivory double-breasted blazer",
-            "text": "Linen and wool, for warm evenings."
+            "text": "Linen and wool, for warm evenings.",
+            "products": []
           }
         }
       },
       "block_order": [
+        "look_PnKYBz",
         "look_1",
         "look_2",
         "look_3",
@@ -86,16 +110,17 @@
       "type": "lookbook-spread",
       "settings": {
         "color_scheme": "scheme-3",
+        "reverse": false,
         "kicker_left": "Chapter two",
         "kicker_right": "Shot in Lisbon",
         "title": "The trench, rewritten",
         "quote": "We kept the storm flap and took out everything that was only there for show.",
         "text": "<p>Cotton gabardine from a mill in Biella, cut a size bigger through the shoulder so it closes over a knit. Bound seams inside, horn buttons, and a lining you can see.</p>",
+        "products": [],
         "button_label": "See the full lookbook",
         "button_link": "shopify://pages/lookbook",
         "folio_left": "12",
         "folio_right": "13",
-        "reverse": false,
         "padding_top": 120,
         "padding_bottom": 136
       }
@@ -106,6 +131,7 @@
         "piece_1": {
           "type": "piece",
           "settings": {
+            "product": "",
             "x": 48,
             "y": 30
           }
@@ -113,6 +139,7 @@
         "piece_2": {
           "type": "piece",
           "settings": {
+            "product": "",
             "x": 52,
             "y": 58
           }
@@ -120,6 +147,7 @@
         "piece_3": {
           "type": "piece",
           "settings": {
+            "product": "",
             "x": 40,
             "y": 86
           }
@@ -136,6 +164,11 @@
         "title": "Everything in this photo",
         "text": "Tap a number on the photo to find the piece. Sizes can be changed in the bag.",
         "button_label": "Add the whole look to bag",
+        "fallback_kicker": "An editorial study",
+        "fallback_title": "A look before the first collection",
+        "fallback_text": "Use this quiet space to introduce the point of view behind your first edit. It will become shoppable as soon as products are selected.",
+        "fallback_button_label": "Explore the store",
+        "fallback_button_link": "",
         "padding_top": 120,
         "padding_bottom": 96
       }
@@ -150,7 +183,8 @@
             "composition": "100% cotton",
             "weight": "14 oz",
             "origin": "Kojima, Japan",
-            "feel": "Stiff at first, fades to your shape"
+            "feel": "Stiff at first, fades to your shape",
+            "link": ""
           }
         },
         "fabric_2": {
@@ -160,7 +194,8 @@
             "composition": "100% merino wool",
             "weight": "190 gsm",
             "origin": "Biella, Italy",
-            "feel": "Soft, breathes, does not hold smell"
+            "feel": "Soft, breathes, does not hold smell",
+            "link": ""
           }
         },
         "fabric_3": {
@@ -170,7 +205,8 @@
             "composition": "100% cotton",
             "weight": "160 gsm",
             "origin": "Pochampally, India",
-            "feel": "Light, softens with every wash"
+            "feel": "Light, softens with every wash",
+            "link": ""
           }
         },
         "fabric_4": {
@@ -180,7 +216,8 @@
             "composition": "100% mulberry silk",
             "weight": "18 momme",
             "origin": "Como, Italy",
-            "feel": "Fluid drape, matte surface"
+            "feel": "Fluid drape, matte surface",
+            "link": ""
           }
         }
       },
@@ -248,6 +285,7 @@
             "address": "12 Rampart Row\nKala Ghoda, Mumbai 400001",
             "hours": "Monday to Saturday: 11:00 to 20:00\nSunday: 12:00 to 18:00",
             "phone": "+91 22 4000 0000",
+            "map_link": "",
             "utc_offset": 5.5,
             "open_hour": 11,
             "close_hour": 20,
@@ -262,6 +300,7 @@
             "address": "The Courtyard, Kalka Das Marg\nMehrauli, New Delhi 110030",
             "hours": "Tuesday to Sunday: 11:00 to 19:30\nMonday: Closed",
             "phone": "+91 11 4000 0000",
+            "map_link": "",
             "utc_offset": 5.5,
             "open_hour": 11,
             "close_hour": 19,
@@ -276,6 +315,7 @@
             "address": "7 Lavelle Road\nBengaluru 560001",
             "hours": "Every day: 11:00 to 20:00",
             "phone": "+91 80 4000 0000",
+            "map_link": "",
             "utc_offset": 5.5,
             "open_hour": 11,
             "close_hour": 20,
