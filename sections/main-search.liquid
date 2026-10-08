@@ -18,7 +18,10 @@
       </p>
       {% render 'active-filters', results: search %}
       {%- if search.results_count == 0 -%}
-        <div class="empty-state"><p>{{ 'general.search.no_results_html' | t: terms: search.terms }}</p></div>
+        <div class="empty-state">
+          <p>{{ 'general.search.no_results_html' | t: terms: search.terms }}</p>
+          <a href="{{ routes.all_products_collection_url }}" class="button button--secondary">{{ 'general.search.browse' | t }}</a>
+        </div>
       {%- else -%}
         <ul class="grid" role="list" style="--cols: 4; --cols-tablet: 3; padding-bottom: 4rem;">
           {%- for item in search.results -%}

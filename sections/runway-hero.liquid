@@ -1,4 +1,5 @@
 {%- assign looks = section.blocks -%}
+{%- if looks.size > 0 or request.design_mode -%}
 <section class="color-{{ section.settings.color_scheme }} section-bg" data-runway data-speed="{{ section.settings.speed }}" aria-roledescription="carousel" aria-label="{{ section.settings.title | strip_html | escape }}">
   <div class="runway">
     <div class="runway__number">
@@ -70,6 +71,7 @@
     </div>
   {%- endif -%}
 </section>
+{%- endif -%}
 
 {% schema %}
 {

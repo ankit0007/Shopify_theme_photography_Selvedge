@@ -458,6 +458,10 @@ body.overflow-hidden { overflow: hidden; }
 .feature-product__gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
 .feature-product__gallery > :first-child { grid-column: 1 / -1; }
 .feature-product .product { padding: 0; }
+.demo-feature .product__info-inner { max-width: 48rem; }
+.demo-card__description { margin: 0.8rem 0 0; font-size: 1.35rem; }
+.demo-card__link { display: inline-block; margin-top: 1rem; }
+.demo-collection-card > a { display: block; color: inherit; text-decoration: none; }
 
 .breadcrumbs { font-size: 1.3rem; color: var(--muted); padding-top: 1.6rem; font-family: var(--font-body-family); }
 .breadcrumbs ol { list-style: none; display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 0; padding: 0; }

@@ -1,3 +1,4 @@
+{%- if section.blocks.size > 0 or request.design_mode or settings.enable_demo_fallbacks -%}
 {% render 'section-spacing' %}
 <div class="color-{{ section.settings.color_scheme }} section-bg section-padding">
   <div class="page-width">
@@ -8,6 +9,7 @@
       </div>
     {%- endif -%}
     <ul class="grid slider-mobile" data-stagger role="list" style="--cols: {{ section.settings.columns }}; --cols-tablet: 2;">
+      {%- if section.blocks.size > 0 -%}
       {%- for block in section.blocks -%}
         {%- assign c = block.settings.collection -%}
         <li {{ block.shopify_attributes }}>
@@ -29,9 +31,15 @@
           </a>
         </li>
       {%- endfor -%}
+      {%- elsif settings.enable_demo_fallbacks -%}
+        <li>{% render 'demo-collection-card', title: 'Outerwear', description: 'Layered shapes for cooler days.', image: 'demo-editorial-3.svg' %}</li>
+        <li>{% render 'demo-collection-card', title: 'Denim, raw', description: 'Texture that changes with wear.', image: 'demo-editorial-1.svg' %}</li>
+        <li>{% render 'demo-collection-card', title: 'Soft tailoring', description: 'Quiet structure, considered cloth.', image: 'demo-editorial-4.svg' %}</li>
+      {%- endif -%}
     </ul>
   </div>
 </div>
+{%- endif -%}
 
 {% schema %}
 {

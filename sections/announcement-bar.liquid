@@ -1,3 +1,4 @@
+{%- if section.blocks.size > 0 or request.design_mode -%}
 <div class="announcement color-{{ section.settings.color_scheme }}" role="region" aria-label="{{ 'sections.announcement.label' | t }}" data-announcement data-speed="{{ section.settings.speed }}" {{ section.shopify_attributes }}>
   <div class="announcement__inner">
     {%- for block in section.blocks -%}
@@ -10,6 +11,7 @@
     {%- endfor -%}
   </div>
 </div>
+{%- endif -%}
 
 {% schema %}
 {
