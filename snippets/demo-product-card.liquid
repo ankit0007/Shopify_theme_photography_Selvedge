@@ -1,0 +1,27 @@
+{% doc %}
+  Renders a presentation-only editorial product card for an empty catalog.
+  @param {string} title - Demo item title
+  @param {string} [description] - Optional editorial description
+  @param {string} [label] - Optional category or material label
+  @param {string} [image] - Theme asset filename
+  @param {number} [index] - Card index for image loading
+{% enddoc %}
+{%- liquid
+  assign card_image = image | default: 'demo-editorial-1.svg'
+  assign card_loading = 'lazy'
+  if index != blank and index < 2
+    assign card_loading = 'eager'
+  endif
+-%}
+<article class="card demo-card">
+  <div class="card__media zoom-hover">
+    <div class="media media--{{ settings.card_image_ratio | default: 'portrait' }}">
+      <img src="{{ card_image | asset_url }}" alt="{{ title | escape }}" loading="{{ card_loading }}" width="900" height="1200">
+    </div>
+  </div>
+  <div class="card__info">
+    {%- if label != blank -%}<span class="card__type">{{ label | escape }}</span>{%- endif -%}
+    <h3 class="card__title">{{ title | escape }}</h3>
+    {%- if description != blank -%}<p class="demo-card__description muted">{{ description | escape }}</p>{%- endif -%}
+  </div>
+</article>
