@@ -1,5 +1,110 @@
 {
-  "current": "Atelier",
+  "current": {
+    "type_header_font": "tenor_sans_n4",
+    "type_body_font": "manrope_n4",
+    "type_accent_font": "instrument_serif_i4",
+    "heading_tracking": -2,
+    "heading_case": "none",
+    "nav_case": "uppercase",
+    "heading_scale": 100,
+    "body_scale": 100,
+    "radius_large": 0,
+    "radius_small": 0,
+    "buttons_radius": 0,
+    "inputs_radius": 0,
+    "buttons_uppercase": true,
+    "card_style": "editorial",
+    "card_image_ratio": "portrait",
+    "card_show_secondary_image": true,
+    "card_show_type": false,
+    "card_show_vendor": false,
+    "card_quick_add": true,
+    "card_quick_view": true,
+    "card_show_swatches": true,
+    "wishlist": true,
+    "color_schemes": {
+      "scheme-1": {
+        "settings": {
+          "background": "#FFFFFF",
+          "background_gradient": "",
+          "surface": "#F1EFEC",
+          "text": "#191817",
+          "accent": "#7B1E2D",
+          "button": "#191817",
+          "button_label": "#FFFFFF",
+          "secondary_button_label": "#191817"
+        }
+      },
+      "scheme-2": {
+        "settings": {
+          "background": "#191817",
+          "background_gradient": "",
+          "surface": "#252321",
+          "text": "#F4F2EE",
+          "accent": "#E3A8B1",
+          "button": "#F4F2EE",
+          "button_label": "#191817",
+          "secondary_button_label": "#F4F2EE"
+        }
+      },
+      "scheme-3": {
+        "settings": {
+          "background": "#F1EFEC",
+          "background_gradient": "",
+          "surface": "#E6E3DE",
+          "text": "#191817",
+          "accent": "#7B1E2D",
+          "button": "#191817",
+          "button_label": "#FFFFFF",
+          "secondary_button_label": "#191817"
+        }
+      },
+      "scheme-4": {
+        "settings": {
+          "background": "#7B1E2D",
+          "background_gradient": "",
+          "surface": "#6B1826",
+          "text": "#FFFFFF",
+          "accent": "#F4D9DD",
+          "button": "#FFFFFF",
+          "button_label": "#7B1E2D",
+          "secondary_button_label": "#FFFFFF"
+        }
+      },
+      "scheme-5": {
+        "settings": {
+          "background": "#F7F6F3",
+          "background_gradient": "",
+          "surface": "#EEECE8",
+          "text": "#191817",
+          "accent": "#7B1E2D",
+          "button": "#191817",
+          "button_label": "#FFFFFF",
+          "secondary_button_label": "#191817"
+        }
+      }
+    },
+    "logo_width": 140,
+    "page_width": 1680,
+    "grid_gap": 8,
+    "spacing_sections": 0,
+    "header_style": "center",
+    "header_transparent": false,
+    "header_search_shortcut": true,
+    "buttons_magnetic": false,
+    "cart_type": "drawer",
+    "show_cart_note": true,
+    "free_shipping_threshold": "4999",
+    "animations_reveal": true,
+    "animations_text": true,
+    "page_transitions": true,
+    "custom_cursor": true,
+    "grain": false,
+    "animations_hover": true,
+    "badge_new_tag": "new",
+    "badge_hot_tag": "last-pieces",
+    "brand_name": "Selvedge"
+  },
   "presets": {
     "Atelier": {
       "type_header_font": "tenor_sans_n4",
@@ -104,7 +209,8 @@
       "grain": false,
       "animations_hover": true,
       "badge_new_tag": "new",
-      "badge_hot_tag": "last-pieces"
+      "badge_hot_tag": "last-pieces",
+      "brand_name": "Selvedge"
     },
     "Noir": {
       "type_header_font": "bodoni_moda_n5",
