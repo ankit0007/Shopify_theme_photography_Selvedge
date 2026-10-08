@@ -9,12 +9,21 @@
     </div>
   {%- endif -%}
   {%- paginate blog.articles by 9 -%}
-    <ul class="grid" role="list" style="--cols: 3; --cols-tablet: 2; --cols-mobile: 1; row-gap: 5.6rem;">
-      {%- for article in blog.articles -%}
-        <li>{% render 'article-card', article: article, index: forloop.index0 %}</li>
-      {%- endfor -%}
-    </ul>
-    {% render 'pagination', paginate: paginate, anchor: '' %}
+    {%- if blog.articles_count > 0 -%}
+      <ul class="grid" role="list" style="--cols: 3; --cols-tablet: 2; --cols-mobile: 1; row-gap: 5.6rem;">
+        {%- for article in blog.articles -%}
+          <li>{% render 'article-card', article: article, index: forloop.index0 %}</li>
+        {%- endfor -%}
+      </ul>
+      {% render 'pagination', paginate: paginate, anchor: '' %}
+    {%- else -%}
+      {% render 'empty-state',
+        title: section.settings.empty_title,
+        text: section.settings.empty_text,
+        link_label: section.settings.empty_button_label,
+        link_url: section.settings.empty_button_link | default: routes.root_url
+      %}
+    {%- endif -%}
   {%- endpaginate -%}
 </div>
 
@@ -23,6 +32,13 @@
   "name": "Blog posts",
   "tag": "section",
   "class": "section",
-  "settings": [ { "type": "checkbox", "id": "show_tags", "label": "Show tag filter", "default": true } ]
+  "settings": [
+    { "type": "checkbox", "id": "show_tags", "label": "Show tag filter", "default": true },
+    { "type": "header", "content": "Empty blog" },
+    { "type": "text", "id": "empty_title", "label": "Empty heading", "default": "Stories are being developed" },
+    { "type": "text", "id": "empty_text", "label": "Empty text", "default": "Notes on cloth, craft and the people behind each edit will appear here." },
+    { "type": "text", "id": "empty_button_label", "label": "Empty button label", "default": "Return to the store" },
+    { "type": "url", "id": "empty_button_link", "label": "Empty button link", "info": "Leave blank to link to the home page." }
+  ]
 }
 {% endschema %}
