@@ -53,20 +53,20 @@
   "blocks": [
     { "type": "store", "name": "Boutique", "settings": [
       { "type": "image_picker", "id": "image", "label": "Photo" },
-      { "type": "text", "id": "city", "label": "City", "default": "Mumbai" },
-      { "type": "text", "id": "name", "label": "Name", "default": "Kala Ghoda" },
-      { "type": "textarea", "id": "address", "label": "Address", "default": "12 Rampart Row\nKala Ghoda, Mumbai 400001" },
+      { "type": "text", "id": "city", "label": "City", "default": "New York" },
+      { "type": "text", "id": "name", "label": "Name", "default": "SoHo" },
+      { "type": "textarea", "id": "address", "label": "Address", "default": "100 Spring Street\nSoHo, New York, NY 10012" },
       { "type": "textarea", "id": "hours", "label": "Opening hours", "info": "One line per row, as Days: hours", "default": "Monday to Saturday: 11:00 to 20:00\nSunday: 12:00 to 18:00" },
-      { "type": "text", "id": "phone", "label": "Phone", "default": "+91 22 4000 0000" },
+      { "type": "text", "id": "phone", "label": "Phone", "default": "+1 212 555 0147" },
       { "type": "url", "id": "map_link", "label": "Map link" },
       { "type": "header", "content": "Open now indicator" },
-      { "type": "range", "id": "utc_offset", "label": "Time zone offset from UTC", "min": -12, "max": 14, "step": 0.5, "unit": "h", "default": 5.5 },
+      { "type": "range", "id": "utc_offset", "label": "Time zone offset from UTC", "min": -12, "max": 14, "step": 0.5, "unit": "h", "default": -5 },
       { "type": "range", "id": "open_hour", "label": "Opens", "min": 0, "max": 23, "step": 1, "unit": "h", "default": 11 },
       { "type": "range", "id": "close_hour", "label": "Closes", "min": 1, "max": 24, "step": 1, "unit": "h", "default": 20 },
       { "type": "select", "id": "closed_day", "label": "Closed on", "default": "none", "options": [ { "value": "none", "label": "Open every day" }, { "value": "0", "label": "Sunday" }, { "value": "1", "label": "Monday" } ] }
     ] }
   ],
   "max_blocks": 6,
-  "presets": [ { "name": "Boutiques", "blocks": [ { "type": "store" }, { "type": "store", "settings": { "city": "Delhi", "name": "Mehrauli", "address": "The Courtyard, Kalka Das Marg\nMehrauli, New Delhi 110030" } } ] } ]
+  "presets": [ { "name": "Boutiques", "blocks": [ { "type": "store" }, { "type": "store", "settings": { "city": "Los Angeles", "name": "Melrose", "address": "8500 Melrose Avenue\nWest Hollywood, CA 90069", "phone": "+1 323 555 0184", "utc_offset": -8 } }, { "type": "store", "settings": { "city": "Austin", "name": "Congress Avenue", "address": "1100 Congress Avenue\nAustin, TX 78701", "phone": "+1 512 555 0162", "utc_offset": -6 } } ] } ]
 }
 {% endschema %}

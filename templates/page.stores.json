@@ -6,12 +6,12 @@
         "store_1": {
           "type": "store",
           "settings": {
-            "city": "Mumbai",
-            "name": "Kala Ghoda",
-            "address": "12 Rampart Row\nKala Ghoda, Mumbai 400001",
+            "city": "New York",
+            "name": "SoHo",
+            "address": "100 Spring Street\nSoHo, New York, NY 10012",
             "hours": "Monday to Saturday: 11:00 to 20:00\nSunday: 12:00 to 18:00",
-            "phone": "+91 22 4000 0000",
-            "utc_offset": 5.5,
+            "phone": "+1 212 555 0147",
+            "utc_offset": -5,
             "open_hour": 11,
             "close_hour": 20,
             "closed_day": "none"
@@ -20,12 +20,12 @@
         "store_2": {
           "type": "store",
           "settings": {
-            "city": "New Delhi",
-            "name": "Mehrauli",
-            "address": "The Courtyard, Kalka Das Marg\nMehrauli, New Delhi 110030",
+            "city": "Los Angeles",
+            "name": "Melrose",
+            "address": "8500 Melrose Avenue\nWest Hollywood, CA 90069",
             "hours": "Tuesday to Sunday: 11:00 to 19:30\nMonday: Closed",
-            "phone": "+91 11 4000 0000",
-            "utc_offset": 5.5,
+            "phone": "+1 323 555 0184",
+            "utc_offset": -8,
             "open_hour": 11,
             "close_hour": 19,
             "closed_day": "1"
@@ -34,12 +34,12 @@
         "store_3": {
           "type": "store",
           "settings": {
-            "city": "Bengaluru",
-            "name": "Lavelle Road",
-            "address": "7 Lavelle Road\nBengaluru 560001",
+            "city": "Austin",
+            "name": "Congress Avenue",
+            "address": "1100 Congress Avenue\nAustin, TX 78701",
             "hours": "Every day: 11:00 to 20:00",
-            "phone": "+91 80 4000 0000",
-            "utc_offset": 5.5,
+            "phone": "+1 512 555 0162",
+            "utc_offset": -6,
             "open_hour": 11,
             "close_hour": 20,
             "closed_day": "none"

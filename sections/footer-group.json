@@ -23,7 +23,7 @@
           "type": "text",
           "settings": {
             "heading": "Workshop",
-            "text": "<p>Unit 4, Kamala Mills<br>Lower Parel, Mumbai 400013</p><p>Visits by appointment.</p>"
+            "text": "<p>125 Greenwich Avenue<br>New York, NY 10006</p><p>Visits by appointment.</p>"
           }
         }
       },
@@ -36,7 +36,7 @@
         "color_scheme": "scheme-1",
         "join_title": "Hear about new collections first",
         "join_note": "One letter a month. Early access to sale and new drops.",
-        "heading": "Clothing cut in Mumbai from cloth we can trace to the mill.",
+        "heading": "Clothing cut in New York from cloth we can trace to the mill.",
         "show_social": true,
         "enable_country_selector": true,
         "enable_language_selector": true,
