@@ -1,0 +1,22 @@
+{% doc %}
+  Renders a presentation-only collection card for a store without collections.
+  @param {string} title - Demo collection title
+  @param {string} [description] - Optional collection description
+  @param {string} [image] - Theme asset filename
+  @param {string} [link] - Safe destination URL
+{% enddoc %}
+{%- assign card_image = image | default: 'demo-editorial-2.svg' -%}
+<article class="collection-card demo-collection-card">
+  <a href="{{ link | default: routes.collections_url }}">
+    <div class="media media--portrait">
+      <img src="{{ card_image | asset_url }}" alt="{{ title | escape }}" loading="lazy" width="900" height="1200">
+    </div>
+    <div class="collection-card__info">
+      <span>
+        <h2 class="h3" style="margin:0;">{{ title | escape }}</h2>
+        {%- if description != blank -%}<span class="caption">{{ description | escape }}</span>{%- endif -%}
+      </span>
+      <span class="icon-btn icon-btn--sm" aria-hidden="true">{% render 'icon', name: 'arrow' %}</span>
+    </div>
+  </a>
+</article>
