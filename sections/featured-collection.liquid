@@ -2,16 +2,23 @@
 {%- liquid
   assign collection = section.settings.collection
   assign limit = section.settings.products_to_show
+  assign has_products = false
+  if collection != blank and collection.products_count > 0
+    assign has_products = true
+  endif
   assign link_label = ''
-  if section.settings.show_view_all
+  if has_products and section.settings.show_view_all
     assign link_label = 'sections.featured_collection.view_all' | t
+  endif
+  if section.settings.enable_demo_fallbacks and settings.enable_demo_fallbacks
+    assign show_demo = true
   endif
 -%}
 <div class="color-{{ section.settings.color_scheme }} section-bg section-padding">
   <div class="page-width">
-    {% render 'intro', title: section.settings.title, text: section.settings.text, link_label: link_label, link_url: collection.url %}
-    <ul class="grid" role="list" data-stagger style="--cols: {{ section.settings.columns }}; --cols-tablet: 3;">
-      {%- if collection != blank and collection.products_count > 0 -%}
+    {%- if has_products -%}
+      {% render 'intro', title: section.settings.title, text: section.settings.text, link_label: link_label, link_url: collection.url %}
+      <ul class="grid" role="list" data-stagger style="--cols: {{ section.settings.columns }}; --cols-tablet: 3;">
         {%- for product in collection.products limit: limit -%}
           {%- if section.settings.insert_image != blank and forloop.index == section.settings.insert_position -%}
             <li class="grid-insert-cell">
@@ -26,10 +33,41 @@
           {%- endif -%}
           <li>{% render 'product-card', card_product: product, section_id: section.id, index: forloop.index0 %}</li>
         {%- endfor -%}
-      {%- else -%}
-        {%- for i in (1..limit) -%}<li>{% render 'product-card', card_product: blank %}</li>{%- endfor -%}
-      {%- endif -%}
-    </ul>
+      </ul>
+    {%- elsif show_demo -%}
+      {% render 'intro',
+        title: section.settings.fallback_title,
+        text: section.settings.fallback_text,
+        link_label: section.settings.fallback_button_label,
+        link_url: section.settings.fallback_button_link | default: routes.all_products_collection_url
+      %}
+      <ul class="grid" role="list" data-stagger style="--cols: {{ section.settings.columns }}; --cols-tablet: 3;">
+        {%- assign demo_count = limit | at_most: 6 -%}
+        {%- for i in (1..demo_count) -%}
+          {%- case forloop.index -%}
+            {%- when 1 -%}
+              <li>{% render 'demo-product-card', title: 'Raw Selvedge Jacket', description: 'A study in weight, texture and honest wear.', label: 'Denim study', image: 'demo-editorial-1.svg', index: forloop.index0 %}</li>
+            {%- when 2 -%}
+              <li>{% render 'demo-product-card', title: 'Merino Overshirt', description: 'Soft structure for the days between seasons.', label: 'Wool study', image: 'demo-editorial-2.svg', index: forloop.index0 %}</li>
+            {%- when 3 -%}
+              <li>{% render 'demo-product-card', title: 'Studio Trench', description: 'The familiar shape, cut with a little more room.', label: 'Outerwear study', image: 'demo-editorial-3.svg', index: forloop.index0 %}</li>
+            {%- when 4 -%}
+              <li>{% render 'demo-product-card', title: 'Atelier Trousers', description: 'A clean line from waist to hem.', label: 'Tailoring study', image: 'demo-editorial-4.svg', index: forloop.index0 %}</li>
+            {%- when 5 -%}
+              <li>{% render 'demo-product-card', title: 'Linen Blazer', description: 'Light tailoring for long evenings.', label: 'Linen study', image: 'demo-editorial-2.svg', index: forloop.index0 %}</li>
+            {%- when 6 -%}
+              <li>{% render 'demo-product-card', title: 'Handloom Shirt', description: 'Texture that rewards a closer look.', label: 'Fabric study', image: 'demo-editorial-1.svg', index: forloop.index0 %}</li>
+          {%- endcase -%}
+        {%- endfor -%}
+      </ul>
+    {%- else -%}
+      {% render 'empty-state',
+        title: section.settings.fallback_title,
+        text: section.settings.fallback_text,
+        link_label: section.settings.fallback_button_label,
+        link_url: section.settings.fallback_button_link | default: routes.all_products_collection_url
+      %}
+    {%- endif -%}
   </div>
 </div>
 
@@ -45,6 +83,11 @@
     { "type": "range", "id": "products_to_show", "min": 2, "max": 16, "step": 1, "label": "Maximum products to show", "default": 8 },
     { "type": "range", "id": "columns", "min": 2, "max": 5, "step": 1, "label": "Columns on desktop", "default": 4 },
     { "type": "checkbox", "id": "show_view_all", "label": "Show 'View all' link", "default": true },
+    { "type": "checkbox", "id": "enable_demo_fallbacks", "label": "Show editorial demo cards when collection is empty", "default": true },
+    { "type": "inline_richtext", "id": "fallback_title", "label": "Fallback heading", "default": "The Selvedge edit" },
+    { "type": "text", "id": "fallback_text", "label": "Fallback text", "default": "A considered starting point for your first collection. Replace these studies with your own work when you are ready." },
+    { "type": "text", "id": "fallback_button_label", "label": "Fallback button label", "default": "Explore the store" },
+    { "type": "url", "id": "fallback_button_link", "label": "Fallback button link", "info": "Leave blank to link to all products." },
     { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
     { "type": "header", "content": "Editorial tile" },
     { "type": "image_picker", "id": "insert_image", "label": "Image", "info": "Takes the space of two products." },

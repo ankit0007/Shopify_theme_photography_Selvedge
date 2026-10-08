@@ -1,5 +1,5 @@
 {% render 'section-spacing' %}
-<div class="color-{{ section.settings.color_scheme }} section-bg section-padding" style="overflow:hidden;">
+<div class="color-{{ section.settings.color_scheme }} section-bg section-padding" style="overflow:hidden;"{% unless recommendations.performed? and recommendations.products_count > 0 %} hidden{% endunless %}>
   <div class="page-width" data-rail-scope data-recommendations="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ section.settings.products_to_show }}&intent=related">
     {%- if recommendations.performed? and recommendations.products_count > 0 -%}
       {% render 'intro', title: section.settings.heading %}

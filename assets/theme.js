@@ -913,7 +913,7 @@
         const html = await fetch(wrap.dataset.recommendations).then((r) => r.text());
         const doc = new DOMParser().parseFromString(html, 'text/html');
         const fresh = $('[data-recommendations]', doc);
-        if (fresh && fresh.querySelector('.rail')) { wrap.innerHTML = fresh.innerHTML; wrap._init = false; initAll(wrap.parentElement); $$('.reveal, .split-lines', wrap).forEach((n) => n.classList.add('is-visible')); }
+        if (fresh && fresh.querySelector('.rail')) { wrap.innerHTML = fresh.innerHTML; wrap.hidden = false; wrap._init = false; initAll(wrap.parentElement); $$('.reveal, .split-lines', wrap).forEach((n) => n.classList.add('is-visible')); }
       } catch (err) { /* ignore */ }
     });
   }

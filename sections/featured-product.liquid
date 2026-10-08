@@ -6,6 +6,7 @@
 -%}
 <div class="color-{{ section.settings.color_scheme }} section-bg section-padding">
   <div class="page-width" data-section-id="{{ section.id }}">
+    {%- if fp != blank -%}
     <div class="product feature-product" style="padding: 0;">
       <div class="feature-product__gallery">
         {%- if fp.media.size > 0 -%}
@@ -60,6 +61,30 @@
         </div>
       </div>
     </div>
+    {%- elsif settings.enable_demo_fallbacks -%}
+      <div class="feature-product demo-feature">
+        <div class="feature-product__gallery">
+          <div class="media media--landscape">
+            <img src="{{ 'demo-editorial-3.svg' | asset_url }}" alt="{{ section.settings.fallback_title | escape }}" loading="eager" width="900" height="1200">
+          </div>
+          <div class="media media--square">
+            <img src="{{ 'demo-editorial-4.svg' | asset_url }}" alt="" loading="lazy" width="900" height="1200">
+          </div>
+        </div>
+        <div class="product__info">
+          <div class="product__info-inner">
+            {%- if section.settings.fallback_label != blank -%}<p class="product__vendor">{{ section.settings.fallback_label | escape }}</p>{%- endif -%}
+            <h2 class="product__title" data-split-lines>{{ section.settings.fallback_title | escape }}</h2>
+            {%- if section.settings.fallback_text != blank -%}<div class="product__description rte">{{ section.settings.fallback_text }}</div>{%- endif -%}
+            {%- if section.settings.fallback_button_label != blank -%}
+              <a href="{{ section.settings.fallback_button_link | default: routes.all_products_collection_url }}" class="button">{{ section.settings.fallback_button_label | escape }}</a>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    {%- else -%}
+      {% render 'empty-state', title: 'Choose a featured product', text: 'Select a product in the Theme Editor to bring this editorial feature to life.', link_label: 'Explore the store', link_url: routes.all_products_collection_url %}
+    {%- endif -%}
   </div>
 </div>
 
@@ -71,6 +96,11 @@
   "settings": [
     { "type": "product", "id": "product", "label": "Product" },
     { "type": "text", "id": "label", "label": "Label", "default": "Best seller this month" },
+    { "type": "text", "id": "fallback_label", "label": "Fallback label", "default": "An editorial study" },
+    { "type": "text", "id": "fallback_title", "label": "Fallback heading", "default": "Made for the close look" },
+    { "type": "richtext", "id": "fallback_text", "label": "Fallback text", "default": "<p>A presentation-only feature for a store still gathering its first collection.</p>" },
+    { "type": "text", "id": "fallback_button_label", "label": "Fallback button label", "default": "Explore the store" },
+    { "type": "url", "id": "fallback_button_link", "label": "Fallback button link", "info": "Leave blank to link to all products." },
     { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-2" },
     { "type": "header", "content": "Section padding" },
     { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Top padding", "default": 64 },
